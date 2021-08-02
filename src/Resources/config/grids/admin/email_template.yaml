@@ -1,0 +1,30 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_mail_template_plugin_email_template:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate
+            fields:
+                name:
+                    type: string
+                    label: bitbag_sylius_mail_template_plugin.ui.template_name
+                subject:
+                    type: string
+                    label: bitbag_sylius_mail_template_plugin.ui.template_subject
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+            filters:
+                name:
+                    type: string
+                    label: bitbag_sylius_mail_template_plugin.ui.search
+                subject:
+                    type: string
+                    label: bitbag_sylius_mail_template_plugin.ui.level

@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/resources/email_template.yaml" }

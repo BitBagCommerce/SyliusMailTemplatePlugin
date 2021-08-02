@@ -1,0 +1,2 @@
+bitbag_sylius_mail_template_plugin:
+    resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/routing.yaml"

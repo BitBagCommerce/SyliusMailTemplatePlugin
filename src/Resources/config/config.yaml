@@ -1,0 +1,4 @@
+imports:
+    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/services.xml" }
+    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/grids.yaml" }
+    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/resources.yaml" }

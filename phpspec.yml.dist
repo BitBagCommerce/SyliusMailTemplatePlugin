@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: BitBag\SyliusMailTemplatePlugin
+        psr4_prefix: BitBag\SyliusMailTemplatePlugin

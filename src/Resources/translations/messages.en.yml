@@ -1,0 +1,17 @@
+bitbag_sylius_mail_template_plugin:
+    ui:
+        description: "Edit the email template"
+        email_template: "Email template"
+        email_templates: "Email templates"
+        level: "Level"
+        new_email_template: "New email template"
+        paymentlink: "Payment link"
+        paymentlinkAbandoned: "Payment link abandoned"
+        search: "Search"
+        style_css: "CSS style"
+        template_content: "Template content"
+        template_name: "Template name"
+        template_subject: "Template subject"
+        template_type: "Template type"
+
+

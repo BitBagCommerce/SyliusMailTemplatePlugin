@@ -1,0 +1,2 @@
+bitbag_email_template:
+    resource: "admin/email_template.yaml"
