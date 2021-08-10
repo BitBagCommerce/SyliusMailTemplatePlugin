@@ -4,8 +4,8 @@
     <services>
         <defaults public="true" />
         <service id="bitbag.email_sender" class="BitBag\SyliusMailTemplatePlugin\EmailSender\Sender"
-                 decorates="sylius.email_sender">
-            <argument type="service" id=".inner" />
+                 decorates="sylius.email_sender" decoration-inner-name="sylius.email_sender.inner">
+            <argument type="service" id="sylius.email_sender.inner" />
             <argument type="service" id="bitbag_sylius_mail_template_plugin.resolver.template_resource_resolver" />
         </service>
     </services>
