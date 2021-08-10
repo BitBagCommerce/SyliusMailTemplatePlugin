@@ -25,14 +25,11 @@ class EmailTemplate implements EmailTemplateInterface
         $this->initializeTranslationsCollection();
     }
 
-    /** @var int|null */
-    protected $id;
+    protected ?int $id;
 
-    /** @var string|null */
-    protected $type;
+    protected ?string $type;
 
-    /** @var string|null */
-    protected $styleCss;
+    protected ?string $styleCss;
 
     public function getId(): ?int
     {

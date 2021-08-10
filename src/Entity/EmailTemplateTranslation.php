@@ -15,17 +15,13 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class EmailTemplateTranslation extends AbstractTranslation implements EmailTemplateTranslationInterface
 {
-    /** @var int|null */
-    protected $id;
+    protected ?int $id;
 
-    /** @var string|null */
-    protected $name;
+    protected ?string $name;
 
-    /** @var string|null */
-    protected $subject;
+    protected ?string $subject;
 
-    /** @var string|null */
-    protected $content;
+    protected ?string $content;
 
     public function getId(): ?int
     {
