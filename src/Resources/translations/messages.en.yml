@@ -13,5 +13,12 @@ bitbag_sylius_mail_template_plugin:
         template_name: "Template name"
         template_subject: "Template subject"
         template_type: "Template type"
+        edit_email_template: "Edit email template"
+        orderConfirmation: "Order confirmation"
+        userRegistration: "User registration"
+        shipmentConfirmation: "Shipment confirmation"
+        passwordResetToken: "Password reset token"
+        verificationToken: "Verification token"
+        contactRequest: "Contact request"
 
 

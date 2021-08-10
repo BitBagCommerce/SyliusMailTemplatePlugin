@@ -1,0 +1,21 @@
+{% block subject %}
+    {{ template.subject }}
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        {% if template.translatable.styleCss %}
+            {{ template.translatable.styleCss|raw }}
+        {% endif %}
+        <h1 class="name">{{ template.name }}</h1>
+        <h3 class="subject">{{ template.subject }}</h3>
+        {{ template.content|raw }}
+
+        {# Fields from Sylius #}
+        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) %}
+        {{ order.number }}
+        <a href="{{ url|raw }}">
+            {{ 'sylius.email.order_confirmation.view_order_or_change_payment_method'|trans({}, null, localeCode) }}
+        </a>
+    {% endblock %}
+{% endblock %}

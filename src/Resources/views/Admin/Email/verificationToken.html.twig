@@ -1,0 +1,26 @@
+{% block subject %}
+    {{ template.subject }}
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        {% if template.translatable.styleCss %}
+            {{ template.translatable.styleCss|raw }}
+        {% endif %}
+        <h1 class="name">{{ template.name }}</h1>
+        <h3 class="subject">{{ template.subject }}</h3>
+        {{ template.content|raw }}
+
+        {# Fields from Sylius #}
+        {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+            {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode}) %}
+            <a href="{{ url|raw }}">
+                {{ 'sylius.email.verification_token.verify_your_email_address'|trans({}, null, localeCode) }}
+            </a>
+        {% else %}
+            <div>
+                <span>{{ 'sylius.email.verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMailTemplatePlugin\Repository;
+namespace BitBag\SyliusMailTemplatePlugin\Resolver;
 
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 
-interface EmailTemplateTranslationRepositoryInterface
+interface TemplateResourceResolverInterface
 {
-    public function findOneByLocaleCodeAndType(string $localeCode, string $type): ?EmailTemplateTranslationInterface;
+    public function findOrLog(string $emailCode): ?EmailTemplateTranslationInterface;
 }

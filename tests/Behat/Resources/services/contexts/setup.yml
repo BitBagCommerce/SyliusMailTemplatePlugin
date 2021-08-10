@@ -1,0 +1,9 @@
+services:
+    _defaults: { public: true }
+
+    bitbag_sylius_mail_template.behat.context.setup.email_template:
+        class: Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Setup\EmailTemplateContext
+        arguments:
+            - "@sylius.behat.shared_storage"
+            - "@bitbag_sylius_mail_template_plugin.factory.email_template"
+            - "@bitbag_sylius_mail_template_plugin.repository.email_template_translation"
