@@ -25,16 +25,12 @@ final class EmailTemplateContext implements Context
 
     private EmailCheckerInterface $emailChecker;
 
-    private TranslatorInterface $translator;
-
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        EmailCheckerInterface $emailChecker,
-        TranslatorInterface $translator
+        EmailCheckerInterface $emailChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
-        $this->translator = $translator;
     }
 
     /**

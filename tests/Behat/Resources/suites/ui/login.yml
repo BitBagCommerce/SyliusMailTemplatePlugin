@@ -13,8 +13,7 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.user
 
-                - sylius.behat.context.ui.shop.login
-
+                - bitbag_sylius_mail_template.behat.context.ui.login
                 - bitbag_sylius_mail_template.behat.context.setup.email_template
                 - bitbag_sylius_mail_template.behat.context.ui.email_template
 

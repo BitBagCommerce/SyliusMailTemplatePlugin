@@ -12,7 +12,7 @@
         {{ template.content|raw }}
 
         {# Fields from Sylius #}
-        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+        {% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
         <a href="{{ url|raw }}">
             {{ 'sylius.email.user_registration.start_shopping'|trans({}, null, localeCode) }}
         </a>

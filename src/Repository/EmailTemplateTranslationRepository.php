@@ -26,6 +26,6 @@ class EmailTemplateTranslationRepository extends EntityRepository implements Ema
             ->setParameter('type', $type)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }

@@ -11,7 +11,7 @@ bitbag_sylius_mail_template_plugin_admin_email_template:
             all:
                 subheader: bitbag_sylius_mail_template_plugin.ui.description
                 templates:
-                    form: "@BitBagSyliusMailTemplatePlugin/Admin/TemplateEmail/Crud/_form.html.twig"
+                    form: "@BitBagSyliusMailTemplatePlugin/Admin/EmailTemplate/Crud/_form.html.twig"
             index:
                 icon: 'envelope'
     type: sylius.resource
