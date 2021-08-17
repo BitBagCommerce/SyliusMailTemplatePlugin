@@ -16,7 +16,7 @@ Feature: Requesting contact
         When I want to request contact
         And I specify the message as "Hi! I did not receive an item!"
         And I send it
-        And the email with contact request should be sent to "contact@goodshop.com"
+        Then the email with contact request should be sent to "contact@goodshop.com"
 
     @ui @email
     Scenario: Requesting contact as a guest

@@ -14,7 +14,7 @@ Feature: Resetting a password
         When I want to reset password
         And I specify customer email as "goodman@example.com"
         And I reset it
-        And an email with reset token should be sent to "goodman@example.com"
+        Then an email with reset token should be sent to "goodman@example.com"
 
     @ui @email
     Scenario: Changing my account password with token I received
@@ -23,4 +23,4 @@ Feature: Resetting a password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
-        And I should be able to log in as "goodman@example.com" with "newp@ssw0rd" password
+        Then I should be able to log in as "goodman@example.com" with "newp@ssw0rd" password
