@@ -5,14 +5,10 @@
 {% block body %}
     {% block content %}
         {% if template.translatable.styleCss %}
-            {{ template.translatable.styleCss|raw }}
+            <style>{{ template.translatable.styleCss|raw }}</style>
         {% endif %}
         <h1 class="name">{{ template.name }}</h1>
         <h3 class="subject">{{ template.subject }}</h3>
-        {{ template.content|raw }}
-
-        {# Fields from Sylius #}
-        {{ data.email }}
-        {{ data.message|nl2br }}
+        {{ include(template_from_string(template.content)) | nl2br }}
     {% endblock %}
 {% endblock %}

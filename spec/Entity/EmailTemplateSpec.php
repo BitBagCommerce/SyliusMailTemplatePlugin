@@ -32,5 +32,4 @@ final class EmailTemplateSpec extends ObjectBehavior
     {
         $this->shouldHaveType(EmailTemplateInterface::class);
     }
-
 }

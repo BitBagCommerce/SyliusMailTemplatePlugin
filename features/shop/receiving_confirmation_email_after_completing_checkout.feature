@@ -6,7 +6,7 @@ Feature: Receiving confirmation email after finalizing checkout
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is mail template with "order_confirmation" type and "Order confirmation" name and "Congratulations, you have bought new gun" subject and "Pif paf" content
+        And there is mail template with "order_confirmation" type and "Order confirmation" name and "Congratulations, you have bought new gun" subject and "Pif paf </br> {{order.number}}" content
         And the store has a product "Sig Sauer P226" priced at "$499.99"
         And the store ships everywhere for free
         And the store allows paying offline

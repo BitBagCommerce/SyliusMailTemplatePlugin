@@ -6,7 +6,6 @@ sylius_resource:
                 model: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate
                 interface: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface
                 form: BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType
-                repository: BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepository
             translation:
                 classes:
                     model: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation

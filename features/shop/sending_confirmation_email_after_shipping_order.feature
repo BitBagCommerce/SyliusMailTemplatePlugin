@@ -6,7 +6,7 @@ Feature: Sending a confirmation email after shipping an order
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff!" content
+        And there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method }} </br> {{shipment.tracking}}" content
         And the store has a product "Angel T-Shirt"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"

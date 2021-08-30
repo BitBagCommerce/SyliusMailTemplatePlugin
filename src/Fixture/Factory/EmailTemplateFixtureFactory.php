@@ -13,7 +13,7 @@ namespace BitBag\SyliusMailTemplatePlugin\Fixture\Factory;
 
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
-use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
@@ -22,12 +22,12 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
 
     private FactoryInterface $emailTemplateTranslationFactory;
 
-    private EmailTemplateRepositoryInterface $emailTemplateRepository;
+    private EntityRepository $emailTemplateRepository;
 
     public function __construct(
         FactoryInterface $emailTemplateFactory,
         FactoryInterface $emailTemplateTranslationFactory,
-        EmailTemplateRepositoryInterface $emailTemplateRepository
+        EntityRepository $emailTemplateRepository
     ) {
         $this->emailTemplateFactory = $emailTemplateFactory;
         $this->emailTemplateTranslationFactory = $emailTemplateTranslationFactory;

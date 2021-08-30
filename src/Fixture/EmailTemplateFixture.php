@@ -56,6 +56,7 @@ final class EmailTemplateFixture extends AbstractFixture
                         ->end()
                     ->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 }

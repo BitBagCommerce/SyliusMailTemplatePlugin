@@ -74,32 +74,11 @@ final class EmailTemplateContext implements Context
         /** @var EmailTemplateInterface $emailTemplate */
         $emailTemplate = $this->templateFactory->createNew();
 
-        if (null === $type) {
-            $type = 'user_registration';
-        }
-
-        if (null === $name) {
-            $name = 'User registration template';
-        }
-
-        if (null === $subject) {
-            $subject = 'User registration subject';
-        }
-
-        if (null === $content) {
-            $content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.';
-        }
-
-        if (null === $locale) {
-            $locale = 'en_US';
-        }
-
-        $emailTemplate->setCurrentLocale($locale);
-
-        $emailTemplate->setType($type);
-        $emailTemplate->setName($name);
-        $emailTemplate->setSubject($subject);
-        $emailTemplate->setContent($content);
+        $emailTemplate->setCurrentLocale($locale ?? 'en_US');
+        $emailTemplate->setType($type ?? 'user_registration');
+        $emailTemplate->setName($name ?? 'User registration template');
+        $emailTemplate->setSubject($subject ?? 'User registration subject');
+        $emailTemplate->setContent($content ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.');
 
         return $emailTemplate;
     }
