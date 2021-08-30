@@ -16,7 +16,7 @@ sylius_fixtures:
                         custom:
                             contact_request:
                                 type: "contact_request"
-                                styleCss: "<style>* { color: green };</style>"
+                                styleCss: "* { color: green };"
                                 translations:
                                     en_US:
                                         name: "Contact request example mail"
