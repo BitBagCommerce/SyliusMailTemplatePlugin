@@ -33,7 +33,7 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 # Overview
 
 ----
-This plugin allows you to edit email templates from admin panel.
+This plugin allows you to edit email templates from admin panel using all twig features.
 
 
 ## We are here to help
@@ -69,29 +69,23 @@ Override email templates that you want to edit (`config/packages/sylius_mailer.y
 
 ```yaml
 sylius_mailer:
-    sender:
-        name: Example
-        address: no-reply@example.com
-    emails:
-        contact_request:
-            subject: sylius.emails.contact_request.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/contactRequest.html.twig"
-        order_confirmation:
-            subject: sylius.emails.order_confirmation.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/orderConfirmation.html.twig"
-        user_registration:
-            subject: sylius.emails.user_registration.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/userRegistration.html.twig"
-        shipment_confirmation:
-            subject: sylius.emails.shipment_confirmation.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/shipmentConfirmation.html.twig"
-        reset_password_token:
-            subject: sylius.emails.user.password_reset.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/passwordReset.html.twig"
-        verification_token:
-            subject: sylius.emails.user.verification_token.subject
-            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/verificationToken.html.twig"
-
+  renderer_adapter: bitbag_sylius_mail_template_plugin.renderer.adapter.email_twig_adapter
+  sender:
+    name: Example
+    address: no-reply@example.com
+  emails:
+    contact_request:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+    order_confirmation:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+    user_registration:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+    shipment_confirmation:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+    reset_password_token:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+    verification_token:
+      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
 ```
 
 Update your database
@@ -101,6 +95,53 @@ $ bin/console doctrine:migrations:migrate
 ```
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
+
+### Using twig
+
+You can use **all twig features** in the email templates, but the most important are:
+
+#### contact_request:
+```html
+{{ data.email }}
+{{ data.message|nl2br }}
+```
+
+#### order_confirmation:
+```html
+{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) %}
+
+{{ order.number }}
+
+<a href="{{ url|raw }}">View order or change payment method</a>
+```
+
+#### user_registration:
+```html
+{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+
+<a href="{{ url|raw }}">Start shopping</a>
+```
+
+#### shipment_confirmation:
+```html
+{{ order.number }}
+{{ shipment.method }}
+{{ shipment.tracking }}
+```
+
+#### reset_password_token:
+```html
+{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_password_reset', { 'token': user.passwordResetToken}) : url('sylius_shop_password_reset', { 'token': user.passwordResetToken, '_locale': localeCode}) %}
+
+<a href="{{ url|raw }}">Reset your password</a>
+```
+
+#### verification_token:
+```html
+{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode}) %}
+
+<a href="{{ url|raw }}">Verify your email address</a>
+```
 
 ## Customization
 
