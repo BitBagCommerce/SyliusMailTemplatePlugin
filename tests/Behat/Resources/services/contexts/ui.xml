@@ -7,14 +7,14 @@
     <services>
         <defaults public="true" />
 
-        <service id="bitbag_sylius_mail_template.behat.context.ui.email_template"
+        <service id="bitbag_sylius_mail_template_plugin.behat.context.ui.email_template"
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui\EmailTemplateContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="translator" />
         </service>
 
-        <service id="bitbag_sylius_mail_template.behat.context.ui.login"
+        <service id="bitbag_sylius_mail_template_plugin.behat.context.ui.login"
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui\LoginContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />

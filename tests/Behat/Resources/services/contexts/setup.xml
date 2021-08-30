@@ -7,7 +7,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="bitbag_sylius_mail_template.behat.context.setup.email_template"
+        <service id="bitbag_sylius_mail_template_plugin.behat.context.setup.email_template"
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Setup\EmailTemplateContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="bitbag_sylius_mail_template_plugin.factory.email_template" />
