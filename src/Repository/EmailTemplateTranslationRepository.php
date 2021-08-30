@@ -16,7 +16,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class EmailTemplateTranslationRepository extends EntityRepository implements EmailTemplateTranslationRepositoryInterface
 {
-    public function findOneByLocaleCodeAdnType(string $localeCode, string $type): ?EmailTemplateTranslationInterface
+    public function findOneByLocaleCodeAndType(string $localeCode, string $type): ?EmailTemplateTranslationInterface
     {
         return $this->createQueryBuilder('tt')
             ->innerJoin('tt.translatable', 'templateEmail')
@@ -26,6 +26,6 @@ class EmailTemplateTranslationRepository extends EntityRepository implements Ema
             ->setParameter('type', $type)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }

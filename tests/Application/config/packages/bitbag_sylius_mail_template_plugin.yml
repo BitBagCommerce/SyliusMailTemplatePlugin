@@ -1,0 +1,25 @@
+imports:
+    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/config.yaml" }
+
+parameters:
+    fixtures_dir: "%kernel.project_dir%/Resources/fixtures"
+
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+                logger: ~
+            fixtures:
+                email_template:
+                    options:
+                        custom:
+                            contact_request:
+                                type: "contact_request"
+                                styleCss: "* { color: green };"
+                                translations:
+                                    en_US:
+                                        name: "Contact request example mail"
+                                        subject: "Wanna contact with us?"
+                                        content: "Call us"
+

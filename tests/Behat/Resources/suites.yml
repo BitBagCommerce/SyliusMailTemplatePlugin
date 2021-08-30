@@ -1,5 +1,6 @@
-# Put your Behat suites definitions here
-
-default:
-    suites:
-
+imports:
+    - suites/ui/user_registration.yml
+    - suites/ui/checkout.yml
+    - suites/ui/requesting_contact.yml
+    - suites/ui/managing_orders.yml
+    - suites/ui/login.yml

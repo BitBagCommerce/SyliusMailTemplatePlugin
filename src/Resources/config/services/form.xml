@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="bitbag_sylius_mail_template_plugin.form.type.email_template.validation_groups" type="collection">
+            <parameter>bitbag</parameter>
+        </parameter>
+        <parameter key="bitbag_sylius_mail_template_plugin.form.type.translation.email_template_translation.validation_groups" type="collection">
+            <parameter>bitbag</parameter>
+        </parameter>
+    </parameters>
+
     <services>
-        <service id="bitbag_sylius_mail_template_plugin.form.type.translation.block_translation_type" class="BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType">
+        <service id="bitbag_sylius_mail_template_plugin.form.type.email_template_type" class="BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType">
+            <argument>%bitbag_sylius_mail_template_plugin.model.email_template.class%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.form.type.email_template.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.form.type.translation.email_template_translation_type"
+                 class="BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType">
             <argument>%bitbag_sylius_mail_template_plugin.model.email_template_translation.class%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.form.type.translation.email_template_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

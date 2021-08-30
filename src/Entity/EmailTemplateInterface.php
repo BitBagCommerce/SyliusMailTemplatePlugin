@@ -16,9 +16,17 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 
 interface EmailTemplateInterface extends ResourceInterface, TranslatableInterface
 {
-    public const PAYMENT_LINK = 'payment_link';
+    public const ORDER_CONFIRMATION = 'order_confirmation';
 
-    public const PAYMENT_LINK_ABANDONED = 'payment_link_abandoned';
+    public const USER_REGISTRATION = 'user_registration';
+
+    public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
+
+    public const RESET_PASSWORD_TOKEN = 'reset_password_token';
+
+    public const VERIFICATION_TOKEN = 'verification_token';
+
+    public const CONTACT_REQUEST = 'contact_request';
 
     public function getId(): ?int;
 

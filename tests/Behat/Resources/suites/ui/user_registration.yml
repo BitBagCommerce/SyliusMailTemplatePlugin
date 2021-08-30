@@ -1,0 +1,27 @@
+default:
+    suites:
+        ui_user_registration:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.ui.shop.locale
+                - sylius.behat.context.ui.shop.registration
+                - sylius.behat.context.domain.managing_orders
+
+                - bitbag_sylius_mail_template_plugin.behat.context.setup.email_template
+                - bitbag_sylius_mail_template_plugin.behat.context.ui.email_template
+
+
+            filters:
+                tags: "@user_registration && @ui"

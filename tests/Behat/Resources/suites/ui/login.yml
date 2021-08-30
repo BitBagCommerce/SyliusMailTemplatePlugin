@@ -1,0 +1,21 @@
+default:
+    suites:
+        ui_customer_login:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
+
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.user
+
+                - bitbag_sylius_mail_template_plugin.behat.context.ui.login
+                - bitbag_sylius_mail_template_plugin.behat.context.setup.email_template
+                - bitbag_sylius_mail_template_plugin.behat.context.ui.email_template
+
+            filters:
+                tags: "@customer_login && @ui"

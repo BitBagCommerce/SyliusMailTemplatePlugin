@@ -1,0 +1,18 @@
+sylius_mailer:
+    renderer_adapter: bitbag_sylius_mail_template_plugin.renderer.adapter.email_twig_adapter
+    sender:
+        name: Example
+        address: no-reply@example.com
+    emails:
+        contact_request:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+        order_confirmation:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+        user_registration:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+        shipment_confirmation:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+        reset_password_token:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
+        verification_token:
+            template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
