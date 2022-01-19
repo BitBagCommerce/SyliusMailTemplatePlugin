@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Form\Type;
 
-use BitBag\SyliusMailTemplatePlugin\EmailTemplateTerms\Options;
 use BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,12 +20,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class EmailTemplateType extends AbstractType
 {
+    private array $parameter;
+
+    public function __construct(array $parameter)
+    {
+        $this->parameter = $parameter;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('type', ChoiceType::class, [
                 'label' => 'bitbag_sylius_mail_template_plugin.ui.template_type',
-                'choices' => Options::getAvailableEmailTemplate(),
+                'choices' => $this->getEmailCodes(),
             ])
             ->add('styleCss', TextareaType::class, [
                 'label' => 'bitbag_sylius_mail_template_plugin.ui.style_css',
@@ -40,5 +47,14 @@ final class EmailTemplateType extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'bitbag_sylius_mail_template_plugin_template_email';
+    }
+
+    private function getEmailCodes(): array
+    {
+        $emailObjects = $this->parameter;
+
+        $emailCodes = array_keys($emailObjects);
+
+        return array_combine($emailCodes, $emailCodes);
     }
 }

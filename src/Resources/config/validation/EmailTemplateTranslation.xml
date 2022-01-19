@@ -5,13 +5,13 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation">
         <property name="name">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank" />
         </property>
         <property name="subject">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank" />
         </property>
         <property name="content">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank" />
         </property>
     </class>
 </constraint-mapping>

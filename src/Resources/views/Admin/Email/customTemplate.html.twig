@@ -7,8 +7,7 @@
         {% if template.translatable.styleCss %}
             <style>{{ template.translatable.styleCss|raw }}</style>
         {% endif %}
-        <h1 class="name">{{ template.name }}</h1>
-        <h3 class="subject">{{ template.subject }}</h3>
+
         {{ include(template_from_string(template.content)) | nl2br }}
     {% endblock %}
 {% endblock %}

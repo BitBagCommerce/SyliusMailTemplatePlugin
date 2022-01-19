@@ -28,6 +28,12 @@ final class Sender implements SenderInterface
     public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
     {
         $template = $this->templateResolver->findOrLog($code);
+//        ToDo: $email->getTemplate() na mój
+//        ToDo: Przenieść całą logikę wysyłania maila tutaj
+//        ToDo: Usunąć name z translacji
+//        ToDo: Odwrócić logikę w mailach, podać obiekt główny zamiast translatowanego
+//        ToDo: Send test mail
+//        ToDo: CodeMirror dla kolorowania składni
 
         $data['template'] = $template;
 

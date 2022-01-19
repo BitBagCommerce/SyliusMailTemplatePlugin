@@ -13,6 +13,7 @@
 
     <services>
         <service id="bitbag_sylius_mail_template_plugin.form.type.email_template_type" class="BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType">
+            <argument>%sylius.mailer.emails%</argument>
             <argument>%bitbag_sylius_mail_template_plugin.model.email_template.class%</argument>
             <argument>%bitbag_sylius_mail_template_plugin.form.type.email_template.validation_groups%</argument>
             <tag name="form.type" />

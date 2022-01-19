@@ -44,7 +44,7 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
                 $this->emailTemplateRepository->remove($emailTemplate);
             }
 
-            $styleCss = '<style>* { color: green };</style>';
+            $styleCss = '* { color: green };';
 
             if (null === $type) {
                 $type = 'contact_request';

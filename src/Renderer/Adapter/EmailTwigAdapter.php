@@ -70,7 +70,11 @@ final class EmailTwigAdapter extends AbstractAdapter
 
         $data = $this->twig->mergeGlobals($data);
 
-        $template = $this->twig->loadTemplate((string) $email->getTemplate());
+        if (!$data['template']) {
+            $template = $this->twig->loadTemplate((string) $email->getTemplate());
+        } else {
+            $template = $this->twig->loadTemplate("@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig");
+        }
 
         $subject = $template->renderBlock('subject', $data);
         $body = $template->renderBlock('body', $data);
