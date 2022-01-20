@@ -29,6 +29,10 @@ final class EmailTemplateType extends AbstractType
             ])
             ->add('styleCss', TextareaType::class, [
                 'label' => 'bitbag_sylius_mail_template_plugin.ui.style_css',
+                'attr' => [
+                    'class' => 'codemirror-editor',
+                    'data-language' => 'css',
+                ],
             ])
             ->add('translations', ResourceTranslationsType::class, [
                 'label' => 'bitbag_sylius_mail_template_plugin.ui.template_contents',
