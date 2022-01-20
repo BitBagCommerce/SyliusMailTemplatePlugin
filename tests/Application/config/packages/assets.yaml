@@ -6,6 +6,6 @@ framework:
             admin:
                 json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
             mail_template_shop:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/mail_template/shop/manifest.json'
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/mailtemplate/shop/manifest.json'
             mail_template_admin:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/mail_template/admin/manifest.json'
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/mailtemplate/admin/manifest.json'

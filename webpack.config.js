@@ -6,7 +6,7 @@
 
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
-const pluginName = 'mail_template';
+const pluginName = 'mailtemplate';
 
 const getConfig = (pluginName, type) => {
     Encore.reset();
