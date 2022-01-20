@@ -1,0 +1,20 @@
+{
+  "entrypoints": {
+    "bitbag-mailtemplate-shop": {
+      "css": [
+        "/public/bitbag-mailtemplate-shop.css"
+      ],
+      "js": [
+        "/public/bitbag-mailtemplate-shop.js"
+      ]
+    },
+    "bitbag-mailtemplate-admin": {
+      "css": [
+        "/public/bitbag-mailtemplate-admin.css"
+      ],
+      "js": [
+        "/public/bitbag-mailtemplate-admin.js"
+      ]
+    }
+  }
+}
