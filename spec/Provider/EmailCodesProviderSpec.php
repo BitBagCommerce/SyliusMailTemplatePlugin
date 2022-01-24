@@ -15,9 +15,9 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 class EmailCodesProviderSpec extends ObjectBehavior
 {
     private const EXAMPLE_EMAILS_CONFIGURATION = [
-        Emails::ACCOUNT_VERIFICATION_TOKEN => [],
         Emails::CONTACT_REQUEST => [],
         Emails::ORDER_CONFIRMATION => [],
+        Emails::SHIPMENT_CONFIRMATION => [],
     ];
 
     function let(): void
@@ -35,9 +35,9 @@ class EmailCodesProviderSpec extends ObjectBehavior
         $emailCodesWithLabels = $this->provideWithLabels();
 
         $emailCodesWithLabels->shouldBeArray();
-        $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::ACCOUNT_VERIFICATION_TOKEN), Emails::ACCOUNT_VERIFICATION_TOKEN);
         $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::CONTACT_REQUEST), Emails::CONTACT_REQUEST);
         $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::ORDER_CONFIRMATION), Emails::ORDER_CONFIRMATION);
+        $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::SHIPMENT_CONFIRMATION), Emails::SHIPMENT_CONFIRMATION);
     }
 
     private function getLabel(string $emailCode): string
