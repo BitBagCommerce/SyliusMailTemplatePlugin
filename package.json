@@ -1,0 +1,8 @@
+{
+  "name": "@bitbag/mail-template-plugin",
+  "repository": "https://github.com/BitBagCommerce/SyliusMailTemplatePlugin.git",
+  "license": "MIT",
+  "scripts": {
+    "dist": "yarn encore production --config-name bitbag-plugin-dist"
+  }
+}
