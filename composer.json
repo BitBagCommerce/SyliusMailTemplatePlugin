@@ -10,7 +10,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
-        "sylius/sylius": "~1.9.0 || ~1.10.0"
+        "sylius/sylius": "~1.9.0 || ~1.10.0",
+        "twig/inky-extra": "^3.3"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -43,7 +44,13 @@
         "vimeo/psalm": "4.7.1"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true,
+            "symfony/thanks": true
+        }
     },
     "autoload": {
         "psr-4": {

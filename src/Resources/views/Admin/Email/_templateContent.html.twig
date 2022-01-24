@@ -1,0 +1,3 @@
+{% apply inky_to_html|nl2br %}
+    {{ include(template_from_string(template.content)) }}
+{% endapply %}
