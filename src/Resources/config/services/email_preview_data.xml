@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data_provider" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\MailPreviewDataProvider">
+            <argument type="tagged_iterator" tag="bitbag_sylius_mail_template_plugin.mail_preview_data" default-index-method="getIndex" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.account_verification_token" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\AccountVerificationTokenMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.contact_request" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\ContactRequestMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.order_confirmation" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\OrderConfirmationMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.order_confirmation_resent" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\OrderConfirmationResentMailPreviewData" >
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.order_confirmation" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.password_reset" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\PasswordResetMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.shipment_confirmation" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\ShipmentConfirmationMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.user_registration" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\UserRegistrationMailPreviewData" >
+            <argument type="service" id="sylius.fixture.example_factory.order" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+    </services>
+</container>
