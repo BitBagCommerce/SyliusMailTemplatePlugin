@@ -3,3 +3,37 @@
  * Do you need more information about us and what we do? Visit our https://bitbag.io website!
  * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
  */
+.mail-preview.modal {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .button {
+    &.close {
+      background: none;
+    }
+  }
+}
+
+.mail-preview-loader {
+  &.hidden {
+    display: none;
+  }
+}
+
+.ui {
+  &.form {
+    .error {
+      &.message {
+        &.mail-preview-validation-errors {
+          &:not(:empty) {
+            display: block;
+            margin-bottom: 14px;
+          }
+        }
+      }
+    }
+  }
+}

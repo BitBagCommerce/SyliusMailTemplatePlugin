@@ -20,5 +20,9 @@ bitbag_sylius_mail_template_plugin:
         template_type: "Type"
         userRegistration: "User registration"
         verificationToken: "Verification token"
-
-
+        preview: "Preview"
+        not_allowed_twig_function: "Function \"%s\" is not allowed at line %d"
+        not_allowed_twig_method: "Method \"%s\" is not allowed at line %d"
+        not_allowed_twig_property: "Property \"%s\" is not allowed at line %d"
+        not_allowed_twig_filter: "Filter \"%s\" is not allowed at line %d"
+        not_allowed_twig_tag: "Tag \"%s\" is not allowed at line %d"

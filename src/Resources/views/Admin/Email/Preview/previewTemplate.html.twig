@@ -1,0 +1,16 @@
+{% block subject %}
+    {{ subject }}
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        {% if styleCss %}
+            <style>{{ styleCss|raw }}</style>
+        {% endif %}
+        <h1 class="name">{{ name }}</h1>
+        <h3 class="subject">{{ subject }}</h3>
+        {% sandbox %}
+            {% include '@BitBagSyliusMailTemplatePlugin/Admin/Email/Preview/_previewTemplateContent.html.twig' %}
+        {% endsandbox %}
+    {% endblock %}
+{% endblock %}
