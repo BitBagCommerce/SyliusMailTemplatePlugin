@@ -7,7 +7,7 @@
                 class="BitBag\SyliusMailTemplatePlugin\Validator\IsRenderableMailContentValidator"
         >
             <argument type="service" id="twig" />
-            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data_provider" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.provider.mail_preview_data_provider" />
 
             <tag
                     name="validator.constraint_validator"
