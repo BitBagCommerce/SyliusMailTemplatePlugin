@@ -6,6 +6,10 @@
             <argument type="tagged_iterator" tag="bitbag_sylius_mail_template_plugin.mail_preview_data" default-index-method="getIndex" />
         </service>
 
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.generic" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\GenericMailPreviewData" >
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.account_verification_token" class="BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\AccountVerificationTokenMailPreviewData" >
             <argument type="service" id="sylius.fixture.example_factory.order" />
 

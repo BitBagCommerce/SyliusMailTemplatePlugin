@@ -14,6 +14,8 @@ use Webmozart\Assert\Assert;
 
 final class MailPreviewDataProvider implements MailPreviewDataProviderInterface
 {
+    public const GENERIC_PREVIEW_DATA_KEY = 'generic';
+
     private iterable $mailPreviewData;
 
     public function __construct(iterable $mailPreviewData)
@@ -21,10 +23,12 @@ final class MailPreviewDataProvider implements MailPreviewDataProviderInterface
         $this->mailPreviewData = $mailPreviewData instanceof \Traversable ? iterator_to_array($mailPreviewData) : $mailPreviewData;
     }
 
-    public function get(string $emailType): ?MailPreviewDataInterface
+    public function get(string $emailType): MailPreviewDataInterface
     {
+        Assert::keyExists($this->mailPreviewData, self::GENERIC_PREVIEW_DATA_KEY);
+
         if (!isset($this->mailPreviewData[$emailType])) {
-            return null;
+            return $this->mailPreviewData[self::GENERIC_PREVIEW_DATA_KEY];
         }
 
         $mailPreviewData = $this->mailPreviewData[$emailType];
