@@ -26,3 +26,5 @@ bitbag_sylius_mail_template_plugin:
         not_allowed_twig_property: "Property \"%s\" is not allowed at line %d"
         not_allowed_twig_filter: "Filter \"%s\" is not allowed at line %d"
         not_allowed_twig_tag: "Tag \"%s\" is not allowed at line %d"
+    validation:
+        invalid_content: "Content must be a valid twig template: \"{{ error }}\""
