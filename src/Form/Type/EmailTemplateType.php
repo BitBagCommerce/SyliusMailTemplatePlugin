@@ -50,6 +50,10 @@ final class EmailTemplateType extends AbstractType
             ])
             ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [
                 'label' => self::STYLE_CSS_LABEL,
+                'attr' => [
+                    'class' => 'codemirror-editor',
+                    'data-language' => 'css',
+                ],
             ])
             ->add(self::TRANSLATIONS_FIELD_NAME, ResourceTranslationsType::class, [
                 'label' => self::TRANSLATIONS_LABEL,
