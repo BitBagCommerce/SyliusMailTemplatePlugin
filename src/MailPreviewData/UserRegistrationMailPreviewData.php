@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider;
+namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
-final class ShipmentConfirmationMailPreviewData implements MailPreviewDataInterface
+final class UserRegistrationMailPreviewData implements MailPreviewDataInterface
 {
     private OrderExampleFactory $orderExampleFactory;
 
@@ -25,13 +25,12 @@ final class ShipmentConfirmationMailPreviewData implements MailPreviewDataInterf
     public function getData(): array
     {
         $order = $this->orderExampleFactory->create();
-        $shipment = $order->getShipments()->first();
+        $user = $order->getCustomer();
         $channel = $order->getChannel();
         $localeCode = $order->getLocaleCode();
 
         return [
-            'shipment' => $shipment,
-            'order' => $order,
+            'user' => $user,
             'channel' => $channel,
             'localeCode' => $localeCode,
         ];
@@ -39,6 +38,6 @@ final class ShipmentConfirmationMailPreviewData implements MailPreviewDataInterf
 
     public static function getIndex(): string
     {
-        return Emails::SHIPMENT_CONFIRMATION;
+        return Emails::USER_REGISTRATION;
     }
 }

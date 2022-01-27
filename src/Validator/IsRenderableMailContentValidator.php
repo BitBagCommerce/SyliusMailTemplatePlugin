@@ -13,13 +13,12 @@ namespace BitBag\SyliusMailTemplatePlugin\Validator;
 use BitBag\SyliusMailTemplatePlugin\Controller\Action\RenderEmailPreviewAction;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
-use BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\MailPreviewDataProviderInterface;
+use BitBag\SyliusMailTemplatePlugin\Provider\MailPreviewDataProviderInterface;
 use BitBag\SyliusMailTemplatePlugin\Request\MailPreviewRequest;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Twig\Environment;
-use Twig\Sandbox\SecurityError;
 use Webmozart\Assert\Assert;
 
 class IsRenderableMailContentValidator extends ConstraintValidator

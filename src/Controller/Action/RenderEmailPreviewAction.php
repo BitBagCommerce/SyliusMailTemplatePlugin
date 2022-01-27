@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Controller\Action;
 
-use BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\MailPreviewDataProviderInterface;
+use BitBag\SyliusMailTemplatePlugin\Provider\MailPreviewDataProviderInterface;
 use BitBag\SyliusMailTemplatePlugin\Request\MailPreviewRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;

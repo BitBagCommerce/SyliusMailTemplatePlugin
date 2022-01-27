@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider;
+namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
-final class PasswordResetMailPreviewData implements MailPreviewDataInterface
+final class OrderConfirmationMailPreviewData implements MailPreviewDataInterface
 {
     private OrderExampleFactory $orderExampleFactory;
 
@@ -25,12 +25,11 @@ final class PasswordResetMailPreviewData implements MailPreviewDataInterface
     public function getData(): array
     {
         $order = $this->orderExampleFactory->create();
-        $user = $order->getCustomer();
         $channel = $order->getChannel();
         $localeCode = $order->getLocaleCode();
 
         return [
-            'user' => $user,
+            'order' => $order,
             'channel' => $channel,
             'localeCode' => $localeCode,
         ];
@@ -38,6 +37,6 @@ final class PasswordResetMailPreviewData implements MailPreviewDataInterface
 
     public static function getIndex(): string
     {
-        return Emails::PASSWORD_RESET;
+        return Emails::ORDER_CONFIRMATION;
     }
 }

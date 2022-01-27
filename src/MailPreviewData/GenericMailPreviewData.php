@@ -8,11 +8,19 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider;
+namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
-interface MailPreviewDataInterface
+final class GenericMailPreviewData implements MailPreviewDataInterface
 {
-    public function getData(): array;
+    public const INDEX = 'generic';
 
-    public static function getIndex(): string;
+    public function getData(): array
+    {
+        return [];
+    }
+
+    public static function getIndex(): string
+    {
+        return self::INDEX;
+    }
 }

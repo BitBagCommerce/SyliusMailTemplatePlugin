@@ -4,11 +4,10 @@ namespace spec\BitBag\SyliusMailTemplatePlugin\Validator;
 
 use BitBag\SyliusMailTemplatePlugin\Controller\Action\RenderEmailPreviewAction;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate;
-use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
-use BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\MailPreviewDataInterface;
-use BitBag\SyliusMailTemplatePlugin\MailPreviewDataProvider\MailPreviewDataProviderInterface;
+use BitBag\SyliusMailTemplatePlugin\MailPreviewData\MailPreviewDataInterface;
+use BitBag\SyliusMailTemplatePlugin\Provider\MailPreviewDataProviderInterface;
 use BitBag\SyliusMailTemplatePlugin\Validator\IsRenderableMailContent;
 use BitBag\SyliusMailTemplatePlugin\Validator\IsRenderableMailContentValidator;
 use PhpSpec\ObjectBehavior;
