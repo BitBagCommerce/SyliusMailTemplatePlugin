@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Form\Type;
 
-use BitBag\SyliusMailTemplatePlugin\EmailTemplateTerms\Options;
 use BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType;
+use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,18 +20,43 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class EmailTemplateType extends AbstractType
 {
+    public const TYPE_FIELD_NAME = 'type';
+
+    public const STYLE_CSS_FIELD_NAME = 'styleCss';
+
+    public const TRANSLATIONS_FIELD_NAME = 'translations';
+
+    public const TEMPLATE_TYPE_LABEL = 'bitbag_sylius_mail_template_plugin.ui.template_type';
+
+    public const STYLE_CSS_LABEL = 'bitbag_sylius_mail_template_plugin.ui.style_css';
+
+    public const TRANSLATIONS_LABEL = 'bitbag_sylius_mail_template_plugin.ui.template_contents';
+
+    public const BLOCK_PREFIX = 'bitbag_sylius_mail_template_plugin_template_email';
+
+    private EmailCodesProviderInterface $emailCodesProvider;
+
+    public function __construct(EmailCodesProviderInterface $emailCodesProvider)
+    {
+        $this->emailCodesProvider = $emailCodesProvider;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type', ChoiceType::class, [
-                'label' => 'bitbag_sylius_mail_template_plugin.ui.template_type',
-                'choices' => Options::getAvailableEmailTemplate(),
+            ->add(self::TYPE_FIELD_NAME, ChoiceType::class, [
+                'label' => self::TEMPLATE_TYPE_LABEL,
+                'choices' => $this->emailCodesProvider->provideWithLabels(),
             ])
-            ->add('styleCss', TextareaType::class, [
-                'label' => 'bitbag_sylius_mail_template_plugin.ui.style_css',
+            ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [
+                'label' => self::STYLE_CSS_LABEL,
+                'attr' => [
+                    'class' => 'codemirror-editor',
+                    'data-language' => 'css',
+                ],
             ])
-            ->add('translations', ResourceTranslationsType::class, [
-                'label' => 'bitbag_sylius_mail_template_plugin.ui.template_contents',
+            ->add(self::TRANSLATIONS_FIELD_NAME, ResourceTranslationsType::class, [
+                'label' => self::TRANSLATIONS_LABEL,
                 'entry_type' => EmailTemplateTranslationType::class,
             ])
         ;
@@ -39,6 +64,6 @@ final class EmailTemplateType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_mail_template_plugin_template_email';
+        return self::BLOCK_PREFIX;
     }
 }

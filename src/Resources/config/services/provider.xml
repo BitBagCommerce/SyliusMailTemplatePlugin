@@ -9,5 +9,12 @@
         <service id="bitbag_sylius_mail_template_plugin.provider.custom_twig_error_response" class="BitBag\SyliusMailTemplatePlugin\Provider\CustomTwigErrorResponseProvider" >
             <argument type="tagged_iterator" tag="bitbag_sylius_mail_template_plugin.twig_error_response" />
         </service>
+      
+        <service
+                id="bitbag_sylius_mail_template_plugin.provider.email_codes"
+                class="BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider"
+        >
+            <argument>%sylius.mailer.emails%</argument>
+        </service>
     </services>
 </container>
