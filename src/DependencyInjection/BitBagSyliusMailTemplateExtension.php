@@ -46,11 +46,11 @@ final class BitBagSyliusMailTemplateExtension extends Extension
 
         $container->setParameter(
             self::ALLOWED_FILTERS_PARAMETER,
-            array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FILTERS], self::REQUIRED_FILTERS)
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FILTERS], self::REQUIRED_FILTERS))
         );
         $container->setParameter(
             self::ALLOWED_FUNCTIONS_PARAMETER,
-            array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FUNCTIONS], self::REQUIRED_FUNCTIONS)
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FUNCTIONS], self::REQUIRED_FUNCTIONS))
         );
         $container->setParameter(
             self::ALLOWED_METHODS_PARAMETER,
@@ -62,7 +62,7 @@ final class BitBagSyliusMailTemplateExtension extends Extension
         );
         $container->setParameter(
             self::ALLOWED_TAGS_PARAMETER,
-            array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS)
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS))
         );
     }
 
