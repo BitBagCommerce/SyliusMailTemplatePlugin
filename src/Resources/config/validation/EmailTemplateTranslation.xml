@@ -12,6 +12,7 @@
         </property>
         <property name="content">
             <constraint name="NotBlank"/>
+            <constraint name="BitBag\SyliusMailTemplatePlugin\Validator\IsRenderableMailContent"/>
         </property>
     </class>
 </constraint-mapping>

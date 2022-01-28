@@ -1,0 +1,18 @@
+{% block subject %}
+    <div class="ui large header">
+        {{ subject }}
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        {% if styleCss %}
+            <style>{{ styleCss|raw }}</style>
+        {% endif %}
+        <div class="ui segment">
+            {% sandbox %}
+                {% include '@BitBagSyliusMailTemplatePlugin/Admin/Email/Preview/_previewTemplateContent.html.twig' %}
+            {% endsandbox %}
+        </div>
+    {% endblock %}
+{% endblock %}

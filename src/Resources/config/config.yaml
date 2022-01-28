@@ -2,3 +2,20 @@ imports:
     - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/services.xml" }
     - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/grids.yaml" }
     - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/resources.yaml" }
+
+parameters:
+    bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_tags:
+        - 'apply'
+    bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_filters:
+        - 'nl2br'
+        - 'inky_to_html'
+        - 'escape'
+    bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_methods:
+        'BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation':
+            - 'getContent'
+        'Sylius\Component\Core\Model\ShipmentInterface': '*'
+        'Sylius\Component\Core\Model\OrderInterface': '*'
+    bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_properties: []
+    bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_functions:
+        - 'include'
+        - 'template_from_string'

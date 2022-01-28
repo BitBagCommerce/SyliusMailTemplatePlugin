@@ -4,6 +4,8 @@
  * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
  */
 
+import './emailTemplatePreview';
+
 require('codemirror/mode/htmlmixed/htmlmixed');
 require('codemirror/mode/css/css');
 const CodeMirror = require('codemirror/lib/codemirror');

@@ -1,6 +1,16 @@
-{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+{% from '@BitBagSyliusMailTemplatePlugin/Admin/Macro/translationForm.html.twig' import translationForm %}
 
 {{ form_errors(form) }}
 {{ form_row(form.type) }}
 {{ form_row(form.styleCss) }}
 {{ translationForm(form.translations) }}
+
+<div class="mail-preview ui modal">
+    <div class="header">
+        <span>{{ 'bitbag_sylius_mail_template_plugin.ui.preview'|trans }}</span>
+        <button class="ui icon button close">
+            <i class="icon close"></i>
+        </button>
+    </div>
+    <div class="content"></div>
+</div>

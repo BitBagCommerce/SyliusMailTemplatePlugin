@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_mail_template_plugin.controller.action.render_email_preview" class="BitBag\SyliusMailTemplatePlugin\Controller\Action\RenderEmailPreviewAction" >
+            <argument type="service" id="twig" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.provider.mail_preview_data_provider" />
+            <argument type="service" id="translator" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+    </services>
+</container>

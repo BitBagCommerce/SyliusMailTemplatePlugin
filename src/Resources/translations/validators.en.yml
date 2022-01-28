@@ -1,0 +1,3 @@
+bitbag_sylius_mail_template_plugin:
+    is_renderable_mail_content:
+        invalid_content: "Content must be an invalid twig template: \"{{ error }}\""
