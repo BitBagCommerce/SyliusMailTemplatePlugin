@@ -7,22 +7,22 @@ Feature: Requesting contact
     Background:
         Given the store operates on a single channel in "United States"
         And this channel has contact email set as "contact@goodshop.com"
-        And there is mail template with "contact_request" type and "Contact Request" name and "Invitation" subject and "Invitation" content
 
     @ui @email
-    Scenario: Requesting contact as a logged in customer
-        Given there is a user "lucifer@morningstar.com"
-        And I am logged in as "lucifer@morningstar.com"
-        When I want to request contact
-        And I specify the message as "Hi! I did not receive an item!"
-        And I send it
-        Then the email with contact request should be sent to "contact@goodshop.com"
-
-    @ui @email
-    Scenario: Requesting contact as a guest
+    Scenario: Receiving a default request contact email from form
         When I want to request contact
         And I specify the email as "lucifer@morningstar.com"
         And I specify the message as "Hi! I did not receive an item!"
         And I send it
         Then I should be notified that the contact request has been submitted successfully
-        And the email with contact request should be sent to "contact@goodshop.com"
+        And a default email with contact request should have been sent to "contact@goodshop.com" with sender "lucifer@morningstar.com"
+
+    @ui @email
+    Scenario: Receiving a custom request contact email from form
+        Given there is mail template with "contact_request" type and "Contact Request" name and "Contact form" subject and "{{ data.email }} wrote {{ data.message }}" content
+        When I want to request contact
+        And I specify the email as "lucifer@morningstar.com"
+        And I specify the message as "Hi! I did not receive an item!"
+        And I send it
+        Then I should be notified that the contact request has been submitted successfully
+        And a custom email with contact request should have been sent to "contact@goodshop.com" with sender "lucifer@morningstar.com"
