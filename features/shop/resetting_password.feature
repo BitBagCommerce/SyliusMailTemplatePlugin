@@ -6,7 +6,7 @@ Feature: Resetting a password
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is mail template with "reset_password_token" type and "Reset password" name and "Wanna reset password?" subject and "Here is your code:" content
+        And there is mail template with "reset_password_token" type and "Reset password" name and "Wanna reset password?" subject and "Wanna reset password? Here is your code:" content
         And there is a user "goodman@example.com" identified by "heisenberg"
 
     @ui @email

@@ -49,7 +49,7 @@ final class EmailTemplateContext implements Context
     public function anEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
-            'Wanna reset password?',
+            'Wanna reset password? Here is your code:',
             $recipient
         );
     }
@@ -101,8 +101,7 @@ final class EmailTemplateContext implements Context
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
-                '%s %s %s',
-                'Congratulations, you have bought new gun',
+                '%s %s',
                 'Pif paf',
                 $order->getNumber()
             ),
@@ -132,8 +131,7 @@ final class EmailTemplateContext implements Context
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
-                '%s %s %s %s',
-                'Your products are waiting for you!',
+                '%s %s %s',
                 'Enjoy your new stuff!',
                 $order->getNumber(),
                 $this->getShippingMethodName($order)
