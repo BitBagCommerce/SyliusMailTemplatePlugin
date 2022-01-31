@@ -22,6 +22,8 @@ class EmailTemplateTranslation extends AbstractTranslation implements EmailTempl
 
     protected ?string $content;
 
+    protected ?EmailTemplate $emailTemplate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,5 +57,15 @@ class EmailTemplateTranslation extends AbstractTranslation implements EmailTempl
     public function setContent(?string $content): void
     {
         $this->content = $content;
+    }
+
+    public function getEmailTemplate(): ?EmailTemplate
+    {
+        return $this->emailTemplate;
+    }
+
+    public function setEmailTemplate(?EmailTemplate $emailTemplate): void
+    {
+        $this->emailTemplate = $emailTemplate;
     }
 }

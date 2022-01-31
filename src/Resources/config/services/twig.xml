@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_mail_template_plugin.twig.sandbox.security_policy" class="Twig\Sandbox\SecurityPolicy">
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_tags%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_filters%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_methods%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_properties%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_functions%</argument>
+        </service>
+
+        <service
+            id="bitbag_sylius_mail_template_plugin.twig.sandbox.custom_security_policy"
+            class="BitBag\SyliusMailTemplatePlugin\Twig\Sandbox\SecurityPolicy"
+            decorates="bitbag_sylius_mail_template_plugin.twig.sandbox.security_policy"
+        >
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.twig.sandbox.custom_security_policy.inner" />
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_methods%</argument>
+            <argument>%bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_properties%</argument>
+        </service>
+
+        <service id="twig.extension.sandbox" class="Twig\Extension\SandboxExtension">
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.twig.sandbox.security_policy" />
+
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="twig.extension.string_loader" class="Twig\Extension\StringLoaderExtension">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="twig.extension.extra.inky" class="Twig\Extra\Inky\InkyExtension">
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

@@ -1,5 +1,4 @@
 sylius_mailer:
-    renderer_adapter: bitbag_sylius_mail_template_plugin.renderer.adapter.email_twig_adapter
     sender:
         name: Example
         address: no-reply@example.com

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_mail_template_plugin.response.twig_error.security_not_allowed_filter_error" class="BitBag\SyliusMailTemplatePlugin\Response\TwigError\SecurityNotAllowedFilterErrorResponse" >
+            <argument type="service" id="translator" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.twig_error_response" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.response.twig_error.security_not_allowed_function_error" class="BitBag\SyliusMailTemplatePlugin\Response\TwigError\SecurityNotAllowedFunctionErrorResponse" >
+            <argument type="service" id="translator" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.twig_error_response" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.response.twig_error.security_not_allowed_method_error" class="BitBag\SyliusMailTemplatePlugin\Response\TwigError\SecurityNotAllowedMethodErrorResponse" >
+            <argument type="service" id="translator" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.twig_error_response" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.response.twig_error.security_not_allowed_property_error" class="BitBag\SyliusMailTemplatePlugin\Response\TwigError\SecurityNotAllowedPropertyErrorResponse" >
+            <argument type="service" id="translator" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.twig_error_response" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.response.twig_error.security_not_allowed_tag_error" class="BitBag\SyliusMailTemplatePlugin\Response\TwigError\SecurityNotAllowedTagErrorResponse" >
+            <argument type="service" id="translator" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.twig_error_response" />
+        </service>
+    </services>
+</container>

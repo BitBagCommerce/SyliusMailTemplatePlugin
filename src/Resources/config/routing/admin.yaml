@@ -1,2 +1,7 @@
 bitbag_email_template:
     resource: "admin/email_template.yaml"
+
+bitbag_email_preview:
+    path: '/mail-template/preview'
+    defaults:
+        _controller: bitbag_sylius_mail_template_plugin.controller.action.render_email_preview
