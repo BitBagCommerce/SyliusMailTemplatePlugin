@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\Repository;
 
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface EmailTemplateTranslationRepositoryInterface
+interface EmailTemplateTranslationRepositoryInterface extends RepositoryInterface
 {
     public function findOneByLocaleCodeAndType(string $localeCode, string $type): ?EmailTemplateTranslationInterface;
 }

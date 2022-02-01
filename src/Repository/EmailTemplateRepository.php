@@ -11,15 +11,29 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\Repository;
 
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class EmailTemplateRepository extends EntityRepository implements EmailTemplateRepositoryInterface
+/**
+ * @method QueryBuilder createQueryBuilder($alias, $indexBy = null)
+ */
+final class EmailTemplateRepository implements EmailTemplateRepositoryInterface
 {
-    public function findOneByType(string $type): ?EmailTemplateInterface
+    use RepositoryDecoratorTrait;
+
+    public function __construct(RepositoryInterface $decoratedRepository)
+    {
+        $this->decoratedRepository = $decoratedRepository;
+    }
+
+    public function findOneByLocaleCodeAndType(string $localeCode, string $type): ?EmailTemplateInterface
     {
         return $this->createQueryBuilder('t')
+            ->innerJoin('t.translations', 'tt')
             ->where('t.type = :type')
+            ->andWhere('tt.locale = :locale')
             ->setParameter('type', $type)
+            ->setParameter('locale', $localeCode)
             ->getQuery()
             ->getOneOrNullResult()
         ;
