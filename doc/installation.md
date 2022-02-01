@@ -2,8 +2,6 @@
 
 ## Installation
 
----
-
 ```bash
 $ composer require bitbag/mailtemplate-plugin
 ```

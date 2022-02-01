@@ -2,8 +2,6 @@
 
 ## Testing
 
----
-
 ```bash
 $ composer install
 $ cd tests/Application

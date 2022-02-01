@@ -2,8 +2,6 @@
 
 ## Usage
 
----
-
 Before sending an email there's a check if for the given locale and email type exists custom email template. If it exists, it will be used instead of the default one.
 
 ### Creating a new mail template

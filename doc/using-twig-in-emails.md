@@ -2,8 +2,6 @@
 
 ## Using Twig in emails
 
----
-
 ### Security
 Twig templating engine is a powerful tool but in case of creating email templates might be too powerful. To prevent insecure usage of Twig we have limited the access to the Twig functions and filters.
 Default configuration is following:
