@@ -35,137 +35,15 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 ----
 This plugin allows you to edit email templates from admin panel using all twig features.
 
+- [Installation](doc/installation.md)
+- [Testing](doc/testing.md)
+- [Usage](doc/usage.md)
+- [Using Twig in emails](doc/using-twig-in-emails.md)
 
 ## We are here to help
 This **open-source plugin was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know!
 
 [![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailtemplate)
-
-## Installation
-```bash
-$ composer require bitbag/mailtemplate-plugin
-```
-    
-Add plugin dependencies to your `config/bundles.php` file:
-```php
-return [
-    ...
-
-    BitBag\SyliusMailTemplatePlugin\BitBagSyliusMailTemplatePlugin::class => ['all' => true],
-];
-```
-
-Import required config in your `config/packages/_sylius.yaml` file:
-```yaml
-# config/packages/_sylius.yaml
-
-imports:
-    ...
-    
-    - { resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/config.yaml" }
-```
-
-Override email templates that you want to edit (`config/packages/sylius_mailer.yaml`) by adding lines below
-
-```yaml
-sylius_mailer:
-  renderer_adapter: bitbag_sylius_mail_template_plugin.renderer.adapter.email_twig_adapter
-  sender:
-    name: Example
-    address: no-reply@example.com
-  emails:
-    contact_request:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-    order_confirmation:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-    user_registration:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-    shipment_confirmation:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-    reset_password_token:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-    verification_token:
-      template: "@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig"
-```
-
-Update your database
-
-```
-$ bin/console doctrine:migrations:migrate
-```
-
-**Note:** If you are running it on production, add the `-e prod` flag to this command.
-
-### Using twig
-
-You can use **all twig features** in the email templates, but the most important are:
-
-#### contact_request:
-```html
-{{ data.email }}
-{{ data.message|nl2br }}
-```
-
-#### order_confirmation:
-```html
-{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) %}
-
-{{ order.number }}
-
-<a href="{{ url|raw }}">View order or change payment method</a>
-```
-
-#### user_registration:
-```html
-{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
-
-<a href="{{ url|raw }}">Start shopping</a>
-```
-
-#### shipment_confirmation:
-```html
-{{ order.number }}
-{{ shipment.method }}
-{{ shipment.tracking }}
-```
-
-#### reset_password_token:
-```html
-{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_password_reset', { 'token': user.passwordResetToken}) : url('sylius_shop_password_reset', { 'token': user.passwordResetToken, '_locale': localeCode}) %}
-
-<a href="{{ url|raw }}">Reset your password</a>
-```
-
-#### verification_token:
-```html
-{% set url = channel.hostname is not null ? '//' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode}) %}
-
-<a href="{{ url|raw }}">Verify your email address</a>
-```
-
-## Customization
-
-### Available services you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) and forms you can [extend](http://symfony.com/doc/current/form/create_form_type_extension.html)
-
-Run the below command to see what Symfony services are shared with this plugin:
-```bash
-$ bin/console debug:container | grep bitbag_sylius_mailtemplate_plugin
-```
-
-## Testing
-```bash
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn build
-$ bin/console assets:install public -e test
-$ bin/console doctrine:schema:create -e test
-$ bin/console server:run 127.0.0.1:8080 -d public -e test
-$ open http://localhost:8080
-$ cd ../..
-$ vendor/bin/behat
-$ vendor/bin/phpspec run
-```
 
 # About us
 
