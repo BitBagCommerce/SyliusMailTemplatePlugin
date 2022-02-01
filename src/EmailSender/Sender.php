@@ -59,7 +59,7 @@ final class Sender implements SenderInterface
         }
 
         $customTemplate = $this->templateTranslationRepository->findOneByLocaleCodeAndType(
-            $data[self::LOCALE_CODE_KEY] ?? null,
+            $data[self::LOCALE_CODE_KEY] ?? '',
             $code
         );
 
