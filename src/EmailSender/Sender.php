@@ -11,26 +11,77 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\EmailSender;
 
-use BitBag\SyliusMailTemplatePlugin\Resolver\TemplateResourceResolver;
+use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateTranslationRepositoryInterface;
+use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
+use Sylius\Component\Mailer\Provider\EmailProviderInterface;
+use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
+use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class Sender implements SenderInterface
 {
-    private SenderInterface $decoratedSender;
-    private TemplateResourceResolver $templateResolver;
+    public const CUSTOM_EMAIL_TEMPLATE_PATH = '@BitBagSyliusMailTemplatePlugin/Admin/Email/customTemplate.html.twig';
 
-    public function __construct(SenderInterface $decoratedSender, TemplateResourceResolver $templateResolver)
-    {
-        $this->decoratedSender = $decoratedSender;
-        $this->templateResolver = $templateResolver;
+    public const TEMPLATE = 'template';
+
+    public const LOCALE_CODE_KEY = 'localeCode';
+
+    private RendererAdapterInterface $rendererAdapter;
+
+    private SenderAdapterInterface $senderAdapter;
+
+    private EmailProviderInterface $provider;
+
+    private DefaultSettingsProviderInterface $defaultSettingsProvider;
+
+    private EmailTemplateTranslationRepositoryInterface $templateTranslationRepository;
+
+    public function __construct(
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+        EmailProviderInterface $provider,
+        DefaultSettingsProviderInterface $defaultSettingsProvider,
+        EmailTemplateTranslationRepositoryInterface $templateTranslationRepository
+    ) {
+        $this->senderAdapter = $senderAdapter;
+        $this->rendererAdapter = $rendererAdapter;
+        $this->provider = $provider;
+        $this->defaultSettingsProvider = $defaultSettingsProvider;
+        $this->templateTranslationRepository = $templateTranslationRepository;
     }
 
     public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
     {
-        $template = $this->templateResolver->findOrLog($code);
+        $email = $this->provider->getEmail($code);
 
-        $data['template'] = $template;
+        if (!$email->isEnabled()) {
+            return;
+        }
 
-        $this->decoratedSender->send($code, $recipients, $data, $attachments, $replyTo);
+        $customTemplate = $this->templateTranslationRepository->findOneByLocaleCodeAndType(
+            $data[self::LOCALE_CODE_KEY] ?? null,
+            $code
+        );
+
+        if (null !== $customTemplate) {
+            $email->setTemplate(self::CUSTOM_EMAIL_TEMPLATE_PATH);
+            $data[self::TEMPLATE] = $customTemplate;
+        }
+
+        $senderAddress = $email->getSenderAddress() ?: $this->defaultSettingsProvider->getSenderAddress();
+        $senderName = $email->getSenderName() ?: $this->defaultSettingsProvider->getSenderName();
+
+        $renderedEmail = $this->rendererAdapter->render($email, $data);
+
+        $this->senderAdapter->send(
+            $recipients,
+            $senderAddress,
+            $senderName,
+            $renderedEmail,
+            $email,
+            $data,
+            $attachments,
+            $replyTo
+        );
     }
 }
