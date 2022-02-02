@@ -19,7 +19,8 @@ Feature: Receiving set of welcoming emails after registration
         Then a welcoming email should have been sent to "ghastly@bespoke.com"
 
     @ui @email
-    Scenario: Receiving a default account verification email after registration
+    Scenario: Receiving a default account verification email after registration if no custom email with matching locale defined
+        Given there is mail template with "verification_token" type and "Verification token" name and "Invitation" subject and "Verify yourself. We need you!" content and "fr_FR" locale
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that my account has been created and the verification email has been sent
         And a default account verification email should have been sent to "ghastly@bespoke.com"

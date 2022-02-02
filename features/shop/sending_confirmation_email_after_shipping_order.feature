@@ -23,6 +23,14 @@ Feature: Sending a confirmation email after shipping an order
         Then a default email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
 
     @ui @email
+    Scenario: Sending a default confirmation email after shipping an order if no custom email with matching locale defined
+        Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method.name }} </br> {{shipment.tracking}}" content and "fr_FR" locale
+        When I view the summary of the order "#00000666"
+        And specify its tracking code as "#00044"
+        And I ship this order
+        Then a default email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
+
+    @ui @email
     Scenario: Sending a custom confirmation email after shipping an order
         Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method.name }} </br> {{shipment.tracking}}" content
         When I view the summary of the order "#00000666"

@@ -16,6 +16,14 @@ Feature: Resetting a password
         Then a default email with reset token should be sent to "goodman@example.com"
 
     @ui @email
+    Scenario: Receiving a default reset password email if no custom email with matching locale defined
+        Given there is mail template with "reset_password_token" type and "Reset password" name and "Wanna reset password?" subject and "Wanna reset password? Here is your code:" content and "fr_FR" locale
+        When I want to reset password
+        And I specify customer email as "goodman@example.com"
+        And I reset it
+        Then a default email with reset token should be sent to "goodman@example.com"
+
+    @ui @email
     Scenario: Receiving a custom reset password email
         Given there is mail template with "reset_password_token" type and "Reset password" name and "Wanna reset password?" subject and "Wanna reset password? Here is your code:" content
         When I want to reset password
