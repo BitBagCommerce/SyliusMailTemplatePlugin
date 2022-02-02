@@ -17,7 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class CustomTwigErrorResponseProvider implements CustomTwigErrorResponseProviderInterface
 {
-    /** @var TwigErrorResponseInterface[] */
+    /** @var TwigErrorResponseInterface[]|object[] */
     private array $customTwigErrorResponses;
 
     public function __construct(iterable $customTwigErrorResponses)
@@ -28,7 +28,7 @@ final class CustomTwigErrorResponseProvider implements CustomTwigErrorResponsePr
     public function provide(Error $error): ?Response
     {
         foreach ($this->customTwigErrorResponses as $response) {
-            Assert::same(get_class($response), TwigErrorResponseInterface::class);
+            Assert::isInstanceOf($response, TwigErrorResponseInterface::class);
 
             if ($response->supports($error)) {
                 return $response->getResponse($error);

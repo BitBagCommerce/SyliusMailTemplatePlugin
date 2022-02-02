@@ -11,7 +11,6 @@ namespace spec\BitBag\SyliusMailTemplatePlugin\Provider;
 use BitBag\SyliusMailTemplatePlugin\Provider\CustomTwigErrorResponseProvider;
 use BitBag\SyliusMailTemplatePlugin\Response\TwigError\TwigErrorResponseInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Error\Error;
@@ -62,7 +61,11 @@ class CustomTwigErrorResponseProviderSpec extends ObjectBehavior
         $thirdResponse->getResponse($error)->willReturn($thirdJsonResponse);
         $thirdResponse->supports($error)->willReturn(true);
 
-        $customResponses = [$firstResponse, $secondResponse, $thirdResponse];
+        $customResponses = [
+            $firstResponse->getWrappedObject(),
+            $secondResponse->getWrappedObject(),
+            $thirdResponse->getWrappedObject()
+        ];
         $this->beConstructedWith($customResponses);
 
         $providedResponse = $this->provide(new Error('foo'));
