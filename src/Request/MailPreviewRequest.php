@@ -51,7 +51,7 @@ final class MailPreviewRequest implements RequestDtoInterface
         ?string $content,
         ?string $template,
         ?string $css
-    ){
+    ) {
         $this->name = $name;
         $this->subject = $subject;
         $this->content = $content;

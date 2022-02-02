@@ -50,7 +50,13 @@ final class Sender implements SenderInterface
         $this->templateTranslationRepository = $templateTranslationRepository;
     }
 
-    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
+    public function send(
+        string $code,
+        array $recipients,
+        array $data = [],
+        array $attachments = [],
+        array $replyTo = []
+    ): void
     {
         $email = $this->provider->getEmail($code);
 

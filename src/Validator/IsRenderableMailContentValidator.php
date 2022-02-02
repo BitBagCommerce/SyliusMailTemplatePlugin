@@ -35,7 +35,6 @@ class IsRenderableMailContentValidator extends ConstraintValidator
 
     /**
      * @param string $value
-     * @param Constraint $constraint
      */
     public function validate($value, Constraint $constraint): void
     {

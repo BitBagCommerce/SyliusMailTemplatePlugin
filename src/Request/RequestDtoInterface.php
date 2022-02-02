@@ -14,5 +14,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface RequestDtoInterface
 {
-    public static function createFromRequest(Request $request): RequestDtoInterface;
+    public static function createFromRequest(Request $request): self;
 }

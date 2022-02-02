@@ -50,11 +50,15 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
                 $type = 'contact_request';
             }
 
-            $this->createEmailTemplate($type, $styleCss,$fields);
+            $this->createEmailTemplate($type, $styleCss, $fields);
         }
     }
 
-    private function createEmailTemplate(string $type, string $styleCss, array $emailTemplateData): void
+    private function createEmailTemplate(
+        string $type,
+        string $styleCss,
+        array $emailTemplateData
+    ): void
     {
         /** @var EmailTemplateInterface $emailTemplate */
         $emailTemplate = $this->emailTemplateFactory->createNew();

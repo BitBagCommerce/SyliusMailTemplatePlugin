@@ -41,9 +41,10 @@ final class RequestDtoArgumentValueResolver implements ArgumentValueResolverInte
         Assert::isInstanceOf($requestDto, RequestDtoInterface::class);
 
         $errors = $this->validator->validate($requestDto);
-        if ($errors->count() > 0) {
+        if (0 < $errors->count()) {
             $firstError = $errors->get(0);
             $errorMessage = sprintf('%s: %s', $firstError->getPropertyPath(), $firstError->getMessage());
+
             throw new BadRequestException($errorMessage);
         }
 

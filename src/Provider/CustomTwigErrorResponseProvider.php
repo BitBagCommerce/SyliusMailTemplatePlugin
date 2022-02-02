@@ -22,7 +22,6 @@ final class CustomTwigErrorResponseProvider implements CustomTwigErrorResponsePr
 
     public function __construct(iterable $customTwigErrorResponses)
     {
-
         $this->customTwigErrorResponses = $customTwigErrorResponses;
     }
 

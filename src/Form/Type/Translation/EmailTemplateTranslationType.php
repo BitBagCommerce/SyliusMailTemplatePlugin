@@ -30,8 +30,8 @@ final class EmailTemplateTranslationType extends AbstractResourceType
                 'label' => 'bitbag_sylius_mail_template_plugin.ui.template_content',
                 'attr' => [
                     'class' => 'codemirror-editor',
-                    'data-language' => 'htmlmixed'
-                ]
+                    'data-language' => 'htmlmixed',
+                ],
             ])
         ;
     }
