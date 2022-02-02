@@ -17,15 +17,16 @@ final class MailPreviewDataProvider implements MailPreviewDataProviderInterface
 {
     public const GENERIC_PREVIEW_DATA_KEY = 'generic';
 
-    private iterable $mailPreviewData;
+    private array $mailPreviewData;
 
     public function __construct(iterable $mailPreviewData)
     {
         $this->mailPreviewData = $mailPreviewData instanceof \Traversable ? iterator_to_array($mailPreviewData) : $mailPreviewData;
     }
 
-    public function get(string $emailType): MailPreviewDataInterface
+    public function get(?string $emailType): MailPreviewDataInterface
     {
+        Assert::notNull($emailType);
         Assert::keyExists($this->mailPreviewData, self::GENERIC_PREVIEW_DATA_KEY);
 
         if (!isset($this->mailPreviewData[$emailType])) {

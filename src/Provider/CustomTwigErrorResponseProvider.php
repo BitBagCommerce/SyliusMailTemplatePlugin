@@ -18,17 +18,17 @@ use Webmozart\Assert\Assert;
 final class CustomTwigErrorResponseProvider implements CustomTwigErrorResponseProviderInterface
 {
     /** @var TwigErrorResponseInterface[] */
-    private iterable $customTwigErrorResponses;
+    private array $customTwigErrorResponses;
 
     public function __construct(iterable $customTwigErrorResponses)
     {
-        $this->customTwigErrorResponses = $customTwigErrorResponses;
+        $this->customTwigErrorResponses = $customTwigErrorResponses instanceof \Traversable ? iterator_to_array($customTwigErrorResponses) : $customTwigErrorResponses;
     }
 
     public function provide(Error $error): ?Response
     {
         foreach ($this->customTwigErrorResponses as $response) {
-            Assert::isInstanceOf($response, TwigErrorResponseInterface::class);
+            Assert::same(get_class($response), TwigErrorResponseInterface::class);
 
             if ($response->supports($error)) {
                 return $response->getResponse($error);

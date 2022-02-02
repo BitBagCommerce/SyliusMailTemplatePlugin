@@ -11,10 +11,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
 final class AccountVerificationTokenMailPreviewData implements MailPreviewDataInterface
 {
+    public const INDEX = 'account_verification_token';
+
     private OrderExampleFactory $orderExampleFactory;
 
     public function __construct(OrderExampleFactory $orderExampleFactory)
@@ -38,6 +39,6 @@ final class AccountVerificationTokenMailPreviewData implements MailPreviewDataIn
 
     public static function getIndex(): string
     {
-        return Emails::ACCOUNT_VERIFICATION_TOKEN;
+        return self::INDEX;
     }
 }

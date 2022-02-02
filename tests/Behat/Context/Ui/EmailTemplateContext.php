@@ -60,8 +60,7 @@ final class EmailTemplateContext implements Context
         string $method,
         string $orderNumber,
         string $recipient
-    ): void
-    {
+    ): void {
         Assert::true($this->emailChecker->hasMessageTo(
             sprintf(
                 'Your order with number %s has been sent using %s.',

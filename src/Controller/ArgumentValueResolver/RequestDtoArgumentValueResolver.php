@@ -29,12 +29,12 @@ final class RequestDtoArgumentValueResolver implements ArgumentValueResolverInte
 
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        return is_subclass_of($argument->getType(), RequestDtoInterface::class);
+        return is_subclass_of($argument->getType() ?? '', RequestDtoInterface::class);
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): \Generator
     {
-        /** @var RequestDtoInterface $class */
+        /** @var RequestDtoInterface|mixed $class */
         $class = $argument->getType();
 
         $requestDto = $class::createFromRequest($request);

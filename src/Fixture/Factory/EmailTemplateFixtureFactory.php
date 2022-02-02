@@ -46,7 +46,7 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
 
             $styleCss = '<style>* { color: green };</style>';
 
-            if (null === $type) {
+            if (is_int($type)) {
                 $type = 'contact_request';
             }
 
@@ -58,8 +58,7 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
         string $type,
         string $styleCss,
         array $emailTemplateData
-    ): void
-    {
+    ): void {
         /** @var EmailTemplateInterface $emailTemplate */
         $emailTemplate = $this->emailTemplateFactory->createNew();
 

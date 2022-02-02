@@ -39,6 +39,7 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder(self::TREE_NAME);
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @phpstan-ignore-next-line */
         $rootNode
             ->children()
                 ->arrayNode(self::TWIG)

@@ -40,8 +40,7 @@ class SecurityPolicy implements SecurityPolicyInterface
         $tags,
         $filters,
         $functions
-    ): void
-    {
+    ): void {
         $this->decoratedSecurityPolicy->checkSecurity($tags, $filters, $functions);
     }
 

@@ -56,8 +56,7 @@ final class Sender implements SenderInterface
         array $data = [],
         array $attachments = [],
         array $replyTo = []
-    ): void
-    {
+    ): void {
         $email = $this->provider->getEmail($code);
 
         if (!$email->isEnabled()) {
@@ -74,8 +73,8 @@ final class Sender implements SenderInterface
             $data[self::TEMPLATE] = $customTemplate;
         }
 
-        $senderAddress = $email->getSenderAddress() ?: $this->defaultSettingsProvider->getSenderAddress();
-        $senderName = $email->getSenderName() ?: $this->defaultSettingsProvider->getSenderName();
+        $senderAddress = $email->getSenderAddress() ?? $this->defaultSettingsProvider->getSenderAddress();
+        $senderName = $email->getSenderName() ?? $this->defaultSettingsProvider->getSenderName();
 
         $renderedEmail = $this->rendererAdapter->render($email, $data);
 

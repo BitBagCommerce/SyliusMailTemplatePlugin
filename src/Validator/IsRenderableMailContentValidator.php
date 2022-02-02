@@ -15,7 +15,6 @@ use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use BitBag\SyliusMailTemplatePlugin\Provider\MailPreviewDataProviderInterface;
 use BitBag\SyliusMailTemplatePlugin\Request\MailPreviewRequest;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Twig\Environment;
@@ -34,21 +33,25 @@ class IsRenderableMailContentValidator extends ConstraintValidator
     }
 
     /**
-     * @param string $value
+     * @param string|mixed $value
      */
     public function validate($value, Constraint $constraint): void
     {
         Assert::string($value);
         Assert::isInstanceOf($constraint, IsRenderableMailContent::class);
 
-        /** @var TranslationInterface|EmailTemplateTranslationInterface $validatedObject */
+        /** @var object|EmailTemplateTranslationInterface $validatedObject */
         $validatedObject = $this->context->getObject();
         Assert::isInstanceOf($validatedObject, EmailTemplateTranslationInterface::class);
-        Assert::isInstanceOf($validatedObject, TranslationInterface::class);
 
         /** @var EmailTemplateInterface $mailTemplate */
         $mailTemplate = $validatedObject->getTranslatable();
         $templateType = $mailTemplate->getType();
+
+        if (null === $templateType) {
+            return;
+        }
+
         $data = $this->getViewData($templateType, $value);
 
         try {

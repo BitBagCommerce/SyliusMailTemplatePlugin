@@ -30,11 +30,12 @@ final class SecurityNotAllowedFunctionErrorResponse extends AbstractTwigErrorRes
         return SecurityNotAllowedFunctionError::class;
     }
 
-    /**
-     * @param SecurityNotAllowedFunctionError $error
-     */
     protected function getErrorMessage(Error $error): string
     {
+        if (!$error instanceof SecurityNotAllowedFunctionError) {
+            throw new \InvalidArgumentException('Expected SecurityNotAllowedFunctionError');
+        }
+
         return sprintf($this->translator->trans(self::MESSAGE), $error->getFunctionName(), $error->getTemplateLine());
     }
 }

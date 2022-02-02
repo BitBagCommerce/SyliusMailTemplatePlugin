@@ -30,11 +30,12 @@ final class SecurityNotAllowedPropertyErrorResponse extends AbstractTwigErrorRes
         return SecurityNotAllowedPropertyError::class;
     }
 
-    /**
-     * @param SecurityNotAllowedPropertyError $error
-     */
     protected function getErrorMessage(Error $error): string
     {
+        if (!$error instanceof SecurityNotAllowedPropertyError) {
+            throw new \InvalidArgumentException('Expected SecurityNotAllowedPropertyError.');
+        }
+
         return sprintf($this->translator->trans(self::MESSAGE), $error->getPropertyName(), $error->getTemplateLine());
     }
 }
