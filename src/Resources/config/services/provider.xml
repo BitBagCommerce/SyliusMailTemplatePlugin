@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+  ~ This file was created by developers working at BitBag
+  ~ Do you need more information about us and what we do? Visit our https://bitbag.io website!
+  ~ We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+  -->
+
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
@@ -9,7 +16,7 @@
         <service id="bitbag_sylius_mail_template_plugin.provider.custom_twig_error_response" class="BitBag\SyliusMailTemplatePlugin\Provider\CustomTwigErrorResponseProvider" >
             <argument type="tagged_iterator" tag="bitbag_sylius_mail_template_plugin.twig_error_response" />
         </service>
-      
+
         <service
                 id="bitbag_sylius_mail_template_plugin.provider.email_codes"
                 class="BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider"
