@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Controller\ArgumentValueResolver;
 
+use BitBag\SyliusMailTemplatePlugin\Http\Exception\BadRequestException;
 use BitBag\SyliusMailTemplatePlugin\Request\RequestDtoInterface;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
