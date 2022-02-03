@@ -28,7 +28,7 @@ final class SenderSpec extends ObjectBehavior
 
     public const BAR = 'bar';
 
-    public CONST LOCALE = 'en_US';
+    public const LOCALE = 'en_US';
 
     public const EMAIL_TYPE = 'test';
 
@@ -61,7 +61,7 @@ final class SenderSpec extends ObjectBehavior
         EmailTemplateTranslationRepositoryInterface $templateTranslationRepository,
         EmailInterface $email,
         RenderedEmail $renderedEmail
-    ) : void {
+    ): void {
         $this->beConstructedWith(
             $rendererAdapter,
             $senderAdapter,
@@ -103,7 +103,7 @@ final class SenderSpec extends ObjectBehavior
         EmailTemplateTranslationRepositoryInterface $templateTranslationRepository,
         EmailInterface $email,
         RenderedEmail $renderedEmail
-    ) : void {
+    ): void {
         $this->beConstructedWith(
             $rendererAdapter,
             $senderAdapter,

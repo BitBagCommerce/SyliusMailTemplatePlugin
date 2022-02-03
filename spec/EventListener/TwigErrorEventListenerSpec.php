@@ -13,6 +13,7 @@ namespace spec\BitBag\SyliusMailTemplatePlugin\EventListener;
 use BitBag\SyliusMailTemplatePlugin\EventListener\TwigErrorEventListener;
 use BitBag\SyliusMailTemplatePlugin\Provider\CustomTwigErrorResponseProviderInterface;
 use PhpSpec\ObjectBehavior;
+use function PHPUnit\Framework\assertSame;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Twig\Error\Error;
-use function PHPUnit\Framework\assertSame;
 
 final class TwigErrorEventListenerSpec extends ObjectBehavior
 {
@@ -50,7 +50,6 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
         $this->onKernelException($exceptionEvent);
     }
 
-
     function it_should_do_nothing_if_provided_custom_response_is_null(
         HttpKernelInterface $httpKernel,
         Request $request,
@@ -75,7 +74,7 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
         HttpKernelInterface $httpKernel,
         Request $request,
         CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider
-    ): void{
+    ): void {
         $jsonResponse = new JsonResponse();
         $error = new Error('foo');
         $exceptionEvent = new ExceptionEvent(
