@@ -6,7 +6,6 @@ Feature: Sending a confirmation email after shipping an order
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method }} </br> {{shipment.tracking}}" content
         And the store has a product "Angel T-Shirt"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
@@ -17,8 +16,24 @@ Feature: Sending a confirmation email after shipping an order
         And I am logged in as an administrator
 
     @ui @email
-    Scenario: Sending a confirmation email after shipping an order
+    Scenario: Sending a default confirmation email after shipping an order
         When I view the summary of the order "#00000666"
         And specify its tracking code as "#00044"
         And I ship this order
-        Then an email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
+        Then a default email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
+
+    @ui @email
+    Scenario: Sending a default confirmation email after shipping an order if no custom email with matching locale defined
+        Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method.name }} </br> {{shipment.tracking}}" content and "fr_FR" locale
+        When I view the summary of the order "#00000666"
+        And specify its tracking code as "#00044"
+        And I ship this order
+        Then a default email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
+
+    @ui @email
+    Scenario: Sending a custom confirmation email after shipping an order
+        Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method.name }} </br> {{shipment.tracking}}" content
+        When I view the summary of the order "#00000666"
+        And specify its tracking code as "#00044"
+        And I ship this order
+        Then a custom email with shipment's details of this order should be sent to "lucy@teamlucifer.com"

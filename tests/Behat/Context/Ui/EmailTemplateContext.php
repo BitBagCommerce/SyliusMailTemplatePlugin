@@ -35,21 +35,64 @@ final class EmailTemplateContext implements Context
 
     /**
      * @Then it should be sent to :recipient
-     * @Then the email with contact request should be sent to :recipient
      */
-    public function anEmailShouldBeSentTo(string $recipient): void
+    public function itShouldBeSentTo(string $recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
     }
 
     /**
-     * @Then an email with reset token should be sent to :recipient
-     * @Then an email with reset token should be sent to :recipient in :localeCode locale
+     * @Then a custom email with contact request should have been sent to :recipient with sender :sender
      */
-    public function anEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    public function aCustomEmailShouldBeSentTo(string $recipient, string $sender): void
     {
         $this->assertEmailContainsMessageTo(
-            'Wanna reset password?',
+            sprintf(
+                '%s wrote %s',
+                $sender,
+                'Hi! I did not receive an item!'
+            ),
+            $recipient
+        );
+    }
+
+    /**
+     * @Then a default email with contact request should have been sent to :recipient with sender :sender
+     */
+    public function aDefaultEmailShouldBeSentTo(string $recipient, string $sender): void
+    {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s: %s %s: %s',
+                'Message from',
+                $sender,
+                'Content',
+                'Hi! I did not receive an item!'
+            ),
+            $recipient
+        );
+    }
+
+    /**
+     * @Then a default email with reset token should be sent to :recipient
+     * @Then a default email with reset token should be sent to :recipient in :localeCode locale
+     */
+    public function aDefaultEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            'To reset your password - click the link below',
+            $recipient
+        );
+    }
+
+    /**
+     * @Then a custom email with reset token should be sent to :recipient
+     * @Then a custom email with reset token should be sent to :recipient in :localeCode locale
+     */
+    public function aCustomEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            'Wanna reset password? Here is your code:',
             $recipient
         );
     }
@@ -67,6 +110,28 @@ final class EmailTemplateContext implements Context
             ),
             $recipient
         ));
+    }
+
+    /**
+     * @Then a default account verification email should have been sent to :recipient
+     */
+    public function aDefaultAccountVerificationEmailShouldHaveBeenSentTo(string $recipient): void
+    {
+        $this->assertEmailContainsMessageTo(
+            'To verify your email address - click the link below',
+            $recipient
+        );
+    }
+
+    /**
+     * @Then a custom account verification email should have been sent to :recipient
+     */
+    public function aCustomAccountVerificationEmailShouldHaveBeenSentTo(string $recipient): void
+    {
+        $this->assertEmailContainsMessageTo(
+            'Verify yourself. We need you!',
+            $recipient
+        );
     }
 
     /**
@@ -91,6 +156,18 @@ final class EmailTemplateContext implements Context
     }
 
     /**
+     * @Then a default welcoming email should have been sent to :recipient
+     * @Then a default welcoming email should have been sent to :recipient in :localeCode locale
+     */
+    public function aDefaultWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            'You have just been registered. Thank you',
+            $recipient
+        );
+    }
+
+    /**
      * @Then an email with the confirmation of the order :order should be sent to :email
      * @Then an email with the confirmation of the order :order should be sent to :email in :localeCode locale
      */
@@ -101,10 +178,29 @@ final class EmailTemplateContext implements Context
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
-                '%s %s %s',
-                'Congratulations, you have bought new gun',
+                '%s %s',
                 'Pif paf',
                 $order->getNumber()
+            ),
+            $recipient
+        );
+    }
+
+    /**
+     * @Then a default email with the confirmation of the order :order should be sent to :email
+     * @Then a default email with the confirmation of the order :order should be sent to :email in :localeCode locale
+     */
+    public function aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                'Your order no.',
+                $order->getNumber(),
+                'has been successfully placed.'
             ),
             $recipient
         );
@@ -120,8 +216,32 @@ final class EmailTemplateContext implements Context
     }
 
     /**
-     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
-     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
+     * @Then /^a default email with the summary of (order placed by "[^"]+") should be sent to him$/
+     * @Then /^a default email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
+     */
+    public function aDefaultEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
+    {
+        $this->aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+    }
+
+    /**
+     * @Then /^a default email with shipment's details of (this order) should be sent to "([^"]+)"$/
+     * @Then /^a default email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
+     */
+    public function aDefaultEmailWithShipmentDetailsOfOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
+        $this->assertEmailContainsMessageTo(
+            'Thank you for a successful transaction.',
+            $recipient
+        );
+    }
+
+    /**
+     * @Then /^a custom email with shipment's details of (this order) should be sent to "([^"]+)"$/
+     * @Then /^a custom email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
      * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient
      * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient in :localeCode locale
      */
@@ -132,8 +252,7 @@ final class EmailTemplateContext implements Context
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
-                '%s %s %s %s',
-                'Your products are waiting for you!',
+                '%s %s %s',
                 'Enjoy your new stuff!',
                 $order->getNumber(),
                 $this->getShippingMethodName($order)

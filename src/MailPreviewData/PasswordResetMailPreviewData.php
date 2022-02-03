@@ -15,6 +15,8 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
 final class PasswordResetMailPreviewData implements MailPreviewDataInterface
 {
+    public const INDEX = 'password_reset';
+
     private OrderExampleFactory $orderExampleFactory;
 
     public function __construct(OrderExampleFactory $orderExampleFactory)
@@ -38,6 +40,6 @@ final class PasswordResetMailPreviewData implements MailPreviewDataInterface
 
     public static function getIndex(): string
     {
-        return Emails::PASSWORD_RESET;
+        return self::INDEX;
     }
 }
