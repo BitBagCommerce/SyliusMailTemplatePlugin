@@ -13,7 +13,7 @@ namespace BitBag\SyliusMailTemplatePlugin\Repository;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class EmailTemplateTranslationRepository implements EmailTemplateTranslationRepositoryInterface
+final class EmailTemplateTranslationRepository implements EmailTemplateTranslationRepositoryInterface
 {
     use RepositoryDecoratorTrait;
 
