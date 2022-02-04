@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file was created by developers working at BitBag
  * Do you need more information about us and what we do? Visit our https://bitbag.io website!
@@ -48,7 +50,8 @@ class SecurityNotAllowedTagErrorResponseSpec extends ObjectBehavior
         $this->shouldThrow(InvalidArgumentException::class)->during('getResponse', [new SecurityError('foo')]);
     }
 
-    function it_should_return_response_with_proper_message(TranslatorInterface $translator): void{
+    function it_should_return_response_with_proper_message(TranslatorInterface $translator): void
+    {
         $translator->trans(SecurityNotAllowedTagErrorResponse::MESSAGE)->willReturn(self::ERROR_MESSAGE_TRANSLATION);
         $error = new SecurityNotAllowedTagError('foo', 'bar', 2);
 

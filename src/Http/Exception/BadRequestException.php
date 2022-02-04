@@ -8,11 +8,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMailTemplatePlugin\Request;
+namespace BitBag\SyliusMailTemplatePlugin\Http\Exception;
 
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
 
-interface RequestDtoInterface
+/**
+ * Raised when a user sends a malformed request.
+ */
+class BadRequestException extends \UnexpectedValueException implements RequestExceptionInterface
 {
-    public static function createFromRequest(Request $request): self;
 }

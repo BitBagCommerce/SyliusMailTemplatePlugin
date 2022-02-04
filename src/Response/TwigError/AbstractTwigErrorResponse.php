@@ -23,7 +23,7 @@ abstract class AbstractTwigErrorResponse implements TwigErrorResponseInterface
 
     public function getResponse(Error $error): Response
     {
-        Assert::isInstanceOf($error, $this->getSupportedErrorClass());
+        Assert::same(get_class($error), $this->getSupportedErrorClass());
 
         return new JsonResponse(
             [

@@ -55,7 +55,7 @@ class SecurityPolicySpec extends ObjectBehavior
     ): void {
         $allowedMethods = [
             '*' => [
-                self::EXAMPLE_METHOD
+                self::EXAMPLE_METHOD,
             ],
         ];
         $securityPolicy->checkMethodAllowed(Argument::type('object'), self::EXAMPLE_METHOD)->shouldNotBeCalled();

@@ -31,8 +31,12 @@ trait RepositoryDecoratorTrait
     /**
      * @return object[]
      */
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null): array
-    {
+    public function findBy(
+        array $criteria,
+        ?array $orderBy = null,
+        $limit = null,
+        $offset = null
+    ): array {
         return $this->decoratedRepository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
@@ -61,8 +65,9 @@ trait RepositoryDecoratorTrait
         $this->decoratedRepository->remove($resource);
     }
 
-    private function createQueryBuilder($alias, $indexBy = null): QueryBuilder
+    private function createQueryBuilder(string $alias, ?string $indexBy = null): QueryBuilder
     {
+        /** @phpstan-ignore-next-line */
         return $this->decoratedRepository->createQueryBuilder($alias, $indexBy);
     }
 }

@@ -12,6 +12,7 @@ namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 final class ContactRequestMailPreviewData implements MailPreviewDataInterface
 {
@@ -29,8 +30,10 @@ final class ContactRequestMailPreviewData implements MailPreviewDataInterface
     public function getData(): array
     {
         $order = $this->orderExampleFactory->create();
+        /** @var CustomerInterface $customer */
+        $customer = $order->getCustomer();
         $data = [
-            self::EMAIL => $order->getCustomer()->getEmail(),
+            self::EMAIL => $customer->getEmail(),
             self::MESSAGE => '<MESSAGE_FROM_CUSTOMER>',
         ];
         $channel = $order->getChannel();

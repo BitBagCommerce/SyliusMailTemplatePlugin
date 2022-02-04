@@ -36,6 +36,7 @@ final class EmailTemplateFixture extends AbstractFixture
 
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
+        /** @phpstan-ignore-next-line  */
         $optionsNode
             ->children()
                 ->arrayNode('custom')

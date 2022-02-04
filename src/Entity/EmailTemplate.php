@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\Entity;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 class EmailTemplate implements EmailTemplateInterface
 {
@@ -85,10 +84,12 @@ class EmailTemplate implements EmailTemplateInterface
         $this->getBlockTranslation()->setContent($content);
     }
 
-    /** @return EmailTemplateTranslationInterface|TranslationInterface|null */
-    protected function getBlockTranslation(): TranslationInterface
+    protected function getBlockTranslation(): EmailTemplateTranslationInterface
     {
-        return $this->getTranslation();
+        /** @var EmailTemplateTranslationInterface $translation */
+        $translation = $this->createTranslation();
+
+        return $translation;
     }
 
     protected function createTranslation(): EmailTemplateTranslation

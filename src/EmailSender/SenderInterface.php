@@ -13,5 +13,11 @@ namespace BitBag\SyliusMailTemplatePlugin\EmailSender;
 
 interface SenderInterface
 {
-    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void;
+    public function send(
+        string $code,
+        array $recipients,
+        array $data = [],
+        array $attachments = [],
+        array $replyTo = []
+    ): void;
 }

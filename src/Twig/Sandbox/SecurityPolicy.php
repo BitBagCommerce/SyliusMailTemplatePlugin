@@ -33,16 +33,21 @@ class SecurityPolicy implements SecurityPolicyInterface
      * @param mixed $tags
      * @param mixed $filters
      * @param mixed $functions
+     *
      * @throws SecurityError
      */
-    public function checkSecurity($tags, $filters, $functions): void
-    {
+    public function checkSecurity(
+        $tags,
+        $filters,
+        $functions
+    ): void {
         $this->decoratedSecurityPolicy->checkSecurity($tags, $filters, $functions);
     }
 
     /**
      * @param mixed $obj
      * @param mixed $method
+     *
      * @throws SecurityNotAllowedMethodError
      */
     public function checkMethodAllowed($obj, $method): void
@@ -78,6 +83,7 @@ class SecurityPolicy implements SecurityPolicyInterface
     /**
      * @param mixed $obj
      * @param mixed $method
+     *
      * @throws SecurityNotAllowedPropertyError
      */
     public function checkPropertyAllowed($obj, $method): void

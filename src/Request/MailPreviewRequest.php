@@ -36,10 +36,15 @@ final class MailPreviewRequest implements RequestDtoInterface
 
     public static function createFromRequest(Request $request): self
     {
+        /** @var string $name */
         $name = $request->request->get(self::NAME);
+        /** @var string $subject */
         $subject = $request->request->get(self::SUBJECT);
+        /** @var string $content */
         $content = $request->request->get(self::CONTENT);
+        /** @var string $template */
         $template = $request->request->get(self::TEMPLATE);
+        /** @var string $css */
         $css = $request->request->get(self::CSS);
 
         return new self($name, $subject, $content, $template, $css);
@@ -51,7 +56,7 @@ final class MailPreviewRequest implements RequestDtoInterface
         ?string $content,
         ?string $template,
         ?string $css
-    ){
+    ) {
         $this->name = $name;
         $this->subject = $subject;
         $this->content = $content;

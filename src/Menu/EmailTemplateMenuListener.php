@@ -20,6 +20,10 @@ final class EmailTemplateMenuListener
 
         $menuItem = $menu->getChild('configuration');
 
+        if (null === $menuItem) {
+            return;
+        }
+
         $menuItem
             ->addChild('email_template', [
                 'route' => 'bitbag_sylius_mail_template_plugin_admin_email_template_index',

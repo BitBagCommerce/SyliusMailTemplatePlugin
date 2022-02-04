@@ -30,11 +30,12 @@ final class SecurityNotAllowedFilterErrorResponse extends AbstractTwigErrorRespo
         return SecurityNotAllowedFilterError::class;
     }
 
-    /**
-     * @param SecurityNotAllowedFilterError $error
-     */
     protected function getErrorMessage(Error $error): string
     {
+        if (!$error instanceof SecurityNotAllowedFilterError) {
+            throw new \InvalidArgumentException('Expected SecurityNotAllowedFilterError');
+        }
+
         return sprintf($this->translator->trans(self::MESSAGE), $error->getFilterName(), $error->getTemplateLine());
     }
 }

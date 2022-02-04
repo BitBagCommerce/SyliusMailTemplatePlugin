@@ -30,11 +30,12 @@ final class SecurityNotAllowedTagErrorResponse extends AbstractTwigErrorResponse
         return SecurityNotAllowedTagError::class;
     }
 
-    /**
-     * @param SecurityNotAllowedTagError $error
-     */
     protected function getErrorMessage(Error $error): string
     {
+        if (!$error instanceof SecurityNotAllowedTagError) {
+            throw new \InvalidArgumentException('Expected SecurityNotAllowedTagError.');
+        }
+
         return sprintf($this->translator->trans(self::MESSAGE), $error->getTagName(), $error->getTemplateLine());
     }
 }

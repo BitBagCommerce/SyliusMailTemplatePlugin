@@ -14,5 +14,5 @@ use BitBag\SyliusMailTemplatePlugin\MailPreviewData\MailPreviewDataInterface;
 
 interface MailPreviewDataProviderInterface
 {
-    public function get(string $emailType): MailPreviewDataInterface;
+    public function get(?string $emailType): MailPreviewDataInterface;
 }

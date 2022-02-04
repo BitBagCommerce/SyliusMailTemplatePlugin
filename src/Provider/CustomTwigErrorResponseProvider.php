@@ -17,13 +17,12 @@ use Webmozart\Assert\Assert;
 
 final class CustomTwigErrorResponseProvider implements CustomTwigErrorResponseProviderInterface
 {
-    /** @var TwigErrorResponseInterface[] */
-    private iterable $customTwigErrorResponses;
+    /** @var TwigErrorResponseInterface[]|object[] */
+    private array $customTwigErrorResponses;
 
     public function __construct(iterable $customTwigErrorResponses)
     {
-
-        $this->customTwigErrorResponses = $customTwigErrorResponses;
+        $this->customTwigErrorResponses = $customTwigErrorResponses instanceof \Traversable ? iterator_to_array($customTwigErrorResponses) : $customTwigErrorResponses;
     }
 
     public function provide(Error $error): ?Response

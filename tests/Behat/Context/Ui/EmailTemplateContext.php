@@ -16,7 +16,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailTemplateContext implements Context
@@ -100,8 +99,11 @@ final class EmailTemplateContext implements Context
     /**
      * @Then an email with the :method shipment's confirmation for the :orderNumber order should be sent to :email
      */
-    public function anEmailWithShipmentsConfirmationForTheOrderShouldBeSentTo(string $method, string $orderNumber, string $recipient): void
-    {
+    public function anEmailWithShipmentsConfirmationForTheOrderShouldBeSentTo(
+        string $method,
+        string $orderNumber,
+        string $recipient
+    ): void {
         Assert::true($this->emailChecker->hasMessageTo(
             sprintf(
                 'Your order with number %s has been sent using %s.',
@@ -141,7 +143,6 @@ final class EmailTemplateContext implements Context
     {
         Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
     }
-
 
     /**
      * @Then a welcoming email should have been sent to :recipient
@@ -268,7 +269,6 @@ final class EmailTemplateContext implements Context
         }
     }
 
-
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
@@ -276,7 +276,7 @@ final class EmailTemplateContext implements Context
 
     private function getShippingMethodName(OrderInterface $order): string
     {
-        /** @var ShipmentInterface $shipment */
+        /** @var ShipmentInterface|false $shipment */
         $shipment = $order->getShipments()->first();
         if (false === $shipment) {
             throw new \LogicException('Order should have at least one shipment.');

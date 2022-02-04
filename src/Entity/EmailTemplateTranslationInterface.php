@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface EmailTemplateTranslationInterface extends ResourceInterface
+interface EmailTemplateTranslationInterface extends ResourceInterface, TranslationInterface
 {
     public function getId(): ?int;
 

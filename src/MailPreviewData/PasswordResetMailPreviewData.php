@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
 final class PasswordResetMailPreviewData implements MailPreviewDataInterface
 {
