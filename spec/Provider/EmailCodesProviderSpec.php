@@ -16,11 +16,17 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
 class EmailCodesProviderSpec extends ObjectBehavior
 {
-    private const EXAMPLE_EMAILS_CONFIGURATION = [
+    public const EXAMPLE_EMAILS_CONFIGURATION = [
         Emails::CONTACT_REQUEST => [],
         Emails::ORDER_CONFIRMATION => [],
         Emails::SHIPMENT_CONFIRMATION => [],
     ];
+
+    public const CONTACT_REQUEST_LABEL = 'Contact Request';
+
+    public const ORDER_CONFIRMATION_LABEL = 'Order Confirmation';
+
+    public const SHIPMENT_CONFIRMATION_LABEL = 'Shipment Confirmation';
 
     function let(): void
     {
@@ -37,13 +43,8 @@ class EmailCodesProviderSpec extends ObjectBehavior
         $emailCodesWithLabels = $this->provideWithLabels();
 
         $emailCodesWithLabels->shouldBeArray();
-        $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::CONTACT_REQUEST), Emails::CONTACT_REQUEST);
-        $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::ORDER_CONFIRMATION), Emails::ORDER_CONFIRMATION);
-        $emailCodesWithLabels->shouldHaveKeyWithValue($this->getLabel(Emails::SHIPMENT_CONFIRMATION), Emails::SHIPMENT_CONFIRMATION);
-    }
-
-    private function getLabel(string $emailCode): string
-    {
-        return sprintf('%s.%s', EmailCodesProvider::LABEL_TRANSLATION_PREFIX, $emailCode);
+        $emailCodesWithLabels->shouldHaveKeyWithValue(self::CONTACT_REQUEST_LABEL, Emails::CONTACT_REQUEST);
+        $emailCodesWithLabels->shouldHaveKeyWithValue(self::ORDER_CONFIRMATION_LABEL, Emails::ORDER_CONFIRMATION);
+        $emailCodesWithLabels->shouldHaveKeyWithValue(self::SHIPMENT_CONFIRMATION_LABEL, Emails::SHIPMENT_CONFIRMATION);
     }
 }
