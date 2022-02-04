@@ -12,8 +12,6 @@ namespace BitBag\SyliusMailTemplatePlugin\Provider;
 
 final class EmailCodesProvider implements EmailCodesProviderInterface
 {
-    public const LABEL_TRANSLATION_PREFIX = 'bitbag_sylius_mail_template_plugin.ui';
-
     private array $emails;
 
     public function __construct(array $emails)
@@ -26,7 +24,7 @@ final class EmailCodesProvider implements EmailCodesProviderInterface
         $typesWithLabels = [];
 
         foreach ($this->emails as $type => $configuration) {
-            $label = sprintf('%s.%s', self::LABEL_TRANSLATION_PREFIX, $type);
+            $label = ucwords(str_replace('_', ' ', $type));
 
             $typesWithLabels[$label] = $type;
         }

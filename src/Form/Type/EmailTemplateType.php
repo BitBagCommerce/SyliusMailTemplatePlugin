@@ -34,6 +34,8 @@ final class EmailTemplateType extends AbstractType
 
     public const BLOCK_PREFIX = 'bitbag_sylius_mail_template_plugin_template_email';
 
+    public const MAIL_TEMPLATE_TYPE_DOMAIN = 'mail_template_type';
+
     private EmailCodesProviderInterface $emailCodesProvider;
 
     public function __construct(EmailCodesProviderInterface $emailCodesProvider)
@@ -47,6 +49,7 @@ final class EmailTemplateType extends AbstractType
             ->add(self::TYPE_FIELD_NAME, ChoiceType::class, [
                 'label' => self::TEMPLATE_TYPE_LABEL,
                 'choices' => $this->emailCodesProvider->provideWithLabels(),
+                'choice_translation_domain' => 'mail_template_type',
             ])
             ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [
                 'label' => self::STYLE_CSS_LABEL,
