@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 final class OrderConfirmationMailPreviewData implements MailPreviewDataInterface
 {
     private OrderExampleFactory $orderExampleFactory;
+
     private PreviewDataFactoryInterface $customerPreviewDataFactory;
 
     public function __construct(OrderExampleFactory $orderExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
@@ -29,7 +30,7 @@ final class OrderConfirmationMailPreviewData implements MailPreviewDataInterface
     {
         $customer = $this->customerPreviewDataFactory->create();
         $order = $this->orderExampleFactory->create([
-            MailPreviewDataInterface::CUSTOMER_KEY => $customer
+            MailPreviewDataInterface::CUSTOMER_KEY => $customer,
         ]);
         $channel = $order->getChannel();
         $localeCode = $order->getLocaleCode();

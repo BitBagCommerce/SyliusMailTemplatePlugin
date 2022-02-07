@@ -12,6 +12,7 @@ namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 final class AccountVerificationTokenMailPreviewData implements MailPreviewDataInterface
 {
@@ -31,7 +32,9 @@ final class AccountVerificationTokenMailPreviewData implements MailPreviewDataIn
     {
         $customer = $this->customerPreviewDataFactory->create();
         $channel = $this->channelExampleFactory->create();
-        $localeCode = $channel->getDefaultLocale()->getCode();
+        /** @var LocaleInterface $defaultLocale */
+        $defaultLocale = $channel->getDefaultLocale();
+        $localeCode = $defaultLocale->getCode();
 
         return [
             MailPreviewDataInterface::USER_KEY => $customer,
