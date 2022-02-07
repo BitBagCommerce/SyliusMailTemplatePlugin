@@ -39,13 +39,20 @@ final class EmailTemplateContext implements Context
         $this->createPage->open();
     }
 
-
     /**
-     * @Then /^I fill a field "([^"]*)" with value "([^"]*)"$/
+     * @When /^I fill a field "([^"]*)" with value "([^"]*)"$/
      */
     public function iFillAFieldWithValue(string $field, string $value): void
     {
         $this->createPage->fillField($field, $value);
+    }
+
+    /**
+     * @When /^I fill a field "([^"]*)" with value "([^"]*)" using javascript$/
+     */
+    public function iFillAFieldWithValueUsingJavascript(string $field, string $value)
+    {
+        $this->createPage->fillInvisibleField($field, $value);
     }
 
     /**
@@ -67,5 +74,21 @@ final class EmailTemplateContext implements Context
             'Email template has been successfully created.',
             NotificationType::success()
         );
+    }
+
+    /**
+     * @Given /^I click on a preview button corresponding to "([^"]*)" locale$/
+     */
+    public function iClickOnCorrespondingToLocale(string $locale): void
+    {
+        $this->createPage->preview($locale);
+    }
+
+    /**
+     * @Then /^I should see a preview modal with subject "([^"]*)" and content "([^"]*)"$/
+     */
+    public function iShouldSeeAPreviewModalWithSubjectAndContent(string $subject, string $content): void
+    {
+        $this->createPage->checkHasPreviewModal($subject, $content);
     }
 }
