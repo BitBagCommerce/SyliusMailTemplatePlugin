@@ -44,6 +44,13 @@
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.user_registration" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\UserRegistrationMailPreviewData" >
             <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
+
+            <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
+        </service>
+
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\CustomerPreviewDataFactory" >
+            <argument type="service" id="sylius.factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
