@@ -13,6 +13,7 @@ namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
+use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateTranslationRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -23,15 +24,19 @@ final class EmailTemplateContext implements Context
 
     private FactoryInterface $templateFactory;
 
+    private FactoryInterface $templateTranslationFactory;
+
     private EmailTemplateTranslationRepositoryInterface $emailTemplateTranslationRepository;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $templateFactory,
+        FactoryInterface $templateTranslationFactory,
         EmailTemplateTranslationRepositoryInterface $emailTemplateTranslationRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->templateFactory = $templateFactory;
+        $this->templateTranslationFactory = $templateTranslationFactory;
         $this->emailTemplateTranslationRepository = $emailTemplateTranslationRepository;
     }
 
@@ -71,14 +76,18 @@ final class EmailTemplateContext implements Context
         ?string $content = null,
         ?string $locale = null
     ): EmailTemplateInterface {
+        /** @var EmailTemplateTranslationInterface $emailTemplateTranslation */
+        $emailTemplateTranslation = $this->templateTranslationFactory->createNew();
+        $emailTemplateTranslation->setName($name ?? 'User registration template');
+        $emailTemplateTranslation->setSubject($subject ?? 'User registration subject');
+        $emailTemplateTranslation->setContent($content ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.');
+        $emailTemplateTranslation->setLocale($locale ?? 'en_US');
+
         /** @var EmailTemplateInterface $emailTemplate */
         $emailTemplate = $this->templateFactory->createNew();
-
         $emailTemplate->setCurrentLocale($locale ?? 'en_US');
         $emailTemplate->setType($type ?? 'user_registration');
-        $emailTemplate->setName($name ?? 'User registration template');
-        $emailTemplate->setSubject($subject ?? 'User registration subject');
-        $emailTemplate->setContent($content ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.');
+        $emailTemplate->addTranslation($emailTemplateTranslation);
 
         return $emailTemplate;
     }
