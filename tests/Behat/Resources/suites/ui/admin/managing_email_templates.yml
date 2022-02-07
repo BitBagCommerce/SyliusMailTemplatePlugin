@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui_admin_managing_email_templates:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_security
+                - bitbag_sylius_mail_template_plugin.behat.context.ui.admin.email_template
+
+            filters:
+                tags: "@managing_email_templates && @ui"

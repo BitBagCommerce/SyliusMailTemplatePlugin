@@ -4,6 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
+    <imports>
+        <import resource="admin/*.xml"/>
+    </imports>
+
     <services>
         <defaults public="true" />
 
@@ -11,7 +15,7 @@
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui\EmailTemplateContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
-            <argument type="service" id="translator" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.behat.page.admin.email_template.create" />
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.behat.context.ui.login"

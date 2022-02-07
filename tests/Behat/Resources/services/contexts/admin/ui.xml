@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+  ~ This file was created by developers working at BitBag
+  ~ Do you need more information about us and what we do? Visit our https://bitbag.io website!
+  ~ We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+  -->
+
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="bitbag_sylius_mail_template_plugin.behat.context.ui.admin.email_template"
+                 class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui\Admin\EmailTemplateContext">
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.behat.page.admin.email_template.create" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+        </service>
+    </services>
+</container>
