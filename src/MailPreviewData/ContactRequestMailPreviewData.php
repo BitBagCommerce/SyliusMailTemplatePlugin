@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
-use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
+use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Component\Core\Model\CustomerInterface;
 
 final class ContactRequestMailPreviewData implements MailPreviewDataInterface
 {
@@ -20,29 +20,32 @@ final class ContactRequestMailPreviewData implements MailPreviewDataInterface
 
     public const MESSAGE = 'message';
 
-    private OrderExampleFactory $orderExampleFactory;
+    public const MESSAGE_FROM_CUSTOMER = '<MESSAGE_FROM_CUSTOMER>';
 
-    public function __construct(OrderExampleFactory $orderExampleFactory)
+    private ChannelExampleFactory $channelExampleFactory;
+
+    private PreviewDataFactoryInterface $customerPreviewDataFactory;
+
+    public function __construct(ChannelExampleFactory $channelExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
     {
-        $this->orderExampleFactory = $orderExampleFactory;
+        $this->channelExampleFactory = $channelExampleFactory;
+        $this->customerPreviewDataFactory = $customerPreviewDataFactory;
     }
 
     public function getData(): array
     {
-        $order = $this->orderExampleFactory->create();
-        /** @var CustomerInterface $customer */
-        $customer = $order->getCustomer();
+        $customer = $this->customerPreviewDataFactory->create();
+        $channel = $this->channelExampleFactory->create();
+        $localeCode = $channel->getDefaultLocale()->getCode();
         $data = [
             self::EMAIL => $customer->getEmail(),
-            self::MESSAGE => '<MESSAGE_FROM_CUSTOMER>',
+            self::MESSAGE => self::MESSAGE_FROM_CUSTOMER,
         ];
-        $channel = $order->getChannel();
-        $localeCode = $order->getLocaleCode();
 
         return [
-            'data' => $data,
-            'channel' => $channel,
-            'localeCode' => $localeCode,
+            MailPreviewDataInterface::DATA_KEY => $data,
+            MailPreviewDataInterface::CHANNEL_KEY => $channel,
+            MailPreviewDataInterface::LOCALE_CODE_KEY => $localeCode,
         ];
     }
 

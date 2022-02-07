@@ -10,30 +10,33 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
-use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
+use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 
 final class PasswordResetMailPreviewData implements MailPreviewDataInterface
 {
     public const INDEX = 'password_reset';
 
-    private OrderExampleFactory $orderExampleFactory;
+    private ChannelExampleFactory $channelExampleFactory;
 
-    public function __construct(OrderExampleFactory $orderExampleFactory)
+    private PreviewDataFactoryInterface $customerPreviewDataFactory;
+
+    public function __construct(ChannelExampleFactory $channelExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
     {
-        $this->orderExampleFactory = $orderExampleFactory;
+        $this->channelExampleFactory = $channelExampleFactory;
+        $this->customerPreviewDataFactory = $customerPreviewDataFactory;
     }
 
     public function getData(): array
     {
-        $order = $this->orderExampleFactory->create();
-        $user = $order->getCustomer();
-        $channel = $order->getChannel();
-        $localeCode = $order->getLocaleCode();
+        $user = $this->customerPreviewDataFactory->create();
+        $channel = $this->channelExampleFactory->create();
+        $localeCode = $channel->getDefaultLocale()->getCode();
 
         return [
-            'user' => $user,
-            'channel' => $channel,
-            'localeCode' => $localeCode,
+            MailPreviewDataInterface::USER_KEY => $user,
+            MailPreviewDataInterface::CHANNEL_KEY => $channel,
+            MailPreviewDataInterface::LOCALE_CODE_KEY => $localeCode,
         ];
     }
 

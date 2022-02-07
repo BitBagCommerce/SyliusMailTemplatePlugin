@@ -7,19 +7,22 @@
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.account_verification_token" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\AccountVerificationTokenMailPreviewData" >
-            <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="sylius.fixture.example_factory.channel" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.contact_request" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\ContactRequestMailPreviewData" >
-            <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="sylius.fixture.example_factory.channel" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.order_confirmation" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\OrderConfirmationMailPreviewData" >
             <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
@@ -31,19 +34,21 @@
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.password_reset" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\PasswordResetMailPreviewData" >
-            <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="sylius.fixture.example_factory.channel" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.shipment_confirmation" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\ShipmentConfirmationMailPreviewData" >
             <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.user_registration" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\UserRegistrationMailPreviewData" >
-            <argument type="service" id="sylius.fixture.example_factory.order" />
+            <argument type="service" id="sylius.fixture.example_factory.channel" />
             <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />

@@ -11,28 +11,26 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
 final class UserRegistrationMailPreviewData implements MailPreviewDataInterface
 {
-    private OrderExampleFactory $orderExampleFactory;
+    private ChannelExampleFactory $channelExampleFactory;
+
     private PreviewDataFactoryInterface $customerPreviewDataFactory;
 
-    public function __construct(OrderExampleFactory $orderExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
+    public function __construct(ChannelExampleFactory $channelExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
     {
-        $this->orderExampleFactory = $orderExampleFactory;
+        $this->channelExampleFactory = $channelExampleFactory;
         $this->customerPreviewDataFactory = $customerPreviewDataFactory;
     }
 
     public function getData(): array
     {
-        $order = $this->orderExampleFactory->create([
-            'customer' => $this->customerPreviewDataFactory->create(),
-        ]);
-        $user = $order->getCustomer();
-        $channel = $order->getChannel();
-        $localeCode = $order->getLocaleCode();
+        $user = $this->customerPreviewDataFactory->create();
+        $channel = $this->channelExampleFactory->create();
+        $localeCode = $channel->getDefaultLocale()->getCode();
 
         return [
             'user' => $user,

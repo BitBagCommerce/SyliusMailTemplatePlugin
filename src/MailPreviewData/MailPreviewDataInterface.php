@@ -12,6 +12,18 @@ namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 interface MailPreviewDataInterface
 {
+    public const CUSTOMER_KEY = 'customer';
+
+    public const ORDER_KEY = 'order';
+
+    public const DATA_KEY = 'data';
+
+    public const USER_KEY = 'user';
+
+    public const CHANNEL_KEY = 'channel';
+
+    public const LOCALE_CODE_KEY = 'localeCode';
+
     public function getData(): array;
 
     public static function getIndex(): string;
