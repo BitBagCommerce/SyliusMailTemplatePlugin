@@ -11,6 +11,7 @@
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Setup\EmailTemplateContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="bitbag_sylius_mail_template_plugin.factory.email_template" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.factory.email_template_translation" />
             <argument type="service" id="bitbag_sylius_mail_template_plugin.repository.email_template_translation" />
         </service>
 
