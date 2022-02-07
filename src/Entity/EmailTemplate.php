@@ -87,7 +87,7 @@ class EmailTemplate implements EmailTemplateInterface
     protected function getBlockTranslation(): EmailTemplateTranslationInterface
     {
         /** @var EmailTemplateTranslationInterface $translation */
-        $translation = $this->createTranslation();
+        $translation = $this->getTranslation();
 
         return $translation;
     }
