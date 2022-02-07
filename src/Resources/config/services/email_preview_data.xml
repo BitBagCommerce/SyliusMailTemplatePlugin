@@ -2,6 +2,9 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.faker" class="Faker\Generator">
+            <factory class="Faker\Factory" method="create" />
+        </service>
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.generic" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\GenericMailPreviewData" >
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>
@@ -56,6 +59,7 @@
 
         <service id="bitbag_sylius_mail_template_plugin.mail_preview_data.preview_data_factory.customer" class="BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\CustomerPreviewDataFactory" >
             <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.mail_preview_data.faker" />
 
             <tag name="bitbag_sylius_mail_template_plugin.mail_preview_data" />
         </service>

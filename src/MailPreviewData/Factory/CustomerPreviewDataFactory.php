@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory;
 
-use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -21,10 +20,10 @@ final class CustomerPreviewDataFactory implements PreviewDataFactoryInterface
 
     private Generator $faker;
 
-    public function __construct(FactoryInterface $customerFactory)
+    public function __construct(FactoryInterface $customerFactory, Generator $faker)
     {
         $this->customerFactory = $customerFactory;
-        $this->faker = Factory::create();
+        $this->faker = $faker;
     }
 
     public function create(): CustomerInterface
