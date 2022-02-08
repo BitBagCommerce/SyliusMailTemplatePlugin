@@ -25,7 +25,7 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function __construct(
         Session $session,
-        $minkParameters,
+        array $minkParameters,
         RouterInterface $router,
         string $routeName,
         PreviewModalElementInterface $previewModal
