@@ -42,6 +42,7 @@ final class ContactRequestMailPreviewData implements MailPreviewDataInterface
         /** @var LocaleInterface $defaultLocale */
         $defaultLocale = $channel->getDefaultLocale();
         $localeCode = $defaultLocale->getCode();
+
         $data = [
             self::EMAIL => $customer->getEmail(),
             self::MESSAGE => self::MESSAGE_FROM_CUSTOMER,

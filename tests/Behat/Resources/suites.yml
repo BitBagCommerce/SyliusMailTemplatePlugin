@@ -1,4 +1,5 @@
 imports:
+    - suites/ui/admin/managing_email_templates.yml
     - suites/ui/user_registration.yml
     - suites/ui/checkout.yml
     - suites/ui/requesting_contact.yml

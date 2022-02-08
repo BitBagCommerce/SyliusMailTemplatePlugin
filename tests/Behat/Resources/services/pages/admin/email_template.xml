@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+                id="bitbag_sylius_mail_template_plugin.behat.page.admin.email_template.create"
+                class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Page\Admin\EmailTemplate\CreatePage"
+                parent="sylius.behat.page.admin.crud.create"
+        >
+            <argument>bitbag_sylius_mail_template_plugin_admin_email_template_create</argument>
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.behat.element.admin.preview_modal" />
+        </service>
+    </services>
+</container>
