@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Page\Admin\EmailTemplate;
 
+use ArrayAccess;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
@@ -23,9 +24,12 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     private PreviewModalElementInterface $previewModal;
 
+    /**
+     * @param array|ArrayAccess $minkParameters
+     */
     public function __construct(
         Session $session,
-        array $minkParameters,
+        $minkParameters,
         RouterInterface $router,
         string $routeName,
         PreviewModalElementInterface $previewModal
