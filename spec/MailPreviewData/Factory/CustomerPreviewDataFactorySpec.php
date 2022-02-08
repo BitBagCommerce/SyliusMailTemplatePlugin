@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file was created by developers working at BitBag
  * Do you need more information about us and what we do? Visit our https://bitbag.io website!
  * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
  */
+
+declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory;
 
@@ -14,12 +14,21 @@ use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\CustomerPreviewDataF
 use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
 use Faker\Generator;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class CustomerPreviewDataFactorySpec extends ObjectBehavior
 {
+    public const FIRST_NAME = 'John';
+
+    public const LAST_NAME = 'Doe';
+
+    public const EMAIL = 'john@doe.local';
+
+    public const PHONE_NUMBER = '+48 123 456 789';
+
     function let(FactoryInterface $factory, Generator $faker)
     {
         $this->beConstructedWith($factory, $faker);
@@ -31,10 +40,27 @@ class CustomerPreviewDataFactorySpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf(PreviewDataFactoryInterface::class);
     }
 
-    function it_should_return_customer_instance(FactoryInterface $factory): void
+    function it_should_return_customer_instance(FactoryInterface $factory, Generator $faker): void
     {
         $factory->createNew()->willReturn(new Customer());
+        $faker->firstName = self::FIRST_NAME;
+        $faker->lastName = self::LAST_NAME;
+        $faker->email = self::EMAIL;
 
-        $this->create()->shouldBeAnInstanceOf(CustomerInterface::class);
+        $dateTime = new \DateTime();
+        $faker->dateTimeBetween(Argument::type('string'), Argument::type('string'))->willReturn($dateTime);
+        $faker->phoneNumber = self::PHONE_NUMBER;
+
+        $customer = $this->create();
+
+        $customer->shouldBeAnInstanceOf(CustomerInterface::class);
+        $customer->getFirstName()->shouldBe(self::FIRST_NAME);
+        $customer->getLastName()->shouldBe(self::LAST_NAME);
+        $customer->getEmail()->shouldBe(self::EMAIL);
+        $customer->getEmailCanonical()->shouldBe(self::EMAIL);
+        $customer->getBirthday()->shouldBe($dateTime);
+        $customer->getCreatedAt()->shouldBe($dateTime);
+        $customer->getUpdatedAt()->shouldBe($dateTime);
+        $customer->getPhoneNumber()->shouldBe(self::PHONE_NUMBER);
     }
 }
