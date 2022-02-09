@@ -4,7 +4,6 @@ bitbag_sylius_mail_template_plugin:
         edit_email_template: "Edit email template"
         email_template: "Email template"
         email_templates: "Email templates"
-        level: "Level"
         new_email_template: "New email template"
         paymentlink: "Payment link"
         paymentlinkAbandoned: "Payment link abandoned"

@@ -12,6 +12,22 @@ sylius_grid:
                 subject:
                     type: string
                     label: bitbag_sylius_mail_template_plugin.ui.template_subject
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [ translations.name ]
+                subject:
+                    type: string
+                    label: sylius.ui.subject
+                    options:
+                        fields: [ translations.subject ]
+                content:
+                    type: string
+                    label: sylius.ui.content
+                    options:
+                        fields: [ translations.content ]
             actions:
                 main:
                     create:
@@ -21,10 +37,3 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
-            filters:
-                name:
-                    type: string
-                    label: bitbag_sylius_mail_template_plugin.ui.search
-                subject:
-                    type: string
-                    label: bitbag_sylius_mail_template_plugin.ui.level
