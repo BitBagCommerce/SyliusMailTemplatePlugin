@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Form\Type;
 
+use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType;
 use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Translation\DataCollectorTranslator;
 
 final class EmailTemplateType extends AbstractType
 {
@@ -36,11 +38,18 @@ final class EmailTemplateType extends AbstractType
 
     public const MAIL_TEMPLATE_TYPE_DOMAIN = 'mail_template_type';
 
+    public const PREFIX_TRANS_TYPE = 'bitbag_sylius_mail_template_plugin.ui.type.';
+
     private EmailCodesProviderInterface $emailCodesProvider;
 
-    public function __construct(EmailCodesProviderInterface $emailCodesProvider)
-    {
+    private DataCollectorTranslator $dataCollectorTranslator;
+
+    public function __construct(
+        EmailCodesProviderInterface $emailCodesProvider,
+        DataCollectorTranslator $dataCollectorTranslator
+    ) {
         $this->emailCodesProvider = $emailCodesProvider;
+        $this->dataCollectorTranslator = $dataCollectorTranslator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -48,11 +57,12 @@ final class EmailTemplateType extends AbstractType
         $builder
             ->add(self::TYPE_FIELD_NAME, ChoiceType::class, [
                 'label' => self::TEMPLATE_TYPE_LABEL,
-                'choices' => $this->emailCodesProvider->provideWithLabels(),
+                'choices' => $this->getAvailableEmailTemplateTypes($options['data']),
                 'choice_translation_domain' => 'mail_template_type',
             ])
             ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [
                 'label' => self::STYLE_CSS_LABEL,
+                'required' => false,
                 'attr' => [
                     'class' => 'codemirror-editor',
                     'data-language' => 'css',
@@ -68,5 +78,15 @@ final class EmailTemplateType extends AbstractType
     public function getBlockPrefix(): string
     {
         return self::BLOCK_PREFIX;
+    }
+
+    private function getAvailableEmailTemplateTypes(EmailTemplateInterface $emailTemplate): array
+    {
+        $types = $this->emailCodesProvider->provideWithLabelsNotUsedTypes();
+        if (null !== $emailTemplate->getId() && null !== $dataType = $emailTemplate->getType()) {
+            $types[$this->dataCollectorTranslator->trans(self::PREFIX_TRANS_TYPE . $dataType)] = $dataType;
+        }
+
+        return $types;
     }
 }

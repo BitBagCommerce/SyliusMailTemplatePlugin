@@ -5,9 +5,6 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">type</option>
         </constraint>
-        <property name="styleCss">
-            <constraint name="NotBlank" />
-        </property>
         <property name="translations">
             <constraint name="Valid" />
         </property>

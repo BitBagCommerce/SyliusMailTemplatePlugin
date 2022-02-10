@@ -14,6 +14,7 @@
     <services>
         <service id="bitbag_sylius_mail_template_plugin.form.type.email_template_type" class="BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType">
             <argument type="service" id="bitbag_sylius_mail_template_plugin.provider.email_codes" />
+            <argument type="service" id="translator.data_collector" />
 
             <tag name="form.type" />
         </service>
