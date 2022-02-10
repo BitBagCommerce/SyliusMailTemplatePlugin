@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMailTemplatePlugin\Provider;
 
 use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider;
+use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 
@@ -28,9 +29,9 @@ class EmailCodesProviderSpec extends ObjectBehavior
 
     public const SHIPMENT_CONFIRMATION_LABEL = 'Shipment Confirmation';
 
-    function let(): void
+    function let(EmailTemplateRepositoryInterface $emailTemplateRepository): void
     {
-        $this->beConstructedWith(self::EXAMPLE_EMAILS_CONFIGURATION);
+        $this->beConstructedWith(self::EXAMPLE_EMAILS_CONFIGURATION, $emailTemplateRepository);
     }
 
     function it_is_initializable(): void

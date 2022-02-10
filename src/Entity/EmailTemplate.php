@@ -23,7 +23,7 @@ class EmailTemplate implements EmailTemplateInterface
         $this->initializeTranslationsCollection();
     }
 
-    protected ?int $id;
+    protected ?int $id = null;
 
     protected ?string $type;
 
