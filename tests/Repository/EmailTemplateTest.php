@@ -19,6 +19,8 @@ final class EmailTemplateTest extends WebTestCase
 
     protected function setUp(): void
     {
+        self::bootKernel();
+
         $this->emailTemplateRepository = self::$container->get('bitbag_sylius_mail_template_plugin.custom_repository.email_template');
     }
 
