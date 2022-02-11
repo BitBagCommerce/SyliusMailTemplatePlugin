@@ -65,14 +65,14 @@ class EmailCodesProviderSpec extends ObjectBehavior
     {
         $emailTemplateRepository->getAllTypes()->willReturn([
             [
-                'type' => 'contact_request'
+                'type' => 'contact_request',
             ],
             [
-                'type' => 'order_confirmation'
+                'type' => 'order_confirmation',
             ],
             [
-                'type' => 'shipment_confirmation'
-            ]
+                'type' => 'shipment_confirmation',
+            ],
         ]);
 
         $emailCodesWithLabels = $this->provideWithLabelsNotUsedTypes();

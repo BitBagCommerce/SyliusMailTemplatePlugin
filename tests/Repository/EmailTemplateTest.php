@@ -30,7 +30,7 @@ final class EmailTemplateTest extends WebTestCase
 
         Assert::assertIsArray($emailTemplateTypes, 'This is not an array.');
 
-        Assert::assertCount( 1, $emailTemplateTypes);
+        Assert::assertCount(1, $emailTemplateTypes);
 
         Assert::assertArrayHasKey('type', $emailTemplateTypes[0]);
     }
