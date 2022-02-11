@@ -21,9 +21,10 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 
 * [Overview](#overview)
 * [Support](#we-are-here-to-help)
-* [Installation](#installation)
-    * [Testing](#testing)
-    * [Customization](#Customization)
+* [Installation](doc/installation.md)
+    * [Testing](doc/testing.md)
+    * [Usage](doc/usage.md)
+    * [Using Twig in emails](doc/using-twig-in-emails.md)
 * [About us](#about-us)
     * [Community](#community)
 * [Demo](#demo-sylius-shop)
