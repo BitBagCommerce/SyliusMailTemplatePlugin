@@ -84,7 +84,10 @@ final class EmailTemplateType extends AbstractType
     {
         $types = $this->emailCodesProvider->provideWithLabelsNotUsedTypes();
         if (null !== $emailTemplate->getId() && null !== $dataType = $emailTemplate->getType()) {
-            $types[$this->dataCollectorTranslator->trans(self::PREFIX_TRANS_TYPE . $dataType)] = $dataType;
+            $replaceDataType = str_replace('_', ' ', $dataType);
+            $labelName = ucwords(strtolower($replaceDataType));
+
+            $types[$this->dataCollectorTranslator->trans($labelName, [], self::MAIL_TEMPLATE_TYPE_DOMAIN)] = $dataType;
         }
 
         return $types;
