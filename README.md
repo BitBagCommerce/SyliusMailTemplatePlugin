@@ -4,11 +4,11 @@
 
 ----
 
-[![](https://img.shields.io/packagist/l/bitbag/mailtemplate-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "License") 
-[ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "Version") 
-[ ![](https://img.shields.io/github/workflow/status/BitBagCommerce/SyliusMailTemplatePlugin/Build) ](https://github.com/BitBagCommerce/SyliusMailTemplatePlugin/actions "Build status") 
-[![](https://poser.pugx.org/bitbag/mailtemplate-plugin/downloads)](https://packagist.org/packages/bitbag/mailtemplate-plugin "Total Downloads") 
-[![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) 
+[![](https://img.shields.io/packagist/l/bitbag/mailtemplate-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "License")
+[ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "Version")
+[ ![](https://img.shields.io/github/workflow/status/BitBagCommerce/SyliusMailTemplatePlugin/Build) ](https://github.com/BitBagCommerce/SyliusMailTemplatePlugin/actions "Build status")
+[![](https://poser.pugx.org/bitbag/mailtemplate-plugin/downloads)](https://packagist.org/packages/bitbag/mailtemplate-plugin "Total Downloads")
+[![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com)
 [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailtemplate)
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us to work  together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailtemplate).
@@ -21,11 +21,12 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 
 * [Overview](#overview)
 * [Support](#we-are-here-to-help)
-* [Installation](#installation)
-    * [Testing](#testing)
-    * [Customization](#Customization)
+* [Installation](doc/installation.md)
+  * [Testing](doc/testing.md)
+  * [Usage](doc/usage.md)
+  * [Using Twig in emails](doc/using-twig-in-emails.md)
 * [About us](#about-us)
-    * [Community](#community)
+  * [Community](#community)
 * [Demo](#demo-sylius-shop)
 * [License](#license)
 * [Contact](#contact)
