@@ -77,9 +77,6 @@ jobs:
                 name: Install PHP dependencies
                 run: composer install --no-interaction
 
-            -   name: Run PHPUnit
-                run: ./vendor/bin/phpunit --coverage-text
-
             -   name: Run ECS
                 run: vendor/bin/ecs
 
