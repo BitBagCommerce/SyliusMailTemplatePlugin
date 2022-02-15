@@ -40,7 +40,8 @@ final class EmailTemplateType extends AbstractType
 
     private EmailTemplateServiceInterface $emailTemplateService;
 
-    public function __construct(EmailTemplateServiceInterface $emailTemplateService) {
+    public function __construct(EmailTemplateServiceInterface $emailTemplateService)
+    {
         $this->emailTemplateService = $emailTemplateService;
     }
 

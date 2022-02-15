@@ -11,6 +11,8 @@
                  class="Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui\Admin\EmailTemplateContext">
             <argument type="service" id="bitbag_sylius_mail_template_plugin.behat.page.admin.email_template.create" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.provider.email_codes" />
+            <argument type="service" id="bitbag_sylius_mail_template_plugin.fixture.factory.email_template" />
         </service>
     </services>
 </container>

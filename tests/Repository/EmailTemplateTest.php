@@ -18,10 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class EmailTemplateTest extends WebTestCase
 {
-    /** @var EmailTemplateRepositoryInterface $emailTemplateRepository */
+    /** @var EmailTemplateRepositoryInterface */
     private $emailTemplateRepository;
 
-    /** @var EmailTemplateServiceInterface $emailTemplateService */
+    /** @var EmailTemplateServiceInterface */
     private $emailTemplateService;
 
     /** @var EmailCodesProviderInterface */
