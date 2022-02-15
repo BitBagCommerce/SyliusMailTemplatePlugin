@@ -10,11 +10,13 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMailTemplatePlugin\Repository;
 
+use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class EmailTemplateTest extends WebTestCase
 {
+    /** @var EmailTemplateRepositoryInterface $emailTemplateRepository */
     private $emailTemplateRepository;
 
     protected function setUp(): void
