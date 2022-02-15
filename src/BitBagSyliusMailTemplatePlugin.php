@@ -10,10 +10,19 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin;
 
+use BitBag\SyliusMailTemplatePlugin\DependencyInjection\CompilerPass\SyliusBehatPolyfillCompilerPass;
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class BitBagSyliusMailTemplatePlugin extends Bundle
 {
     use SyliusPluginTrait;
+
+    public function build(ContainerBuilder $container): void
+    {
+        $container->addCompilerPass(new SyliusBehatPolyfillCompilerPass());
+
+        parent::build($container);
+    }
 }
