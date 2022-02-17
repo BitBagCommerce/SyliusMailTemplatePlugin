@@ -1,0 +1,3 @@
+BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate:
+    email_template_{1..2}:
+        type (unique): <nameType()>

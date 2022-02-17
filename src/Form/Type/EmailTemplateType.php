@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\Form\Type;
 
 use BitBag\SyliusMailTemplatePlugin\Form\Type\Translation\EmailTemplateTranslationType;
-use BitBag\SyliusMailTemplatePlugin\Service\EmailTemplateServiceInterface;
+use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -38,11 +38,11 @@ final class EmailTemplateType extends AbstractType
 
     public const PREFIX_TRANS_TYPE = 'bitbag_sylius_mail_template_plugin.ui.type.';
 
-    private EmailTemplateServiceInterface $emailTemplateService;
+    private EmailCodesProviderInterface $emailCodesProvider;
 
-    public function __construct(EmailTemplateServiceInterface $emailTemplateService)
+    public function __construct(EmailCodesProviderInterface $emailCodesProvider)
     {
-        $this->emailTemplateService = $emailTemplateService;
+        $this->emailCodesProvider = $emailCodesProvider;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -50,7 +50,7 @@ final class EmailTemplateType extends AbstractType
         $builder
             ->add(self::TYPE_FIELD_NAME, ChoiceType::class, [
                 'label' => self::TEMPLATE_TYPE_LABEL,
-                'choices' => $this->emailTemplateService->getAvailableEmailTemplateTypes($options['data']),
+                'choices' => $this->emailCodesProvider->getAvailableEmailTemplateTypes($options['data']),
                 'choice_translation_domain' => 'mail_template_type',
             ])
             ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [

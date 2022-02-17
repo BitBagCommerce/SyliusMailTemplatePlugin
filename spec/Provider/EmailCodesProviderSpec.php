@@ -14,6 +14,7 @@ use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Symfony\Component\Translation\DataCollectorTranslator;
 
 class EmailCodesProviderSpec extends ObjectBehavior
 {
@@ -29,9 +30,11 @@ class EmailCodesProviderSpec extends ObjectBehavior
 
     public const SHIPMENT_CONFIRMATION_LABEL = 'Shipment Confirmation';
 
-    function let(EmailTemplateRepositoryInterface $emailTemplateRepository): void
-    {
-        $this->beConstructedWith(self::EXAMPLE_EMAILS_CONFIGURATION, $emailTemplateRepository);
+    function let(
+        EmailTemplateRepositoryInterface $emailTemplateRepository,
+        DataCollectorTranslator $dataCollectorTranslator
+    ): void {
+        $this->beConstructedWith(self::EXAMPLE_EMAILS_CONFIGURATION, $emailTemplateRepository, $dataCollectorTranslator);
     }
 
     function it_is_initializable(): void

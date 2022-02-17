@@ -24,6 +24,7 @@
         >
             <argument>%sylius.mailer.emails%</argument>
             <argument type="service" id="bitbag_sylius_mail_template_plugin.custom_repository.email_template" />
+            <argument type="service" id="translator.data_collector" />
         </service>
     </services>
 </container>

@@ -12,28 +12,29 @@ namespace Tests\BitBag\SyliusMailTemplatePlugin\Repository;
 
 use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
-use BitBag\SyliusMailTemplatePlugin\Service\EmailTemplateServiceInterface;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class EmailTemplateTest extends WebTestCase
 {
-    /** @var EmailTemplateRepositoryInterface */
-    private $emailTemplateRepository;
+    private EmailTemplateRepositoryInterface $emailTemplateRepository;
 
-    /** @var EmailTemplateServiceInterface */
-    private $emailTemplateService;
-
-    /** @var EmailCodesProviderInterface */
-    private $emailCodesProvider;
+    private EmailCodesProviderInterface $emailCodesProvider;
 
     protected function setUp(): void
     {
         self::bootKernel();
 
-        $this->emailTemplateRepository = self::$container->get('bitbag_sylius_mail_template_plugin.custom_repository.email_template');
-        $this->emailTemplateService = self::$container->get('bitbag_sylius_mail_template_plugin.service.email_template_service');
-        $this->emailCodesProvider = self::$container->get('bitbag_sylius_mail_template_plugin.provider.email_codes');
+        $container = self::$container;
+
+        $this->emailTemplateRepository = $container->get('bitbag_sylius_mail_template_plugin.custom_repository.email_template');
+        $this->emailCodesProvider = $container->get('bitbag_sylius_mail_template_plugin.provider.email_codes');
+
+        $loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $loader->load([
+            __DIR__ . '/DataFixtures/ORM/email_templates.yml',
+            __DIR__ . '/DataFixtures/ORM/email_templates_translation.yml',
+        ]);
     }
 
     public function test_return_used_template_email_types(): void
@@ -42,7 +43,7 @@ final class EmailTemplateTest extends WebTestCase
 
         Assert::assertIsArray($emailTemplateTypes, 'This is not an array.');
 
-        Assert::assertCount(1, $emailTemplateTypes);
+        Assert::assertCount(2, $emailTemplateTypes);
 
         Assert::assertArrayHasKey('type', $emailTemplateTypes[0]);
     }
@@ -51,13 +52,7 @@ final class EmailTemplateTest extends WebTestCase
     {
         $emailTemplate = $this->emailTemplateRepository->findOneBy([]);
 
-        Assert:self::assertNotNull($emailTemplate, 'EmailTemplate was not found.');
-
-        $emailTemplateTypes = $this->emailTemplateRepository->getAllTypes();
-
-        Assert::assertIsArray($emailTemplateTypes, 'This is not an array.');
-
-        $choices = $this->emailTemplateService->getAvailableEmailTemplateTypes($emailTemplate);
+        $choices = $this->emailCodesProvider->getAvailableEmailTemplateTypes($emailTemplate);
 
         Assert::assertEquals(
             count($choices) - 1,

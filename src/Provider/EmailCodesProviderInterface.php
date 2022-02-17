@@ -10,9 +10,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Provider;
 
+use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
+
 interface EmailCodesProviderInterface
 {
     public function provideWithLabels(): array;
 
     public function provideWithLabelsNotUsedTypes(): array;
+
+    public function getAvailableEmailTemplateTypes(EmailTemplateInterface $emailTemplate): array;
 }
