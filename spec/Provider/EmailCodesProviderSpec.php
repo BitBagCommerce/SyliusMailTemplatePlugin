@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMailTemplatePlugin\Provider;
 
+use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
+use BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType;
 use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
 use PhpSpec\ObjectBehavior;
@@ -34,7 +36,11 @@ class EmailCodesProviderSpec extends ObjectBehavior
         EmailTemplateRepositoryInterface $emailTemplateRepository,
         DataCollectorTranslator $dataCollectorTranslator
     ): void {
-        $this->beConstructedWith(self::EXAMPLE_EMAILS_CONFIGURATION, $emailTemplateRepository, $dataCollectorTranslator);
+        $this->beConstructedWith(
+            self::EXAMPLE_EMAILS_CONFIGURATION,
+            $emailTemplateRepository,
+            $dataCollectorTranslator
+        );
     }
 
     function it_is_initializable(): void
@@ -82,5 +88,32 @@ class EmailCodesProviderSpec extends ObjectBehavior
 
         $emailCodesWithLabels->shouldBeArray();
         $emailCodesWithLabels->shouldBeEqualTo([]);
+    }
+
+    function it_should_return_not_used_types_for_edit_email_template(
+        EmailTemplateRepositoryInterface $emailTemplateRepository,
+        EmailTemplateInterface $emailTemplate,
+        DataCollectorTranslator $dataCollectorTranslator
+    ): void {
+        $dataCollectorTranslator->trans('Contact Request',
+            [],
+            EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN
+        )->shouldBeCalled()->willReturn('Contact Request');
+
+        $emailTemplateRepository->getAllTypes()->willReturn([
+            ['type' => 'contact_request'],
+            ['type' => 'order_confirmation']
+        ]);
+
+        $this->provideWithLabelsNotUsedTypes()->shouldReturn([
+            'Shipment Confirmation' => 'shipment_confirmation'
+        ]);
+
+        $emailTemplate->getType()->willReturn('contact_request');
+
+        $this->getAvailableEmailTemplateTypes($emailTemplate)->shouldBeEqualTo([
+            'Shipment Confirmation' => 'shipment_confirmation',
+            'Contact Request' => 'contact_request',
+        ]);
     }
 }

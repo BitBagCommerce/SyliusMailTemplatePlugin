@@ -25,7 +25,7 @@ class EmailTemplate implements EmailTemplateInterface
 
     protected ?int $id = null;
 
-    protected ?string $type;
+    protected ?string $type = null;
 
     protected ?string $styleCss;
 

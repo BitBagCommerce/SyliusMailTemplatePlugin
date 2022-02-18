@@ -65,11 +65,19 @@ final class EmailCodesProvider implements EmailCodesProviderInterface
     public function getAvailableEmailTemplateTypes(EmailTemplateInterface $emailTemplate): array
     {
         $types = $this->provideWithLabelsNotUsedTypes();
-        if (null !== $emailTemplate->getId() && null !== $dataType = $emailTemplate->getType()) {
+
+        if (null !== $dataType = $emailTemplate->getType()) {
             $replaceDataType = str_replace('_', ' ', $dataType);
+
             $labelName = ucwords(strtolower($replaceDataType));
 
-            $types[$this->dataCollectorTranslator->trans($labelName, [], EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN)] = $dataType;
+            $translatedLabelName = $this->dataCollectorTranslator->trans(
+                $labelName,
+                [],
+                EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN
+            );
+
+            $types[$translatedLabelName] = $dataType;
         }
 
         return $types;

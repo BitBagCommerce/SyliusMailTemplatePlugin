@@ -36,8 +36,6 @@ final class EmailTemplateType extends AbstractType
 
     public const MAIL_TEMPLATE_TYPE_DOMAIN = 'mail_template_type';
 
-    public const PREFIX_TRANS_TYPE = 'bitbag_sylius_mail_template_plugin.ui.type.';
-
     private EmailCodesProviderInterface $emailCodesProvider;
 
     public function __construct(EmailCodesProviderInterface $emailCodesProvider)
