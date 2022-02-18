@@ -10,11 +10,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\EventListener;
 
-use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProvider;
+use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\DataCollectorTranslator;
 
 final class NotFoundTypeCreateEmailTemplateEventListener
@@ -25,16 +24,16 @@ final class NotFoundTypeCreateEmailTemplateEventListener
 
     public const DEFINED_ALL_CUSTOM_TEMPLATE = 'bitbag_sylius_mail_template_plugin.ui.all_types_have_defined_custom_template';
 
-    private EmailCodesProvider $emailCodesProvider;
+    private EmailCodesProviderInterface $emailCodesProvider;
 
     private DataCollectorTranslator $translator;
 
-    private Router $router;
+    private RouterInterface $router;
 
     public function __construct(
-        EmailCodesProvider $emailCodesProvider,
+        EmailCodesProviderInterface $emailCodesProvider,
         DataCollectorTranslator $translator,
-        Router $router
+        RouterInterface $router
     ) {
         $this->emailCodesProvider = $emailCodesProvider;
         $this->translator = $translator;
@@ -47,7 +46,7 @@ final class NotFoundTypeCreateEmailTemplateEventListener
 
         if (self::EMAIL_TEMPLATE_CREATE_ROUTE === $requestEvent->getRequest()->attributes->get('_route')) {
             $provideWithLabels = $this->emailCodesProvider->provideWithLabelsNotUsedTypes();
-            if (0 === count($provideWithLabels) && $session instanceof Session) {
+            if (0 === count($provideWithLabels)) {
                 $session->getFlashBag()->add('error', $this->translator->trans(self::DEFINED_ALL_CUSTOM_TEMPLATE));
 
                 $requestEvent->setResponse(new RedirectResponse($this->router->generate(self::EMAIL_TEMPLATE_INDEX_ROUTE)));

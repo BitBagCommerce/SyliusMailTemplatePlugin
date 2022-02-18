@@ -95,18 +95,19 @@ class EmailCodesProviderSpec extends ObjectBehavior
         EmailTemplateInterface $emailTemplate,
         DataCollectorTranslator $dataCollectorTranslator
     ): void {
-        $dataCollectorTranslator->trans('Contact Request',
+        $dataCollectorTranslator->trans(
+            'Contact Request',
             [],
             EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN
         )->shouldBeCalled()->willReturn('Contact Request');
 
         $emailTemplateRepository->getAllTypes()->willReturn([
             ['type' => 'contact_request'],
-            ['type' => 'order_confirmation']
+            ['type' => 'order_confirmation'],
         ]);
 
         $this->provideWithLabelsNotUsedTypes()->shouldReturn([
-            'Shipment Confirmation' => 'shipment_confirmation'
+            'Shipment Confirmation' => 'shipment_confirmation',
         ]);
 
         $emailTemplate->getType()->willReturn('contact_request');
