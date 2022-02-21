@@ -12,6 +12,7 @@ namespace BitBag\SyliusMailTemplatePlugin\EventListener;
 
 use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\DataCollectorTranslator;
@@ -46,7 +47,7 @@ final class NotFoundTypeCreateEmailTemplateEventListener
 
         if (self::EMAIL_TEMPLATE_CREATE_ROUTE === $requestEvent->getRequest()->attributes->get('_route')) {
             $provideWithLabels = $this->emailCodesProvider->provideWithLabelsNotUsedTypes();
-            if (0 === count($provideWithLabels)) {
+            if (0 === count($provideWithLabels) && $session instanceof Session) {
                 $session->getFlashBag()->add('error', $this->translator->trans(self::DEFINED_ALL_CUSTOM_TEMPLATE));
 
                 $requestEvent->setResponse(new RedirectResponse($this->router->generate(self::EMAIL_TEMPLATE_INDEX_ROUTE)));
