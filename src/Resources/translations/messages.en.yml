@@ -20,3 +20,4 @@ bitbag_sylius_mail_template_plugin:
         not_allowed_twig_property: "Property \"%s\" is not allowed at line %d"
         not_allowed_twig_filter: "Filter \"%s\" is not allowed at line %d"
         not_allowed_twig_tag: "Tag \"%s\" is not allowed at line %d"
+        all_types_have_defined_custom_template: "All types have defined custom template"

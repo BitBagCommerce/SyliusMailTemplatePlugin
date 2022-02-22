@@ -48,11 +48,12 @@ final class EmailTemplateType extends AbstractType
         $builder
             ->add(self::TYPE_FIELD_NAME, ChoiceType::class, [
                 'label' => self::TEMPLATE_TYPE_LABEL,
-                'choices' => $this->emailCodesProvider->provideWithLabels(),
+                'choices' => $this->emailCodesProvider->getAvailableEmailTemplateTypes($options['data']),
                 'choice_translation_domain' => 'mail_template_type',
             ])
             ->add(self::STYLE_CSS_FIELD_NAME, TextareaType::class, [
                 'label' => self::STYLE_CSS_LABEL,
+                'required' => false,
                 'attr' => [
                     'class' => 'codemirror-editor',
                     'data-language' => 'css',

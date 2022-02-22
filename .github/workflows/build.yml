@@ -174,3 +174,6 @@ jobs:
                     name: Behat logs
                     path: etc/build/
                     if-no-files-found: ignore
+
+            -   name: Run PHPUnit
+                run: ./vendor/bin/phpunit --coverage-text
