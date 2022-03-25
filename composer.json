@@ -1,5 +1,5 @@
 {
-    "name": "bitbag/mail-template",
+    "name": "bitbag/mailtemplate-plugin",
     "type": "sylius-plugin",
     "description": "Custom templates for Sylius mails.",
     "keywords": [
