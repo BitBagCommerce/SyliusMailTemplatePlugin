@@ -21,6 +21,7 @@ default:
                     symfony: ~
                 chrome_headless:
                     chrome:
+                        socket_timeout: 60
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
                 chrome:
