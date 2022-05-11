@@ -9,7 +9,7 @@
         </service>
         <service id="bitbag_sylius_mail_template_plugin.request_listener.not_found_type_create_email_template" class="BitBag\SyliusMailTemplatePlugin\EventListener\NotFoundTypeCreateEmailTemplateEventListener" >
             <argument type="service" id="bitbag_sylius_mail_template_plugin.provider.email_codes" />
-            <argument type="service" id="translator.data_collector" />
+            <argument type="service" id="translator" />
             <argument type="service" id="router.default" />
 
             <tag name="kernel.event_listener" event="kernel.request" />

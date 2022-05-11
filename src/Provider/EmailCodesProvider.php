@@ -13,7 +13,7 @@ namespace BitBag\SyliusMailTemplatePlugin\Provider;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class EmailCodesProvider implements EmailCodesProviderInterface
 {
@@ -21,12 +21,12 @@ final class EmailCodesProvider implements EmailCodesProviderInterface
 
     private EmailTemplateRepositoryInterface $emailTemplateRepository;
 
-    private DataCollectorTranslator $dataCollectorTranslator;
+    private TranslatorInterface $dataCollectorTranslator;
 
     public function __construct(
         array $emails,
         EmailTemplateRepositoryInterface $emailTemplateRepository,
-        DataCollectorTranslator $dataCollectorTranslator
+        TranslatorInterface $dataCollectorTranslator
     ) {
         $this->emails = $emails;
         $this->emailTemplateRepository = $emailTemplateRepository;
