@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NotFoundTypeCreateEmailTemplateEventListener
 {
@@ -27,13 +27,13 @@ final class NotFoundTypeCreateEmailTemplateEventListener
 
     private EmailCodesProviderInterface $emailCodesProvider;
 
-    private DataCollectorTranslator $translator;
+    private TranslatorInterface $translator;
 
     private RouterInterface $router;
 
     public function __construct(
         EmailCodesProviderInterface $emailCodesProvider,
-        DataCollectorTranslator $translator,
+        TranslatorInterface $translator,
         RouterInterface $router
     ) {
         $this->emailCodesProvider = $emailCodesProvider;
