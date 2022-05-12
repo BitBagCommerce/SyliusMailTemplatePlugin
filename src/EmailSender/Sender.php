@@ -79,7 +79,7 @@ final class Sender implements SenderInterface
         $renderedEmail = $this->rendererAdapter->render($email, $data);
 
         $this->senderAdapter->send(
-            $recipients,
+            $recipients, /** @phpstan-ignore-line */
             $senderAddress,
             $senderName,
             $renderedEmail,
