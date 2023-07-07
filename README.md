@@ -6,7 +6,7 @@
 
 [![](https://img.shields.io/packagist/l/bitbag/mailtemplate-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "License")
 [ ![](https://img.shields.io/packagist/v/bitbag/product-bundle-plugin.svg) ](https://packagist.org/packages/bitbag/mailtemplate-plugin "Version")
-[ ![](https://img.shields.io/github/workflow/status/BitBagCommerce/SyliusMailTemplatePlugin/Build) ](https://github.com/BitBagCommerce/SyliusMailTemplatePlugin/actions "Build status")
+[ ![](https://img.shields.io/github/actions/workflow/status/BitBagCommerce/SyliusMailTemplatePlugin/build.yml?branch=master) ](https://github.com/BitBagCommerce/SyliusMailTemplatePlugin/actions "Build status")
 [![](https://poser.pugx.org/bitbag/mailtemplate-plugin/downloads)](https://packagist.org/packages/bitbag/mailtemplate-plugin "Total Downloads")
 [![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com)
 [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailtemplate)
