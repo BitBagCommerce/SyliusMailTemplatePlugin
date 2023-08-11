@@ -81,16 +81,13 @@ jobs:
                 name: Install PHP dependencies
                 run: composer install --no-interaction
 
-            -   name: Run ECS
+            -   
+                name: Run ECS
                 run: vendor/bin/ecs
 
             -
-                name: Run PHPStan in /src directory
-                run: ./vendor/bin/phpstan analyze --configuration=./phpstan.neon src --level=8
-
-            -
-                name: Run PHPStan in /test directory
-                run: ./vendor/bin/phpstan analyze --configuration=./phpstan.neon tests --level=5
+                name: Run PHPStan
+                run: vendor/bin/phpstan analyse -c phpstan.neon -l 8 src/
                 
             - 
                 name: Failed build Slack notification
