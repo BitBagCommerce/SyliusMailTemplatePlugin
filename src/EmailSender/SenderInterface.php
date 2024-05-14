@@ -18,6 +18,6 @@ interface SenderInterface
         array $recipients,
         array $data = [],
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
     ): void;
 }

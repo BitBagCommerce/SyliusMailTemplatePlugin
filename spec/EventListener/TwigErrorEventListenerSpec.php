@@ -1,9 +1,10 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -37,13 +38,13 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
     function it_should_do_nothing_if_exception_is_not_a_twig_security_error(
         HttpKernelInterface $httpKernel,
         Request $request,
-        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider
+        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider,
     ): void {
         $exceptionEvent = new ExceptionEvent(
             $httpKernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            new \Exception()
+            new \Exception(),
         );
         $customTwigErrorResponseProvider->provide(Argument::type(Error::class))->shouldNotBeCalled();
 
@@ -53,14 +54,14 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
     function it_should_do_nothing_if_provided_custom_response_is_null(
         HttpKernelInterface $httpKernel,
         Request $request,
-        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider
+        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider,
     ): void {
         $genericResponse = new Response();
         $exceptionEvent = new ExceptionEvent(
             $httpKernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            new \Exception()
+            new \Exception(),
         );
         $exceptionEvent->setResponse($genericResponse);
         $customTwigErrorResponseProvider->provide(Argument::type(Error::class))->willReturn(null);
@@ -73,7 +74,7 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
     function it_should_set_response_to_the_provided_custom_twig_error_response(
         HttpKernelInterface $httpKernel,
         Request $request,
-        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider
+        CustomTwigErrorResponseProviderInterface $customTwigErrorResponseProvider,
     ): void {
         $jsonResponse = new JsonResponse();
         $error = new Error('foo');
@@ -81,7 +82,7 @@ final class TwigErrorEventListenerSpec extends ObjectBehavior
             $httpKernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $error
+            $error,
         );
         $exceptionEvent->setResponse(new Response());
         $customTwigErrorResponseProvider->provide($error)->willReturn($jsonResponse);

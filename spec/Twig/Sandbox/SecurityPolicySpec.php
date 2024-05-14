@@ -1,9 +1,10 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -39,7 +40,7 @@ class SecurityPolicySpec extends ObjectBehavior
     }
 
     function it_should_not_call_decorated_object_on_check_method_if_allowed_methods_contains_passed_object_type_with_method_wildcard(
-        SecurityPolicyInterface $securityPolicy
+        SecurityPolicyInterface $securityPolicy,
     ): void {
         $allowedMethods = [
             self::STD_CLASS_NAME => '*',
@@ -51,7 +52,7 @@ class SecurityPolicySpec extends ObjectBehavior
     }
 
     function it_should_not_call_decorated_object_on_check_method_if_allowed_methods_contains__class_wildcard_with_matching_method(
-        SecurityPolicyInterface $securityPolicy
+        SecurityPolicyInterface $securityPolicy,
     ): void {
         $allowedMethods = [
             '*' => [
@@ -65,7 +66,7 @@ class SecurityPolicySpec extends ObjectBehavior
     }
 
     function it_should_not_call_decorated_object_on_check_method_if_allowed_methods_contains_wildcard_class_with_wildcard_method(
-        SecurityPolicyInterface $securityPolicy
+        SecurityPolicyInterface $securityPolicy,
     ): void {
         $allowedMethods = [
             '*' => '*',
@@ -77,7 +78,7 @@ class SecurityPolicySpec extends ObjectBehavior
     }
 
     function it_should_call_decorated_object_method_on_check_method_if_passed_object_or_method_doesnt_meet_requirements(
-        SecurityPolicyInterface $securityPolicy
+        SecurityPolicyInterface $securityPolicy,
     ): void {
         $securityPolicy->checkMethodAllowed(Argument::type('object'), self::EXAMPLE_METHOD)->shouldBeCalled();
 

@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Webmozart\Assert\Assert;
 
 final class EmailTemplateContext implements Context
@@ -29,7 +28,7 @@ final class EmailTemplateContext implements Context
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        EmailCheckerInterface $emailChecker
+        EmailCheckerInterface $emailChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
@@ -52,9 +51,9 @@ final class EmailTemplateContext implements Context
             sprintf(
                 '%s wrote %s',
                 $sender,
-                'Hi! I did not receive an item!'
+                'Hi! I did not receive an item!',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -69,9 +68,9 @@ final class EmailTemplateContext implements Context
                 'Message from',
                 $sender,
                 'Content',
-                'Hi! I did not receive an item!'
+                'Hi! I did not receive an item!',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -83,7 +82,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'To reset your password - click the link below',
-            $recipient
+            $recipient,
         );
     }
 
@@ -95,7 +94,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Wanna reset password? Here is your code:',
-            $recipient
+            $recipient,
         );
     }
 
@@ -105,15 +104,15 @@ final class EmailTemplateContext implements Context
     public function anEmailWithShipmentsConfirmationForTheOrderShouldBeSentTo(
         string $method,
         string $orderNumber,
-        string $recipient
+        string $recipient,
     ): void {
         Assert::true($this->emailChecker->hasMessageTo(
             sprintf(
                 'Your order with number %s has been sent using %s.',
                 $orderNumber,
-                $method
+                $method,
             ),
-            $recipient
+            $recipient,
         ));
     }
 
@@ -124,7 +123,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'To verify your email address - click the link below',
-            $recipient
+            $recipient,
         );
     }
 
@@ -135,7 +134,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Verify yourself. We need you!',
-            $recipient
+            $recipient,
         );
     }
 
@@ -155,7 +154,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Enjoy our stuff!',
-            $recipient
+            $recipient,
         );
     }
 
@@ -167,7 +166,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'You have just been registered. Thank you',
-            $recipient
+            $recipient,
         );
     }
 
@@ -178,15 +177,15 @@ final class EmailTemplateContext implements Context
     public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s',
                 'Pif paf',
-                $order->getNumber()
+                $order->getNumber(),
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -197,16 +196,16 @@ final class EmailTemplateContext implements Context
     public function aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 'Your order no.',
                 $order->getNumber(),
-                'has been successfully placed.'
+                'has been successfully placed.',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -251,11 +250,11 @@ final class EmailTemplateContext implements Context
     public function aDefaultEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             'Thank you for a successful transaction.',
-            $recipient
+            $recipient,
         );
     }
 
@@ -268,22 +267,22 @@ final class EmailTemplateContext implements Context
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 'Enjoy your new stuff!',
                 $order->getNumber(),
-                $this->getShippingMethodName($order)
+                $this->getShippingMethodName($order),
             ),
-            $recipient
+            $recipient,
         );
 
         if ($this->sharedStorage->has('tracking_code')) {
             $this->assertEmailContainsMessageTo(
                 $this->sharedStorage->get('tracking_code'),
-                $recipient
+                $recipient,
             );
         }
     }
@@ -306,6 +305,7 @@ final class EmailTemplateContext implements Context
         Assert::notNull($shippingMethod);
 
         Assert::notNull($shippingMethod->getName());
+
         return $shippingMethod->getName();
     }
 }

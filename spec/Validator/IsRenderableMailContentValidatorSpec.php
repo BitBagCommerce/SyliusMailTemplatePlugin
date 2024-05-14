@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 /*
@@ -54,7 +61,7 @@ class IsRenderableMailContentValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         environment $twig,
         MailPreviewDataProviderInterface $mailPreviewDataProvider,
-        MailPreviewDataInterface $mailPreviewData
+        MailPreviewDataInterface $mailPreviewData,
     ): void {
         $emailTemplateTranslation = $this->createEmailTemplateTranslationWithSampleEmailTemplate();
 
@@ -69,7 +76,7 @@ class IsRenderableMailContentValidatorSpec extends ObjectBehavior
         $constraint = new IsRenderableMailContent();
         $validator = new IsRenderableMailContentValidator(
             $twig->getWrappedObject(),
-            $mailPreviewDataProvider->getWrappedObject()
+            $mailPreviewDataProvider->getWrappedObject(),
         );
         $validator->initialize($context->getWrappedObject());
 
@@ -85,7 +92,7 @@ class IsRenderableMailContentValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         environment $twig,
         MailPreviewDataProviderInterface $mailPreviewDataProvider,
-        MailPreviewDataInterface $mailPreviewData
+        MailPreviewDataInterface $mailPreviewData,
     ): void {
         $emailTemplateTranslation = $this->createEmailTemplateTranslationWithSampleEmailTemplate();
 
@@ -97,7 +104,7 @@ class IsRenderableMailContentValidatorSpec extends ObjectBehavior
         $twig->render(RenderEmailPreviewAction::EMAIL_PREVIEW_TEMPLATE, Argument::type('array'));
         $validator = new IsRenderableMailContentValidator(
             $twig->getWrappedObject(),
-            $mailPreviewDataProvider->getWrappedObject()
+            $mailPreviewDataProvider->getWrappedObject(),
         );
         $validator->initialize($context->getWrappedObject());
 

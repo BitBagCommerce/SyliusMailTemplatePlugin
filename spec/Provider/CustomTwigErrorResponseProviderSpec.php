@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 /*
@@ -47,7 +54,7 @@ class CustomTwigErrorResponseProviderSpec extends ObjectBehavior
     function it_should_return_first_supporting_custom_twig_error_response(
         TwigErrorResponseInterface $firstResponse,
         TwigErrorResponseInterface $secondResponse,
-        TwigErrorResponseInterface $thirdResponse
+        TwigErrorResponseInterface $thirdResponse,
     ): void {
         $error = new Error('foo');
         $firstJsonResponse = new JsonResponse();
