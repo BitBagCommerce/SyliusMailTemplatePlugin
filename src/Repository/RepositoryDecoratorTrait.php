@@ -34,8 +34,8 @@ trait RepositoryDecoratorTrait
     public function findBy(
         array $criteria,
         ?array $orderBy = null,
-        $limit = null,
-        $offset = null
+        ?int $limit = null,
+        ?int $offset = null
     ): array {
         return $this->decoratedRepository->findBy($criteria, $orderBy, $limit, $offset);
     }
