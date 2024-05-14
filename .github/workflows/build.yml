@@ -21,21 +21,17 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "7.4"]
-                symfony: ["^4.4", "^5.2"]
-                sylius: ["~1.9.6", "~1.10.0", "~1.11.0"]
+                php: ["8.0"]
+                symfony: ["^5.4", "^6.0"]
+                ssylius: ["~1.12.0", "~1.13.0"]
                 node: ["14.x"]
                 mysql: ["8.0"]
+                state_machine_adapter: ["winzou_state_machine", "symfony_workflow"]
 
                 exclude:
-                    - sylius: ~1.9.6
-                      php: 8.0
-
-                    - sylius: ~1.10.0
-                      symfony: 4.4
-
-                    - sylius: ~1.11.0
-                      php: 7.4
+                    -
+                        sylius: ~1.12.0
+                        state_machine_adapter: "symfony_workflow"
 
         env:
             APP_ENV: test
@@ -129,6 +125,7 @@ jobs:
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
             -
                 name: Install JS dependencies
                 run: (cd tests/Application && yarn install)
@@ -178,7 +175,7 @@ jobs:
 
             -   name: Run PHPUnit
                 run: ./vendor/bin/phpunit --coverage-text
-                
+
             -   name: Failed build Slack notification
                 uses: rtCamp/action-slack-notify@v2
                 if: ${{ failure() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
