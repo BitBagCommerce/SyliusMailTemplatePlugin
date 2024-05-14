@@ -29,7 +29,7 @@ trait RepositoryDecoratorTrait
     }
 
     /**
-     * @return object[]
+     * @return array<int, object>
      */
     public function findBy(
         array $criteria,

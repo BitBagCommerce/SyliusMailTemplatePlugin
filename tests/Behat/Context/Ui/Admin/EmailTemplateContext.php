@@ -119,7 +119,7 @@ final class EmailTemplateContext extends RawMinkContext
     /**
      * @Given /^I have added all of custom email types$/
      */
-    public function iHaveAddedAllOfCustomEmailTypes()
+    public function iHaveAddedAllOfCustomEmailTypes(): void
     {
         $this->addAllCustomEmailTypesInDatabase();
     }

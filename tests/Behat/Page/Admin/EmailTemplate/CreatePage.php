@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Page\Admin\EmailTemplate;
 
 use ArrayAccess;
+use Behat\Gherkin\Exception\NodeException;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
@@ -56,7 +58,14 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function preview(string $locale): void
     {
-        $this->getDocument()->find('css', sprintf('[data-locale="%s"] .bitbag_preview_mail_template', $locale))->click();
+        /** @var ?NodeElement $node */
+        $node = $this->getDocument()->find('css', sprintf('[data-locale="%s"] .bitbag_preview_mail_template', $locale));
+
+        if (null === $node) {
+            throw new NodeException();
+        }
+
+        $node->click();
     }
 
     /**
@@ -68,7 +77,9 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDriver()->wait(300, 'document.querySelector(".mail-preview").offsetParent !== null');
         Assert::true($this->previewModal->isModalVisible());
+        /** @phpstan-ignore-next-line  */
         Assert::contains($this->previewModal->getSubject(), $subject);
+        /** @phpstan-ignore-next-line  */
         Assert::contains($this->previewModal->getContent(), $content);
     }
 }

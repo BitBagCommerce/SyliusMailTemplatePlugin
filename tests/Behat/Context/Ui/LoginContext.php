@@ -104,6 +104,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheUsername(?string $username = null): void
     {
+        if (null === $username) {
+            throw new \InvalidArgumentException('Username cannot be null.');
+        }
+
         $this->loginPage->specifyUsername($username);
     }
 
@@ -122,6 +126,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyThePasswordAs(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->loginPage->specifyPassword($password);
     }
 
@@ -131,6 +139,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyMyNewPassword(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->resetPasswordPage->specifyNewPassword($password);
     }
 
@@ -140,6 +152,10 @@ final class LoginContext implements Context
      */
     public function iConfirmMyNewPassword(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->resetPasswordPage->specifyConfirmPassword($password);
     }
 
@@ -246,7 +262,7 @@ final class LoginContext implements Context
     /**
      * @Then I should be notified that the :elementName is required
      */
-    public function iShouldBeNotifiedThatElementIsRequired($elementName)
+    public function iShouldBeNotifiedThatElementIsRequired(string $elementName): void
     {
         Assert::true($this->requestPasswordResetPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)));
     }

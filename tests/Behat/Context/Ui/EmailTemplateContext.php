@@ -14,8 +14,11 @@ namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Webmozart\Assert\Assert;
 
 final class EmailTemplateContext implements Context
@@ -213,7 +216,15 @@ final class EmailTemplateContext implements Context
      */
     public function anEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
-        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+        /** @var ?CustomerInterface $customer */
+        $customer = $order->getCustomer();
+        Assert::notNull($customer);
+
+        /** @var ?string $email */
+        $email = $customer->getEmailCanonical();
+        Assert::notNull($email);
+
+        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $email, $localeCode);
     }
 
     /**
@@ -222,7 +233,15 @@ final class EmailTemplateContext implements Context
      */
     public function aDefaultEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
-        $this->aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+        /** @var ?CustomerInterface $customer */
+        $customer = $order->getCustomer();
+        Assert::notNull($customer);
+
+        /** @var ?string $email */
+        $email = $customer->getEmailCanonical();
+        Assert::notNull($email);
+
+        $this->aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $email, $localeCode);
     }
 
     /**
@@ -282,6 +301,11 @@ final class EmailTemplateContext implements Context
             throw new \LogicException('Order should have at least one shipment.');
         }
 
-        return $shipment->getMethod()->getName();
+        /** @var ?ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $shipment->getMethod();
+        Assert::notNull($shippingMethod);
+
+        Assert::notNull($shippingMethod->getName());
+        return $shippingMethod->getName();
     }
 }
