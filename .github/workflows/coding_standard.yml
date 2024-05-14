@@ -83,7 +83,7 @@ jobs:
 
             -
                 name: Run PHPStan
-                run: vendor/bin/phpstan analyse -c phpstan.neon -l 8 src/
+                run: vendor/bin/phpstan analyse -c phpstan.neon
 
             -
                 name: Failed build Slack notification
