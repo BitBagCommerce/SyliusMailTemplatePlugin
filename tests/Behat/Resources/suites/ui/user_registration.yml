@@ -3,7 +3,7 @@ default:
         ui_user_registration:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.locale

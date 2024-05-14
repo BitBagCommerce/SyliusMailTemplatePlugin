@@ -94,6 +94,7 @@ class IsRenderableMailContentValidatorSpec extends ObjectBehavior
         $mailPreviewDataProvider->get(Argument::any())->willReturn($mailPreviewData);
 
         $constraint = new IsRenderableMailContent();
+        $twig->render(RenderEmailPreviewAction::EMAIL_PREVIEW_TEMPLATE, Argument::type('array'));
         $validator = new IsRenderableMailContentValidator(
             $twig->getWrappedObject(),
             $mailPreviewDataProvider->getWrappedObject()

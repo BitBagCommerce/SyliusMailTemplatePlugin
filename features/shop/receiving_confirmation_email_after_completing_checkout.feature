@@ -29,7 +29,7 @@ Feature: Receiving confirmation email after finalizing checkout
 
     @ui @email
     Scenario: Receiving a custom confirmation email after finalizing checkout
-        Given there is mail template with "order_confirmation" type and "Order confirmation" name and "Congratulations, you have bought new gun" subject and "Pif paf </br> {{order.number}}" content
+        Given there is mail template with "order_confirmation" type and "Order confirmation" name and "Congratulations, you have bought new gun" subject and "Pif paf {{order.number}}" content
         And I have product "Sig Sauer P226" in the cart
         And I have completed addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded order with "Free" shipping method and "Offline" payment

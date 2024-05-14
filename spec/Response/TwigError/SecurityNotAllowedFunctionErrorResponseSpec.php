@@ -22,7 +22,7 @@ class SecurityNotAllowedFunctionErrorResponseSpec extends ObjectBehavior
 {
     public const ERROR_MESSAGE_TRANSLATION = 'Function "%s" is not allowed at line %d';
 
-    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Function \u0022bar\u0022 is not allowed at line 2"}';
+    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Function \u0022bar\u0022 is not allowed at line -1"}';
 
     function let(TranslatorInterface $translator)
     {

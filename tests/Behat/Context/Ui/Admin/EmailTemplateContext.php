@@ -173,9 +173,9 @@ final class EmailTemplateContext extends RawMinkContext
                 'remove_existing' => false,
                 'translations' => [
                     'en_US' => [
-                        'name' => "Name for ${type} type",
-                        'subject' => "Subject for ${type} type",
-                        'content' => "Content for ${type} type",
+                        'name' => "Name for {$type} type",
+                        'subject' => "Subject for {$type} type",
+                        'content' => "Content for {$type} type",
                     ],
                 ],
             ];

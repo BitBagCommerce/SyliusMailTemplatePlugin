@@ -22,7 +22,7 @@ class SecurityNotAllowedPropertyErrorResponseSpec extends ObjectBehavior
 {
     public const ERROR_MESSAGE_TRANSLATION = 'Property "%s" is not allowed at line %d';
 
-    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Property \u0022baz\u0022 is not allowed at line 2"}';
+    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Property \u0022baz\u0022 is not allowed at line -1"}';
 
     function let(TranslatorInterface $translator)
     {
