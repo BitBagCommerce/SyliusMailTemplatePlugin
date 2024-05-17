@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 
 final class EmailTemplateContext implements Context
 {
@@ -147,6 +148,20 @@ final class EmailTemplateContext implements Context
     }
 
     /**
+     * @Then email(s) should be sent to :recipient depending on Sylius version
+     */
+    public function numberOfEmailsShouldBeSentToDependingOnSyliusVersion(string $recipient): void
+    {
+        $count = 1;
+
+        if (13 !== (int) SyliusCoreBundle::MINOR_VERSION) {
+            $count = 2;
+        }
+
+        Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
+    }
+
+    /**
      * @Then a welcoming email should have been sent to :recipient
      * @Then a welcoming email should have been sent to :recipient in :localeCode locale
      */
@@ -165,7 +180,7 @@ final class EmailTemplateContext implements Context
     public function aDefaultWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
-            'You have just been registered. Thank you',
+            'To verify your email address - click the link below',
             $recipient,
         );
     }
