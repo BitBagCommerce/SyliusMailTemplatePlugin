@@ -14,12 +14,12 @@ namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
-use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 
 final class EmailTemplateContext implements Context
 {
@@ -154,6 +154,7 @@ final class EmailTemplateContext implements Context
     {
         $count = 1;
 
+        /** @phpstan-ignore-next-line  */
         if (13 !== (int) SyliusCoreBundle::MINOR_VERSION) {
             $count = 2;
         }
