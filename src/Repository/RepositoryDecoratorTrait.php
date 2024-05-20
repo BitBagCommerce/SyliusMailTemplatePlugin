@@ -32,11 +32,12 @@ trait RepositoryDecoratorTrait
     /**
      * @return array<int, object>
      */
+    /** @phpstan-ignore-next-line  */
     public function findBy(
         array $criteria,
         ?array $orderBy = null,
-        ?int $limit = null,
-        ?int $offset = null,
+        $limit = null,
+        $offset = null,
     ): array {
         return $this->decoratedRepository->findBy($criteria, $orderBy, $limit, $offset);
     }
