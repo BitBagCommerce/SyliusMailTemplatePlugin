@@ -36,7 +36,7 @@ final class EmailTemplateTest extends JsonApiTestCase
     {
         self::bootKernel();
 
-        $container = self::$container;
+        $container = $this->getContainer();
 
         $this->emailTemplateRepository = $container->get('bitbag_sylius_mail_template_plugin.custom_repository.email_template');
         $this->emailCodesProvider = $container->get('bitbag_sylius_mail_template_plugin.provider.email_codes');
