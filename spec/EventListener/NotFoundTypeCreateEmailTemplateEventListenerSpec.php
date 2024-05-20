@@ -16,7 +16,6 @@ use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -47,10 +46,12 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_do_nothing_when_route_is_not_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
+        ParameterBagInterface $attributes,
         EmailCodesProviderInterface $emailCodesProvider,
+        Session $session,
     ): void {
         $requestEvent->getRequest()->willReturn($request);
+        $request->getSession()->willReturn($session);
 
         $attributes->get('_route')->shouldBeCalled()->willReturn('wrong_route');
 
@@ -62,7 +63,7 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_not_redirect_when_type_are_available_to_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
+        ParameterBagInterface $attributes,
         EmailCodesProviderInterface $emailCodesProvider,
         Session $session,
         FlashBagInterface $flashBag,
@@ -86,7 +87,7 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_redirect_when_route_is_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
+        ParameterBagInterface $attributes,
         EmailCodesProviderInterface $emailCodesProvider,
         Session $session,
         FlashBagInterface $flashBag,
