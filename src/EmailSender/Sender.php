@@ -41,7 +41,7 @@ final class Sender implements SenderInterface
         SenderAdapterInterface $senderAdapter,
         EmailProviderInterface $provider,
         DefaultSettingsProviderInterface $defaultSettingsProvider,
-        EmailTemplateTranslationRepositoryInterface $templateTranslationRepository
+        EmailTemplateTranslationRepositoryInterface $templateTranslationRepository,
     ) {
         $this->senderAdapter = $senderAdapter;
         $this->rendererAdapter = $rendererAdapter;
@@ -55,7 +55,7 @@ final class Sender implements SenderInterface
         array $recipients,
         array $data = [],
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
     ): void {
         $email = $this->provider->getEmail($code);
 
@@ -65,7 +65,7 @@ final class Sender implements SenderInterface
 
         $customTemplate = $this->templateTranslationRepository->findOneByLocaleCodeAndType(
             $data[self::LOCALE_CODE_KEY] ?? '',
-            $code
+            $code,
         );
 
         if (null !== $customTemplate) {
@@ -86,7 +86,7 @@ final class Sender implements SenderInterface
             $email,
             $data,
             $attachments,
-            $replyTo
+            $replyTo,
         );
     }
 }

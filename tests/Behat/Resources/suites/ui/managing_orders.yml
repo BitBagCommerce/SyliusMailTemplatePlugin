@@ -4,7 +4,7 @@ default:
             contexts:
                 - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user

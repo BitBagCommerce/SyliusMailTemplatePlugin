@@ -1,10 +1,11 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
-*/
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
 
 declare(strict_types=1);
 
@@ -46,23 +47,23 @@ final class BitBagSyliusMailTemplateExtension extends Extension
 
         $container->setParameter(
             self::ALLOWED_FILTERS_PARAMETER,
-            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FILTERS], self::REQUIRED_FILTERS))
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FILTERS], self::REQUIRED_FILTERS)),
         );
         $container->setParameter(
             self::ALLOWED_FUNCTIONS_PARAMETER,
-            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FUNCTIONS], self::REQUIRED_FUNCTIONS))
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_FUNCTIONS], self::REQUIRED_FUNCTIONS)),
         );
         $container->setParameter(
             self::ALLOWED_METHODS_PARAMETER,
-            $config[Configuration::TWIG][Configuration::ALLOWED_METHODS]
+            $config[Configuration::TWIG][Configuration::ALLOWED_METHODS],
         );
         $container->setParameter(
             self::ALLOWED_PROPERTIES_PARAMETER,
-            $config[Configuration::TWIG][Configuration::ALLOWED_PROPERTIES]
+            $config[Configuration::TWIG][Configuration::ALLOWED_PROPERTIES],
         );
         $container->setParameter(
             self::ALLOWED_TAGS_PARAMETER,
-            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS))
+            array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS)),
         );
     }
 

@@ -32,7 +32,7 @@ Feature: Sending a confirmation email after shipping an order
 
     @ui @email
     Scenario: Sending a custom confirmation email after shipping an order
-        Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! </br> {{order.number}} </br> {{ shipment.method.name }} </br> {{shipment.tracking}}" content
+        Given there is mail template with "shipment_confirmation" type and "Shipment confirmation" name and "Your products are waiting for you!" subject and "Enjoy your new stuff! {{order.number}} {{ shipment.method.name }} {{shipment.tracking}}" content
         When I view the summary of the order "#00000666"
         And specify its tracking code as "#00044"
         And I ship this order

@@ -54,7 +54,7 @@ final class LoginContext implements Context
         WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
         RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
@@ -104,6 +104,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheUsername(?string $username = null): void
     {
+        if (null === $username) {
+            throw new \InvalidArgumentException('Username cannot be null.');
+        }
+
         $this->loginPage->specifyUsername($username);
     }
 
@@ -122,6 +126,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyThePasswordAs(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->loginPage->specifyPassword($password);
     }
 
@@ -131,6 +139,10 @@ final class LoginContext implements Context
      */
     public function iSpecifyMyNewPassword(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->resetPasswordPage->specifyNewPassword($password);
     }
 
@@ -140,6 +152,10 @@ final class LoginContext implements Context
      */
     public function iConfirmMyNewPassword(?string $password = null): void
     {
+        if (null === $password) {
+            throw new \InvalidArgumentException('Password cannot be null.');
+        }
+
         $this->resetPasswordPage->specifyConfirmPassword($password);
     }
 
@@ -239,14 +255,14 @@ final class LoginContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
     /**
      * @Then I should be notified that the :elementName is required
      */
-    public function iShouldBeNotifiedThatElementIsRequired($elementName)
+    public function iShouldBeNotifiedThatElementIsRequired(string $elementName): void
     {
         Assert::true($this->requestPasswordResetPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)));
     }
@@ -280,7 +296,7 @@ final class LoginContext implements Context
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(
             'password',
-            'The entered passwords don\'t match'
+            'The entered passwords don\'t match',
         ));
     }
 
@@ -291,7 +307,7 @@ final class LoginContext implements Context
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(
             'password',
-            'Password must be at least 4 characters long.'
+            'Password must be at least 4 characters long.',
         ));
     }
 

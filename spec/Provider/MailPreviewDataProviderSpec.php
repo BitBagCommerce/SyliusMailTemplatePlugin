@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 /*
@@ -35,7 +42,7 @@ class MailPreviewDataProviderSpec extends ObjectBehavior
     }
 
     function it_should_return_generic_mail_preview_data_if_none_mail_preview_data_for_requested_type_exist(
-        MailPreviewDataInterface $genericMailPreviewData
+        MailPreviewDataInterface $genericMailPreviewData,
     ): void {
         $availableMailPreviewData = [
             MailPreviewDataProvider::GENERIC_PREVIEW_DATA_KEY => $genericMailPreviewData,
@@ -60,7 +67,7 @@ class MailPreviewDataProviderSpec extends ObjectBehavior
 
     function it_should_return_mail_preview_data_for_requested_type(
         MailPreviewDataInterface $genericMailPreviewData,
-        MailPreviewDataInterface $fooMailPreviewData
+        MailPreviewDataInterface $fooMailPreviewData,
     ): void {
         $availableMailPreviewData = [
             MailPreviewDataProvider::GENERIC_PREVIEW_DATA_KEY => $genericMailPreviewData,

@@ -1,9 +1,10 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -15,7 +16,6 @@ use BitBag\SyliusMailTemplatePlugin\Provider\EmailCodesProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -31,7 +31,7 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
         DataCollectorTranslator $dataCollectorTranslator,
         RouterInterface $router,
         Request $request,
-        ParameterBagInterface $attributes
+        ParameterBagInterface $attributes,
     ): void {
         $request->attributes = $attributes;
 
@@ -46,10 +46,12 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_do_nothing_when_route_is_not_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
-        EmailCodesProviderInterface $emailCodesProvider
+        ParameterBagInterface $attributes,
+        EmailCodesProviderInterface $emailCodesProvider,
+        Session $session,
     ): void {
         $requestEvent->getRequest()->willReturn($request);
+        $request->getSession()->willReturn($session);
 
         $attributes->get('_route')->shouldBeCalled()->willReturn('wrong_route');
 
@@ -61,10 +63,10 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_not_redirect_when_type_are_available_to_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
+        ParameterBagInterface $attributes,
         EmailCodesProviderInterface $emailCodesProvider,
         Session $session,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
     ): void {
         $requestEvent->getRequest()->willReturn($request);
 
@@ -85,12 +87,12 @@ class NotFoundTypeCreateEmailTemplateEventListenerSpec extends ObjectBehavior
     function it_should_redirect_when_route_is_create_email_template(
         RequestEvent $requestEvent,
         Request $request,
-        ParameterBag $attributes,
+        ParameterBagInterface $attributes,
         EmailCodesProviderInterface $emailCodesProvider,
         Session $session,
         FlashBagInterface $flashBag,
         RouterInterface $router,
-        DataCollectorTranslator $dataCollectorTranslator
+        DataCollectorTranslator $dataCollectorTranslator,
     ): void {
         $requestEvent->getRequest()->willReturn($request);
 

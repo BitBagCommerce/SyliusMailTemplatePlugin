@@ -12,10 +12,13 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailTemplateContext implements Context
@@ -26,7 +29,7 @@ final class EmailTemplateContext implements Context
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        EmailCheckerInterface $emailChecker
+        EmailCheckerInterface $emailChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
@@ -49,9 +52,9 @@ final class EmailTemplateContext implements Context
             sprintf(
                 '%s wrote %s',
                 $sender,
-                'Hi! I did not receive an item!'
+                'Hi! I did not receive an item!',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -66,9 +69,9 @@ final class EmailTemplateContext implements Context
                 'Message from',
                 $sender,
                 'Content',
-                'Hi! I did not receive an item!'
+                'Hi! I did not receive an item!',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -80,7 +83,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'To reset your password - click the link below',
-            $recipient
+            $recipient,
         );
     }
 
@@ -92,7 +95,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Wanna reset password? Here is your code:',
-            $recipient
+            $recipient,
         );
     }
 
@@ -102,15 +105,15 @@ final class EmailTemplateContext implements Context
     public function anEmailWithShipmentsConfirmationForTheOrderShouldBeSentTo(
         string $method,
         string $orderNumber,
-        string $recipient
+        string $recipient,
     ): void {
         Assert::true($this->emailChecker->hasMessageTo(
             sprintf(
                 'Your order with number %s has been sent using %s.',
                 $orderNumber,
-                $method
+                $method,
             ),
-            $recipient
+            $recipient,
         ));
     }
 
@@ -121,7 +124,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'To verify your email address - click the link below',
-            $recipient
+            $recipient,
         );
     }
 
@@ -132,7 +135,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Verify yourself. We need you!',
-            $recipient
+            $recipient,
         );
     }
 
@@ -145,6 +148,21 @@ final class EmailTemplateContext implements Context
     }
 
     /**
+     * @Then email(s) should be sent to :recipient depending on Sylius version
+     */
+    public function numberOfEmailsShouldBeSentToDependingOnSyliusVersion(string $recipient): void
+    {
+        $count = 1;
+
+        /** @phpstan-ignore-next-line  */
+        if (13 !== (int) SyliusCoreBundle::MINOR_VERSION) {
+            $count = 2;
+        }
+
+        Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
+    }
+
+    /**
      * @Then a welcoming email should have been sent to :recipient
      * @Then a welcoming email should have been sent to :recipient in :localeCode locale
      */
@@ -152,7 +170,7 @@ final class EmailTemplateContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             'Enjoy our stuff!',
-            $recipient
+            $recipient,
         );
     }
 
@@ -163,8 +181,8 @@ final class EmailTemplateContext implements Context
     public function aDefaultWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
-            'You have just been registered. Thank you',
-            $recipient
+            'To verify your email address - click the link below',
+            $recipient,
         );
     }
 
@@ -175,15 +193,15 @@ final class EmailTemplateContext implements Context
     public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s',
                 'Pif paf',
-                $order->getNumber()
+                $order->getNumber(),
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -194,16 +212,16 @@ final class EmailTemplateContext implements Context
     public function aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 'Your order no.',
                 $order->getNumber(),
-                'has been successfully placed.'
+                'has been successfully placed.',
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -213,7 +231,15 @@ final class EmailTemplateContext implements Context
      */
     public function anEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
-        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+        /** @var ?CustomerInterface $customer */
+        $customer = $order->getCustomer();
+        Assert::notNull($customer);
+
+        /** @var ?string $email */
+        $email = $customer->getEmailCanonical();
+        Assert::notNull($email);
+
+        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $email, $localeCode);
     }
 
     /**
@@ -222,7 +248,15 @@ final class EmailTemplateContext implements Context
      */
     public function aDefaultEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
-        $this->aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+        /** @var ?CustomerInterface $customer */
+        $customer = $order->getCustomer();
+        Assert::notNull($customer);
+
+        /** @var ?string $email */
+        $email = $customer->getEmailCanonical();
+        Assert::notNull($email);
+
+        $this->aDefaultEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $email, $localeCode);
     }
 
     /**
@@ -232,11 +266,11 @@ final class EmailTemplateContext implements Context
     public function aDefaultEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             'Thank you for a successful transaction.',
-            $recipient
+            $recipient,
         );
     }
 
@@ -249,22 +283,22 @@ final class EmailTemplateContext implements Context
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 'Enjoy your new stuff!',
                 $order->getNumber(),
-                $this->getShippingMethodName($order)
+                $this->getShippingMethodName($order),
             ),
-            $recipient
+            $recipient,
         );
 
         if ($this->sharedStorage->has('tracking_code')) {
             $this->assertEmailContainsMessageTo(
                 $this->sharedStorage->get('tracking_code'),
-                $recipient
+                $recipient,
             );
         }
     }
@@ -282,6 +316,12 @@ final class EmailTemplateContext implements Context
             throw new \LogicException('Order should have at least one shipment.');
         }
 
-        return $shipment->getMethod()->getName();
+        /** @var ?ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $shipment->getMethod();
+        Assert::notNull($shippingMethod);
+
+        Assert::notNull($shippingMethod->getName());
+
+        return $shippingMethod->getName();
     }
 }

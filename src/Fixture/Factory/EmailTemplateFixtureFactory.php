@@ -27,7 +27,7 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
     public function __construct(
         FactoryInterface $emailTemplateFactory,
         FactoryInterface $emailTemplateTranslationFactory,
-        EmailTemplateRepositoryInterface $emailTemplateRepository
+        EmailTemplateRepositoryInterface $emailTemplateRepository,
     ) {
         $this->emailTemplateFactory = $emailTemplateFactory;
         $this->emailTemplateTranslationFactory = $emailTemplateTranslationFactory;
@@ -57,7 +57,7 @@ final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
     private function createEmailTemplate(
         string $type,
         string $styleCss,
-        array $emailTemplateData
+        array $emailTemplateData,
     ): void {
         /** @var EmailTemplateInterface $emailTemplate */
         $emailTemplate = $this->emailTemplateFactory->createNew();
