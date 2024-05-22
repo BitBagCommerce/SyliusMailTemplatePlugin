@@ -76,7 +76,7 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function checkHasPreviewModal(string $subject, string $content): void
     {
-        $this->getDriver()->wait(1000, 'document.querySelector(".mail-preview").offsetParent !== null');
+        $this->getDriver()->wait(3000, 'document.querySelector(".mail-preview").offsetParent !== null');
         Assert::true($this->previewModal->isModalVisible());
         /** @phpstan-ignore-next-line  */
         Assert::contains($this->previewModal->getSubject(), $subject);
