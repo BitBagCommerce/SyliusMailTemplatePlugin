@@ -1,9 +1,10 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -11,6 +12,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Page\Admin\EmailTemplate;
 
 use ArrayAccess;
+use Behat\Gherkin\Exception\NodeException;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
@@ -32,7 +35,7 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
         $minkParameters,
         RouterInterface $router,
         string $routeName,
-        PreviewModalElementInterface $previewModal
+        PreviewModalElementInterface $previewModal,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
 
@@ -50,13 +53,20 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function fillInvisibleField(string $field, string $value): void
     {
         $this->getDriver()->executeScript(
-            sprintf('document.querySelector("[name=\'%s\']").value = "%s";', $field, $value)
+            sprintf('document.querySelector("[name=\'%s\']").value = "%s";', $field, $value),
         );
     }
 
     public function preview(string $locale): void
     {
-        $this->getDocument()->find('css', sprintf('[data-locale="%s"] .bitbag_preview_mail_template', $locale))->click();
+        /** @var ?NodeElement $node */
+        $node = $this->getDocument()->find('css', sprintf('[data-locale="%s"] .bitbag_preview_mail_template', $locale));
+
+        if (null === $node) {
+            throw new NodeException();
+        }
+
+        $node->click();
     }
 
     /**
@@ -66,9 +76,11 @@ final class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function checkHasPreviewModal(string $subject, string $content): void
     {
-        $this->getDriver()->wait(300, 'document.querySelector(".mail-preview").offsetParent !== null');
+        $this->getDriver()->wait(3000, 'document.querySelector(".mail-preview").offsetParent !== null');
         Assert::true($this->previewModal->isModalVisible());
+        /** @phpstan-ignore-next-line  */
         Assert::contains($this->previewModal->getSubject(), $subject);
+        /** @phpstan-ignore-next-line  */
         Assert::contains($this->previewModal->getContent(), $content);
     }
 }

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 /*
@@ -34,12 +41,12 @@ class EmailCodesProviderSpec extends ObjectBehavior
 
     function let(
         EmailTemplateRepositoryInterface $emailTemplateRepository,
-        DataCollectorTranslator $dataCollectorTranslator
+        DataCollectorTranslator $dataCollectorTranslator,
     ): void {
         $this->beConstructedWith(
             self::EXAMPLE_EMAILS_CONFIGURATION,
             $emailTemplateRepository,
-            $dataCollectorTranslator
+            $dataCollectorTranslator,
         );
     }
 
@@ -93,12 +100,12 @@ class EmailCodesProviderSpec extends ObjectBehavior
     function it_should_return_not_used_types_for_edit_email_template(
         EmailTemplateRepositoryInterface $emailTemplateRepository,
         EmailTemplateInterface $emailTemplate,
-        DataCollectorTranslator $dataCollectorTranslator
+        DataCollectorTranslator $dataCollectorTranslator,
     ): void {
         $dataCollectorTranslator->trans(
             'Contact Request',
             [],
-            EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN
+            EmailTemplateType::MAIL_TEMPLATE_TYPE_DOMAIN,
         )->shouldBeCalled()->willReturn('Contact Request');
 
         $emailTemplateRepository->getAllTypes()->willReturn([

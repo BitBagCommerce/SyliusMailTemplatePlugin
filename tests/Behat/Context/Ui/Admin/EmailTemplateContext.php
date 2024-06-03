@@ -1,9 +1,10 @@
 <?php
 
 /*
- * This file was created by developers working at BitBag
- * Do you need more information about us and what we do? Visit our https://bitbag.io website!
- * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -37,7 +38,7 @@ final class EmailTemplateContext extends RawMinkContext
         CreatePageInterface $createPage,
         NotificationCheckerInterface $notificationChecker,
         EmailCodesProviderInterface $emailCodesProvider,
-        EmailTemplateFixtureFactory $emailTemplateFixtureFactory
+        EmailTemplateFixtureFactory $emailTemplateFixtureFactory,
     ) {
         $this->createPage = $createPage;
         $this->notificationChecker = $notificationChecker;
@@ -88,7 +89,7 @@ final class EmailTemplateContext extends RawMinkContext
     {
         $this->notificationChecker->checkNotification(
             'Email template has been successfully created.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -119,7 +120,7 @@ final class EmailTemplateContext extends RawMinkContext
     /**
      * @Given /^I have added all of custom email types$/
      */
-    public function iHaveAddedAllOfCustomEmailTypes()
+    public function iHaveAddedAllOfCustomEmailTypes(): void
     {
         $this->addAllCustomEmailTypesInDatabase();
     }
@@ -173,9 +174,9 @@ final class EmailTemplateContext extends RawMinkContext
                 'remove_existing' => false,
                 'translations' => [
                     'en_US' => [
-                        'name' => "Name for ${type} type",
-                        'subject' => "Subject for ${type} type",
-                        'content' => "Content for ${type} type",
+                        'name' => "Name for {$type} type",
+                        'subject' => "Subject for {$type} type",
+                        'content' => "Content for {$type} type",
                     ],
                 ],
             ];

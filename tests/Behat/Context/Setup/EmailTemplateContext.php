@@ -32,7 +32,7 @@ final class EmailTemplateContext implements Context
         SharedStorageInterface $sharedStorage,
         FactoryInterface $templateFactory,
         FactoryInterface $templateTranslationFactory,
-        EmailTemplateTranslationRepositoryInterface $emailTemplateTranslationRepository
+        EmailTemplateTranslationRepositoryInterface $emailTemplateTranslationRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->templateFactory = $templateFactory;
@@ -47,7 +47,7 @@ final class EmailTemplateContext implements Context
         string $type,
         string $name,
         string $subject,
-        string $content
+        string $content,
     ): void {
         $emailTemplate = $this->createEmailTemplate($type, $name, $subject, $content);
 
@@ -62,7 +62,7 @@ final class EmailTemplateContext implements Context
         string $name,
         string $subject,
         string $content,
-        string $locale
+        string $locale,
     ): void {
         $emailTemplate = $this->createEmailTemplate($type, $name, $subject, $content, $locale);
 
@@ -74,7 +74,7 @@ final class EmailTemplateContext implements Context
         ?string $name = null,
         ?string $subject = null,
         ?string $content = null,
-        ?string $locale = null
+        ?string $locale = null,
     ): EmailTemplateInterface {
         /** @var EmailTemplateTranslationInterface $emailTemplateTranslation */
         $emailTemplateTranslation = $this->templateTranslationFactory->createNew();

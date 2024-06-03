@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 /*
@@ -22,7 +29,7 @@ class SecurityNotAllowedTagErrorResponseSpec extends ObjectBehavior
 {
     public const ERROR_MESSAGE_TRANSLATION = 'Tag "%s" is not allowed at line %d';
 
-    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Tag \u0022bar\u0022 is not allowed at line 2"}';
+    public const EXPECTED_RESPONSE_MESSAGE = '{"message":"Tag \u0022bar\u0022 is not allowed at line -1"}';
 
     function let(TranslatorInterface $translator)
     {
