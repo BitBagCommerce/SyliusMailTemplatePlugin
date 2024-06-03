@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-$ composer require bitbag/mailtemplate-plugin
+$ composer require bitbag/mailtemplate-plugin --no-scripts
 ```
 
 1. Add plugin dependencies to your `config/bundles.php` file:
@@ -34,9 +34,10 @@ bitbag_sylius_mail_template_plugin:
     resource: "@BitBagSyliusMailTemplatePlugin/Resources/config/routing.yaml"
 ```
 
-4. Update your database
+4. Update your database and clear cache
 
 ```
+$ bin/console cache:clear
 $ bin/console doctrine:migrations:migrate
 ```
 
