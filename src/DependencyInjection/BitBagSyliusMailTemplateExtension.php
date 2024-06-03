@@ -73,7 +73,7 @@ final class BitBagSyliusMailTemplateExtension extends Extension implements Prepe
         return new Configuration();
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
             return;
@@ -93,14 +93,14 @@ final class BitBagSyliusMailTemplateExtension extends Extension implements Prepe
             'migrations_paths' => \array_merge(
                 $migrationsPath,
                 [
-                    'BitBag\MailTemplatePlugin\Migrations' => '@BitBagSyliusMailTemplatePlugin/Migrations',
+                    'BitBag\SyliusMailTemplatePlugin\Migrations' => '@BitBagSyliusMailTemplatePlugin/Migrations',
                 ],
             ),
         ]);
 
         $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
             'migrations' => [
-                'BitBag\MailTemplatePlugin\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
+                'BitBag\SyliusMailTemplatePlugin\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
             ],
         ]);
     }
