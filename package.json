@@ -4,5 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dist": "yarn encore production --config-name bitbag-plugin-dist"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "codemirror": "^5.65.1"
   }
 }
