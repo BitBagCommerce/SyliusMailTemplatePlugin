@@ -15,9 +15,10 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-final class BitBagSyliusMailTemplateExtension extends Extension
+final class BitBagSyliusMailTemplateExtension extends Extension implements PrependExtensionInterface
 {
     public const ALLOWED_FILTERS_PARAMETER = 'bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_filters';
 
@@ -70,5 +71,37 @@ final class BitBagSyliusMailTemplateExtension extends Extension
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         return new Configuration();
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
+            return;
+        }
+
+        if (
+            $container->hasParameter('sylius_core.prepend_doctrine_migrations') &&
+            false === $container->getParameter('sylius_core.prepend_doctrine_migrations')
+        ) {
+            return;
+        }
+
+        /** @var array<int|string, mixed> $doctrineConfig */
+        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
+        $migrationsPath = (array) \array_pop($doctrineConfig)['migrations_paths'];
+        $container->prependExtensionConfig('doctrine_migrations', [
+            'migrations_paths' => \array_merge(
+                $migrationsPath,
+                [
+                    'BitBag\SyliusMailTemplatePlugin\Migrations' => '@BitBagSyliusMailTemplatePlugin/Migrations',
+                ],
+            ),
+        ]);
+
+        $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
+            'migrations' => [
+                'BitBag\SyliusMailTemplatePlugin\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
+            ],
+        ]);
     }
 }
