@@ -41,3 +41,5 @@ $ bin/console assets:install
     'path': 'bundles/bitbagsyliusmailtemplatesplugin/bitbag-mailtemplates-shop.css'
 } %}
 ```
+
+3.  [Add packages](./assets-packages.md)

@@ -66,7 +66,9 @@ webpack_encore:
 {{ encore_entry_link_tags('bitbag-mailtemplate-admin', null, 'mail_template_admin') }}
 ```
 
-5. Run `yarn encore dev` or `yarn encore production`
+5. [Add packages](./assets-packages.md)
+
+6. Run `yarn encore dev` or `yarn encore production`
 
 ## Installation - Add new entry to existing configs
 
@@ -102,7 +104,9 @@ webpack_encore:
 {{ encore_entry_link_tags('bitbag-mailtemplate-admin', null, 'admin') }}
 ```
 
-3. Run `yarn encore dev` or `yarn encore production`
+3. [Add packages](./assets-packages.md)
+
+4. Run `yarn encore dev` or `yarn encore production`
 
 ## Installation - Import plugin entry into existing project entry.js files
 
@@ -121,6 +125,8 @@ import '../../vendor/bitbag/mailtemplate-plugin/src/Resources/assets/shop/entry.
 // ./assets/admin/entry.js
 import '../../vendor/bitbag/mailtemplate-plugin/src/Resources/assets/admin/entry.js';
 ```
+
+2.  [Add packages](./assets-packages.md)
 
 ## Installation - Custom solution
 
