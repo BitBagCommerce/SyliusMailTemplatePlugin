@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
@@ -25,11 +26,11 @@ final class ContactRequestMailPreviewData implements MailPreviewDataInterface
 
     public const MESSAGE_FROM_CUSTOMER = '<MESSAGE_FROM_CUSTOMER>';
 
-    private ChannelExampleFactory $channelExampleFactory;
+    private ExampleFactoryInterface $channelExampleFactory;
 
     private PreviewDataFactoryInterface $customerPreviewDataFactory;
 
-    public function __construct(ChannelExampleFactory $channelExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
+    public function __construct(ExampleFactoryInterface $channelExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
     {
         $this->channelExampleFactory = $channelExampleFactory;
         $this->customerPreviewDataFactory = $customerPreviewDataFactory;
@@ -39,6 +40,7 @@ final class ContactRequestMailPreviewData implements MailPreviewDataInterface
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerPreviewDataFactory->create();
+        /** @var ChannelInterface $channel */
         $channel = $this->channelExampleFactory->create();
         /** @var LocaleInterface $defaultLocale */
         $defaultLocale = $channel->getDefaultLocale();
