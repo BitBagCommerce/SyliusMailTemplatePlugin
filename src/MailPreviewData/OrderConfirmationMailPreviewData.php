@@ -12,16 +12,17 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData;
 
 use BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory\PreviewDataFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrderConfirmationMailPreviewData implements MailPreviewDataInterface
 {
-    private OrderExampleFactory $orderExampleFactory;
+    private ExampleFactoryInterface $orderExampleFactory;
 
     private PreviewDataFactoryInterface $customerPreviewDataFactory;
 
-    public function __construct(OrderExampleFactory $orderExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
+    public function __construct(ExampleFactoryInterface $orderExampleFactory, PreviewDataFactoryInterface $customerPreviewDataFactory)
     {
         $this->orderExampleFactory = $orderExampleFactory;
         $this->customerPreviewDataFactory = $customerPreviewDataFactory;
@@ -30,6 +31,7 @@ final class OrderConfirmationMailPreviewData implements MailPreviewDataInterface
     public function getData(): array
     {
         $customer = $this->customerPreviewDataFactory->create();
+        /** @var OrderInterface $order */
         $order = $this->orderExampleFactory->create([
             MailPreviewDataInterface::CUSTOMER_KEY => $customer,
         ]);
