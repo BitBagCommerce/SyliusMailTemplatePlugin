@@ -69,19 +69,19 @@ This plugin allows you to edit email templates from admin panel using all twig f
 
 # Installation 
 ---
-The **SyliusMailTemplatePlugin** installation process can be found **[here](doc/installation.md).**
+The SyliusMailTemplatePlugin **installation process** can be found **[here](doc/installation.md).**
 
 # Testing 
 ---
-The **SyliusMailTemplatePlugin** testing process can be found **[here](doc/testing.md).**
+The SyliusMailTemplatePlugin **testing process** can be found **[here](doc/testing.md).**
 
 # Usage
 ---
-The **SyliusMailTemplatePlugin** usage can be found **[here](doc/usage.md).**
+The SyliusMailTemplatePlugin **usage** can be found **[here](doc/usage.md).**
 
 # Using Twig in emails
 ---
-The **SyliusMailTemplatePlugin** using twig in emails can be found **[here](doc/using-twig-in-emails.md).**
+The SyliusMailTemplatePlugin **using twig in emails** can be found **[here](doc/using-twig-in-emails.md).**
 
 # Functionalities
 ---
