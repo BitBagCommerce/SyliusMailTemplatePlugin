@@ -67,7 +67,6 @@ final class BitBagSyliusMailTemplateExtension extends AbstractResourceExtension 
             array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS)),
         );
 
-        // Register resources
         $this->registerResources('bitbag_sylius_mail_template_plugin', 'doctrine/orm', $config['resources'], $container);
     }
 
