@@ -10,3 +10,23 @@ sylius_resource:
                 classes:
                     model: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation
                     interface: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface
+
+bit_bag_sylius_mail_template:
+    twig:
+        allowed_filters: []
+        allowed_functions: []
+        allowed_methods:
+            '*': '*'
+        allowed_properties: []
+        allowed_tags: []
+    resources:
+        email_template:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate
+                interface: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface
+                form: BitBag\SyliusMailTemplatePlugin\Form\Type\EmailTemplateType
+            translation:
+                classes:
+                    model: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslation
+                    interface: BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-final class BitBagSyliusMailTemplateExtension extends Extension implements PrependExtensionInterface
+final class BitBagSyliusMailTemplateExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     public const ALLOWED_FILTERS_PARAMETER = 'bitbag_sylius_mail_template_plugin.mail_template.twig.allowed_filters';
 
@@ -66,6 +66,9 @@ final class BitBagSyliusMailTemplateExtension extends Extension implements Prepe
             self::ALLOWED_TAGS_PARAMETER,
             array_unique(array_merge($config[Configuration::TWIG][Configuration::ALLOWED_TAGS], self::REQUIRED_TAGS)),
         );
+
+        // Register resources
+        $this->registerResources('bitbag_sylius_mail_template_plugin', 'doctrine/orm', $config['resources'], $container);
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
@@ -104,4 +107,15 @@ final class BitBagSyliusMailTemplateExtension extends Extension implements Prepe
             ],
         ]);
     }
+
+//    private function registerResources(string $prefix, array $resources, ContainerBuilder $container): void
+//    {
+//        foreach ($resources as $resourceName => $resourceConfig) {
+//            $container->setParameter(
+//                sprintf('%s.resources.%s', $prefix, $resourceName),
+//                $resourceConfig
+//            );
+//        }
+//    }
+
 }
