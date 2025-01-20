@@ -107,15 +107,4 @@ final class BitBagSyliusMailTemplateExtension extends AbstractResourceExtension 
             ],
         ]);
     }
-
-//    private function registerResources(string $prefix, array $resources, ContainerBuilder $container): void
-//    {
-//        foreach ($resources as $resourceName => $resourceConfig) {
-//            $container->setParameter(
-//                sprintf('%s.resources.%s', $prefix, $resourceName),
-//                $resourceConfig
-//            );
-//        }
-//    }
-
 }

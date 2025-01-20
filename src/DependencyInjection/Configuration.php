@@ -4,7 +4,7 @@
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
  * You can find more information about us on https://bitbag.io and write us
- * an email at hello@bitbag.io.
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -29,8 +29,8 @@ final class Configuration implements ConfigurationInterface
     public const ALLOWED_METHODS_DEFAULT = ['*' => '*'];
 
     /**
-     * Builds the configuration tree for the plugin.
-     */
+     * @psalm-suppress UnusedVariable
+    */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::TREE_NAME);
@@ -63,35 +63,6 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
-                // Configuration for resources
-//                ->arrayNode('resources')
-//                    ->addDefaultsIfNotSet()
-//                    ->children()
-//                        ->arrayNode('email_template')
-//                            ->addDefaultsIfNotSet()
-//                            ->children()
-//                                ->scalarNode('model')
-//                                    ->defaultValue('BitBag\SyliusMailTemplatePlugin\Entity\MailTemplate')
-//                                    ->info('The FQCN of the MailTemplate model.')
-//                                ->end()
-//                                ->scalarNode('repository')
-//                                    ->defaultValue('BitBag\SyliusMailTemplatePlugin\Repository\MailTemplateRepository')
-//                                    ->info('The FQCN of the repository for MailTemplate.')
-//                                ->end()
-//                                ->scalarNode('interface')
-//                                    ->defaultValue('BitBag\SyliusMailTemplatePlugin\Entity\MailTemplateInterface')
-//                                    ->info('The FQCN of the MailTemplate interface.')
-//                                ->end()
-//                                ->scalarNode('form')
-//                                    ->defaultValue('BitBag\SyliusMailTemplatePlugin\Form\Type\MailTemplateType')
-//                                    ->info('The FQCN of the form type for MailTemplate.')
-//                                ->end()
-//                            ->end()
-//                        ->end()
-//                    ->end()
-//                ->end()
-
                 // Configuration for Twig integration
                 ->arrayNode(self::TWIG)
                     ->addDefaultsIfNotSet()
@@ -100,31 +71,26 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('name')
                             ->defaultValue([])
                             ->prototype('scalar')->end()
-                            ->info('Allowed Twig filters.')
                         ->end()
                         ->arrayNode(self::ALLOWED_FUNCTIONS)
                             ->useAttributeAsKey('name')
                             ->defaultValue([])
                             ->prototype('scalar')->end()
-                            ->info('Allowed Twig functions.')
                         ->end()
                         ->arrayNode(self::ALLOWED_METHODS)
                             ->useAttributeAsKey('name')
                             ->defaultValue(self::ALLOWED_METHODS_DEFAULT)
                             ->prototype('scalar')->end()
-                            ->info('Allowed Twig methods.')
                         ->end()
                         ->arrayNode(self::ALLOWED_PROPERTIES)
                             ->useAttributeAsKey('name')
                             ->defaultValue([])
                             ->prototype('scalar')->end()
-                            ->info('Allowed Twig properties.')
                         ->end()
                         ->arrayNode(self::ALLOWED_TAGS)
                             ->useAttributeAsKey('name')
                             ->defaultValue([])
                             ->prototype('scalar')->end()
-                            ->info('Allowed Twig tags.')
                         ->end()
                     ->end()
                 ->end()
