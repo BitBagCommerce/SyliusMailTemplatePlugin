@@ -21,16 +21,20 @@ final class Configuration implements ConfigurationInterface
     public const TWIG = 'twig';
 
     public const ALLOWED_FILTERS = 'allowed_filters';
+
     public const ALLOWED_FUNCTIONS = 'allowed_functions';
+
     public const ALLOWED_METHODS = 'allowed_methods';
+
     public const ALLOWED_PROPERTIES = 'allowed_properties';
+
     public const ALLOWED_TAGS = 'allowed_tags';
 
     public const ALLOWED_METHODS_DEFAULT = ['*' => '*'];
 
     /**
      * @psalm-suppress UnusedVariable
-    */
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::TREE_NAME);

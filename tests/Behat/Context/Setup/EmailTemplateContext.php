@@ -16,7 +16,7 @@ use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateTranslationRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class EmailTemplateContext implements Context
 {

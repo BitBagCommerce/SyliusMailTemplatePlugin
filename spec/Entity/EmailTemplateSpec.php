@@ -14,7 +14,7 @@ namespace spec\BitBag\SyliusMailTemplatePlugin\Entity;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplate;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class EmailTemplateSpec extends ObjectBehavior
 {

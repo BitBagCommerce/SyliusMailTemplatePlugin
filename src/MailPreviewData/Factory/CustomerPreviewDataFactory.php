@@ -13,7 +13,7 @@ namespace BitBag\SyliusMailTemplatePlugin\MailPreviewData\Factory;
 
 use Faker\Generator;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class CustomerPreviewDataFactory implements PreviewDataFactoryInterface
 {
