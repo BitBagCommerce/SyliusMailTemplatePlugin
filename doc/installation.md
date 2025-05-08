@@ -59,16 +59,11 @@ bitbag_sylius_mail_template_plugin:
 ```
 
 ### Update your database
-First, please run legacy-versioned migrations by using command:
+Please run migrations by using command:
 ```bash
 bin/console doctrine:migrations:migrate
 ```
 
-After migration, please create a new diff migration and update database:
-```bash
-bin/console doctrine:migrations:diff
-bin/console doctrine:migrations:migrate
-```
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
 ### Clear application cache by using command:
