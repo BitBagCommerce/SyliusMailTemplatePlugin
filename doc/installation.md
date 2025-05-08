@@ -73,6 +73,22 @@ bin/console cache:clear
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
 ## Webpack
+
+### NPM dependencies installation
+
+Please install the dependencies that plugin uses:
+
+```bash
+yarn add axios
+yarn add codemirror@5
+```
+
+If your node version disallows to install any of above dependencies, please allow to install legacy versions by using the command:
+
+```bash
+npm config set legacy-peer-deps true
+```
+
 ### Webpack.config.js
 
 Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your webpack.config.js file:
