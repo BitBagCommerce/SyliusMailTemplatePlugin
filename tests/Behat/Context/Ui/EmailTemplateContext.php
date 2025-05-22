@@ -14,7 +14,6 @@ namespace Tests\BitBag\SyliusMailTemplatePlugin\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -144,21 +143,6 @@ final class EmailTemplateContext implements Context
      */
     public function numberOfEmailsShouldBeSentTo(int $count, string $recipient): void
     {
-        Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
-    }
-
-    /**
-     * @Then email(s) should be sent to :recipient depending on Sylius version
-     */
-    public function numberOfEmailsShouldBeSentToDependingOnSyliusVersion(string $recipient): void
-    {
-        $count = 1;
-
-        /** @phpstan-ignore-next-line  */
-        if (13 !== (int) SyliusCoreBundle::MINOR_VERSION) {
-            $count = 2;
-        }
-
         Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
     }
 

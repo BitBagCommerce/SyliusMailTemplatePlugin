@@ -14,7 +14,7 @@ namespace BitBag\SyliusMailTemplatePlugin\Fixture\Factory;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateInterface;
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use BitBag\SyliusMailTemplatePlugin\Repository\EmailTemplateRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class EmailTemplateFixtureFactory implements FixtureFactoryInterface
 {

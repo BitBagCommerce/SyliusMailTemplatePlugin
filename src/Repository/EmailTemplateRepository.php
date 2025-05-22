@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 final class EmailTemplateRepository implements EmailTemplateRepositoryInterface
 {

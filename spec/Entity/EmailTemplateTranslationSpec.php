@@ -13,8 +13,8 @@ namespace spec\BitBag\SyliusMailTemplatePlugin\Entity;
 
 use BitBag\SyliusMailTemplatePlugin\Entity\EmailTemplateTranslationInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Resource\Model\ResourceInterface;
 
 final class EmailTemplateTranslationSpec extends ObjectBehavior
 {

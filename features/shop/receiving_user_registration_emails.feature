@@ -24,7 +24,7 @@ Feature: Receiving set of welcoming emails after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that my account has been created and the verification email has been sent
         And a default account verification email should have been sent to "ghastly@bespoke.com"
-        And emails should be sent to "ghastly@bespoke.com" depending on Sylius version
+        And 1 emails should be sent to "ghastly@bespoke.com"
         But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password
 
     @ui @email
@@ -33,5 +33,5 @@ Feature: Receiving set of welcoming emails after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that my account has been created and the verification email has been sent
         And a custom account verification email should have been sent to "ghastly@bespoke.com"
-        And emails should be sent to "ghastly@bespoke.com" depending on Sylius version
+        And 1 emails should be sent to "ghastly@bespoke.com"
         But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password

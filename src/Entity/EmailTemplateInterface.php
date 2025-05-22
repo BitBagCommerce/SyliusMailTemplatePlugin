@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailTemplatePlugin\Entity;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\TranslatableInterface;
 
 interface EmailTemplateInterface extends ResourceInterface, TranslatableInterface
 {
